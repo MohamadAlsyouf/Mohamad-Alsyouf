@@ -74,7 +74,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* 3D Scene */}
+          {/* 3D BMW E30 Model */}
           <motion.div
             className="hidden lg:block h-[500px]"
             initial={{ opacity: 0 }}
