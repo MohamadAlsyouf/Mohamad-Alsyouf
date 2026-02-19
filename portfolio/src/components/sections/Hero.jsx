@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import CanvasWrapper from '../three/CanvasWrapper'
 import HeroScene from '../three/HeroScene'
+import ContactScene from '../three/ContactScene'
 import { personalInfo } from '../../data/content'
 
 export default function Hero() {
@@ -11,6 +12,13 @@ export default function Hero() {
     >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-[#0d0d14]" />
+
+      {/* Stars background */}
+      <div className="absolute inset-0 opacity-50">
+        <CanvasWrapper className="w-full h-full">
+          <ContactScene />
+        </CanvasWrapper>
+      </div>
 
       {/* Content container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
