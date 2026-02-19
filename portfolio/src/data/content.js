@@ -73,7 +73,7 @@ export const projects = [
     description:
       "Modern portfolio website built with React Three Fiber for 3D elements, Framer Motion for animations, and Tailwind CSS for styling. Features smooth scroll and interactive hover effects.",
     tech: ["React", "Three.js", "Framer Motion", "Tailwind"],
-    liveUrl: null,
-    githubUrl: "https://github.com/Mohamad-Alsyouf/portfolio",
+    liveUrl: "https://mohamadalsyouf.com/",
+    githubUrl: "https://github.com/MohamadAlsyouf/Mohamad-Alsyouf",
   },
 ];
