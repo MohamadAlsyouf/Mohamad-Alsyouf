@@ -3,10 +3,10 @@ export const personalInfo = {
   title: "Full Stack Web Developer",
   tagline: "Building scalable applications that serve millions of users.",
   email: "mohamadalsyouf99@gmail.com",
-  github: "https://github.com/Mohamad-Alsyouf",
+  github: "https://github.com/MohamadAlsyouf",
   linkedin: "https://linkedin.com/in/mohamad-alsyouf",
   twitter: "https://twitter.com/yourusername",
-}
+};
 
 export const aboutText = `I'm a Full Stack Web Developer based in Orange County, CA with expertise in
 building scalable, production-grade applications. At Focus 360, I've developed client-facing apps
@@ -14,7 +14,7 @@ used by over 1 million monthly users and led the creation of an ERP system that 
 of manual workflows into streamlined automation. I thrive in Agile environments, working closely with
 cross-functional teams to deliver solutions that align with business goals. My stack centers on React,
 TypeScript, and AWS, and I'm passionate about clean code, performance optimization, and mentoring
-fellow developers.`
+fellow developers.`;
 
 export const skills = [
   { name: "JavaScript", category: "Language" },
@@ -35,13 +35,14 @@ export const skills = [
   { name: "Cypress", category: "Testing" },
   { name: "Vite", category: "Tools" },
   { name: "Git", category: "Tools" },
-]
+];
 
 export const projects = [
   {
     id: 1,
     title: "ERP Workflow Automation System",
-    description: "Led development of a modern ERP platform replacing 30+ years of manual workflows. Supports 100+ employees across multiple departments, reducing project delays by 25-35% and manual errors by 60%.",
+    description:
+      "Led development of a modern ERP platform replacing 30+ years of manual workflows. Supports 100+ employees across multiple departments, reducing project delays by 25-35% and manual errors by 60%.",
     tech: ["React", "TypeScript", "Zustand", "AWS Lambda", "PostgreSQL"],
     liveUrl: null,
     githubUrl: null,
@@ -49,7 +50,8 @@ export const projects = [
   {
     id: 2,
     title: "NEXT™ Client-Facing Application Suite",
-    description: "Built interactive web apps used by 1M+ monthly users exploring homes from top U.S. real estate developers. Deployed as PWAs in thousands of sales centers nationwide with 80% reduction in AWS costs.",
+    description:
+      "Built interactive web apps used by 1M+ monthly users exploring homes from top U.S. real estate developers. Deployed as PWAs in thousands of sales centers nationwide with 80% reduction in AWS costs.",
     tech: ["React", "TypeScript", "PWA", "Workbox", "AWS"],
     liveUrl: null,
     githubUrl: null,
@@ -57,7 +59,8 @@ export const projects = [
   {
     id: 3,
     title: "Real Estate CMS",
-    description: "Internal content management system to manage assets and listing data for real estate applications. Streamlined production workflows and reduced content update time significantly.",
+    description:
+      "Internal content management system to manage assets and listing data for real estate applications. Streamlined production workflows and reduced content update time significantly.",
     tech: ["React", "TypeScript", "Tailwind", "SQL", "REST APIs"],
     liveUrl: null,
     githubUrl: null,
@@ -65,9 +68,10 @@ export const projects = [
   {
     id: 4,
     title: "Developer Portfolio",
-    description: "Modern portfolio website built with React Three Fiber for 3D elements, Framer Motion for animations, and Tailwind CSS for styling. Features smooth scroll and interactive hover effects.",
+    description:
+      "Modern portfolio website built with React Three Fiber for 3D elements, Framer Motion for animations, and Tailwind CSS for styling. Features smooth scroll and interactive hover effects.",
     tech: ["React", "Three.js", "Framer Motion", "Tailwind"],
     liveUrl: null,
     githubUrl: "https://github.com/Mohamad-Alsyouf/portfolio",
   },
-]
+];

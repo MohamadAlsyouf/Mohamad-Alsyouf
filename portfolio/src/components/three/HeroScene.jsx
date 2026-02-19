@@ -137,7 +137,7 @@ function ReactBMWLogo() {
     <Float speed={1.5} rotationIntensity={0.05} floatIntensity={0.2}>
       <group ref={groupRef} scale={1} rotation={[0.3, 0, 0]}>
         {/* BMW Logo as nucleus in the center */}
-        <group scale={0.38}>
+        <group scale={0.28}>
           <BMWLogo />
         </group>
 
