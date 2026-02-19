@@ -37,9 +37,9 @@ export default function Navbar() {
           {/* Logo */}
           <a
             href="#hero"
-            className="text-xl font-bold text-foreground hover:text-accent transition-colors"
+            className="text-2xl font-bold text-foreground hover:text-accent transition-colors"
           >
-            Portfolio
+            Mohamad Alsyouf
           </a>
 
           {/* Desktop nav links */}
@@ -48,7 +48,7 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm text-muted hover:text-foreground transition-colors"
+                className="text-md text-muted hover:text-foreground transition-colors font-semibold"
               >
                 {link.name}
               </a>

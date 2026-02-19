@@ -2,7 +2,7 @@ import { useRef, useMemo, useState, useEffect } from 'react'
 import { useFrame, useThree, useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three'
 import * as THREE from 'three'
-import headshotImg from '../../assets/meeee.jpg'
+import headshotImg from '../../assets/selfie.jpg'
 
 function Stars({ count = 80 }) {
   const meshRef = useRef()
