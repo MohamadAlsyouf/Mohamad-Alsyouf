@@ -1,6 +1,8 @@
 import { useRef, useMemo, useState, useEffect } from 'react'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame, useThree, useLoader } from '@react-three/fiber'
+import { TextureLoader } from 'three'
 import * as THREE from 'three'
+import headshotImg from '../../assets/meeee.jpg'
 
 function Stars({ count = 80 }) {
   const meshRef = useRef()
@@ -106,6 +108,9 @@ function Rocket({ isHovering, isMoving }) {
   const targetRotation = useRef({ x: 0, z: 0 })
   const flameRef = useRef()
 
+  // Load headshot texture
+  const headshotTexture = useLoader(TextureLoader, headshotImg)
+
   useFrame((state) => {
     if (groupRef.current) {
       const { mouse } = state
@@ -135,9 +140,9 @@ function Rocket({ isHovering, isMoving }) {
       const velocityX = targetPos.current.x - groupRef.current.position.x
       const velocityY = targetPos.current.y - groupRef.current.position.y
 
-      // Tilt rocket based on movement direction
-      targetRotation.current.z = -velocityX * 0.8
-      targetRotation.current.x = velocityY * 0.5
+      // Tilt rocket based on movement direction (reduced to keep window centered)
+      targetRotation.current.z = -velocityX * 0.3
+      targetRotation.current.x = velocityY * 0.15
 
       groupRef.current.rotation.z = THREE.MathUtils.lerp(
         groupRef.current.rotation.z,
@@ -168,37 +173,43 @@ function Rocket({ isHovering, isMoving }) {
     <group ref={groupRef} scale={0.5} rotation={[0, 0, 0]}>
       {/* Rocket body - main cylinder */}
       <mesh position={[0, 0, 0]}>
-        <cylinderGeometry args={[0.4, 0.5, 2, 16]} />
+        <cylinderGeometry args={[0.5, 0.6, 2, 16]} />
         <meshStandardMaterial color={bodyColor} metalness={0.3} roughness={0.4} />
       </mesh>
 
       {/* Nose cone */}
       <mesh position={[0, 1.4, 0]}>
-        <coneGeometry args={[0.4, 0.8, 16]} />
+        <coneGeometry args={[0.5, 0.8, 16]} />
         <meshStandardMaterial color={accentColor} metalness={0.4} roughness={0.3} />
       </mesh>
 
-      {/* Window */}
-      <mesh position={[0, 0.3, 0.42]}>
-        <circleGeometry args={[0.2, 16]} />
+      {/* Window - headshot inside */}
+      <mesh position={[0, 0.3, 0.54]}>
+        <circleGeometry args={[0.32, 64]} />
+        <meshBasicMaterial map={headshotTexture} />
+      </mesh>
+
+      {/* Window glass overlay */}
+      <mesh position={[0, 0.3, 0.55]}>
+        <circleGeometry args={[0.32, 64]} />
         <meshStandardMaterial
           color={windowColor}
-          emissive={windowColor}
-          emissiveIntensity={0.3}
-          metalness={0.8}
+          transparent
+          opacity={0.15}
+          metalness={0.9}
           roughness={0.1}
         />
       </mesh>
 
       {/* Window rim */}
-      <mesh position={[0, 0.3, 0.41]}>
-        <ringGeometry args={[0.2, 0.26, 16]} />
-        <meshStandardMaterial color="#888888" metalness={0.6} roughness={0.3} />
+      <mesh position={[0, 0.3, 0.53]}>
+        <ringGeometry args={[0.32, 0.4, 64, 1, 0, Math.PI * 2]} />
+        <meshStandardMaterial color="#888888" metalness={0.6} roughness={0.3} side={THREE.DoubleSide} />
       </mesh>
 
       {/* Accent stripe */}
       <mesh position={[0, -0.3, 0]}>
-        <cylinderGeometry args={[0.52, 0.52, 0.15, 16]} />
+        <cylinderGeometry args={[0.62, 0.62, 0.15, 16]} />
         <meshStandardMaterial color={accentColor} metalness={0.4} roughness={0.3} />
       </mesh>
 
@@ -207,9 +218,9 @@ function Rocket({ isHovering, isMoving }) {
         <mesh
           key={i}
           position={[
-            Math.sin(angle) * 0.5,
+            Math.sin(angle) * 0.6,
             -0.8,
-            Math.cos(angle) * 0.5,
+            Math.cos(angle) * 0.6,
           ]}
           rotation={[0, -angle, 0]}
         >

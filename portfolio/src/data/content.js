@@ -35,6 +35,8 @@ export const skills = [
   { name: "Cypress", category: "Testing" },
   { name: "Vite", category: "Tools" },
   { name: "Git", category: "Tools" },
+  { name: "Firebase", category: "Cloud" },
+  { name: "Three.js", category: "Frontend" },
 ];
 
 export const projects = [
@@ -52,18 +54,18 @@ export const projects = [
     title: "NEXT™ Client-Facing Application Suite",
     description:
       "Built interactive web apps used by 1M+ monthly users exploring homes from top U.S. real estate developers. Deployed as PWAs in thousands of sales centers nationwide with 80% reduction in AWS costs.",
-    tech: ["React", "TypeScript", "PWA", "Workbox", "AWS"],
+    tech: ["React", "TypeScript", "PWA", "Workbox", "AWS", "Google Analytics"],
     liveUrl: null,
     githubUrl: null,
   },
   {
     id: 3,
-    title: "Real Estate CMS",
+    title: "Deen App - Faith Based Learning Platform",
     description:
       "Internal content management system to manage assets and listing data for real estate applications. Streamlined production workflows and reduced content update time significantly.",
-    tech: ["React", "TypeScript", "Tailwind", "SQL", "REST APIs"],
-    liveUrl: null,
-    githubUrl: null,
+    tech: ["React Native", "TypeScript", "Expo", "Firebase", "REST APIs"],
+    liveUrl: "https://deen-app--84zaizf70p.expo.app/",
+    githubUrl: "https://github.com/MohamadAlsyouf/deen-app",
   },
   {
     id: 4,

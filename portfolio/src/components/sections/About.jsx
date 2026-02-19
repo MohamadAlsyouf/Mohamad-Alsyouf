@@ -15,7 +15,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
         >
           {/* 3D Scene */}
-          <div className="hidden lg:block h-[400px] order-2 lg:order-1">
+          <div className="hidden lg:block relative min-h-[500px] w-[640px] order-2 lg:order-1 self-stretch">
             <CanvasWrapper className="w-full h-full">
               <AboutScene />
             </CanvasWrapper>
