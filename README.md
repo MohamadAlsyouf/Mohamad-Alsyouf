@@ -1,6 +1,6 @@
 # Mohamad Alsyouf | Developer Portfolio
 
-A modern, interactive developer portfolio built with React, Three.js, and Framer Motion. Features 3D elements, smooth animations, and a clean dark theme.
+A modern, interactive developer portfolio built with React, Three.js, and Framer Motion. Features 3D elements, smooth animations, and a clean dark theme. https://mohamadalsyouf.com/
 
 ![React](https://img.shields.io/badge/React-18.2-61DAFB?style=flat-square&logo=react&logoColor=white)
 ![Three.js](https://img.shields.io/badge/Three.js-r158-000000?style=flat-square&logo=three.js&logoColor=white)
