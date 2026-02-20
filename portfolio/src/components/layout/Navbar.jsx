@@ -37,7 +37,7 @@ export default function Navbar() {
           {/* Logo */}
           <a
             href="#hero"
-            className="text-2xl font-bold text-foreground hover:text-accent transition-colors"
+            className="text-lg sm:text-2xl font-bold text-foreground hover:text-accent transition-colors truncate"
           >
             Mohamad Alsyouf
           </a>

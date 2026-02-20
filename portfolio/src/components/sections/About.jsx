@@ -54,28 +54,28 @@ export default function About() {
             </motion.p>
 
             <motion.div
-              className="flex items-center gap-6 pt-4 text-nowrap"
+              className="flex flex-wrap items-center gap-4 sm:gap-6 pt-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div>
-                <div className="text-3xl font-bold text-foreground">3+</div>
-                <div className="text-sm text-muted">Years Experience</div>
+                <div className="text-2xl sm:text-3xl font-bold text-foreground">3+</div>
+                <div className="text-xs sm:text-sm text-muted">Years Experience</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-foreground">1M+</div>
-                <div className="text-sm text-muted">Monthly Users</div>
+                <div className="text-2xl sm:text-3xl font-bold text-foreground">1M+</div>
+                <div className="text-xs sm:text-sm text-muted">Monthly Users</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-foreground">100+</div>
-                <div className="text-sm text-muted">Employees Supported</div>
+                <div className="text-2xl sm:text-3xl font-bold text-foreground">100+</div>
+                <div className="text-xs sm:text-sm text-muted">Employees Supported</div>
               </div>
               <a
                 href="src/assets/Mohamad-Alsyouf-Resume.pdf"
                 download
-                className="px-5 py-2.5 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors ml-2"
+                className="px-4 sm:px-5 py-2 sm:py-2.5 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors text-sm sm:text-base"
               >
                 Download Resume
               </a>

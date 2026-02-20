@@ -26,7 +26,7 @@ export default function Hero() {
           {/* Text content */}
           <div className="space-y-6">
             <motion.p
-              className="text-accent text-2xl font-medium"
+              className="text-accent text-lg sm:text-2xl font-medium"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -35,7 +35,7 @@ export default function Hero() {
             </motion.p>
 
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -44,7 +44,7 @@ export default function Hero() {
             </motion.h1>
 
             <motion.h2
-              className="text-2xl md:text-3xl text-muted font-medium"
+              className="text-xl sm:text-2xl md:text-3xl text-muted font-medium"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -53,7 +53,7 @@ export default function Hero() {
             </motion.h2>
 
             <motion.p
-              className="text-lg text-muted max-w-md"
+              className="text-base sm:text-lg text-muted max-w-md"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -62,20 +62,20 @@ export default function Hero() {
             </motion.p>
 
             <motion.div
-              className="flex gap-4 pt-4"
+              className="flex flex-wrap gap-3 sm:gap-4 pt-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <a
                 href="#projects"
-                className="px-6 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors"
+                className="px-5 sm:px-6 py-2.5 sm:py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors text-sm sm:text-base"
               >
                 View Projects
               </a>
               <a
                 href="#contact"
-                className="px-6 py-3 border border-[#2a2a35] text-foreground rounded-lg font-medium hover:border-accent/50 transition-colors"
+                className="px-5 sm:px-6 py-2.5 sm:py-3 border border-[#2a2a35] text-foreground rounded-lg font-medium hover:border-accent/50 transition-colors text-sm sm:text-base"
               >
                 Get in Touch
               </a>
