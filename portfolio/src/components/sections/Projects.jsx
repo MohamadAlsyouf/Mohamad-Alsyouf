@@ -4,7 +4,7 @@ import { projects } from '../../data/content'
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 lg:py-32">
+    <section id="projects" className="py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.span
