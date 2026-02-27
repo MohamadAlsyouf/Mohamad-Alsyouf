@@ -45,7 +45,7 @@ export const projects = [
     title: "ERP Workflow Automation System",
     description:
       "Led development of a modern ERP platform replacing 30+ years of manual workflows. Supports 100+ employees across multiple departments, reducing project delays by 25-35% and manual errors by 60%.",
-    tech: ["React", "TypeScript", "Zustand", "AWS Lambda", "PostgreSQL"],
+    tech: ["React", "TypeScript", "Zustand", "AWS Lambda", "MySQL"],
     liveUrl: null,
     githubUrl: null,
   },
@@ -60,12 +60,12 @@ export const projects = [
   },
   {
     id: 3,
-    title: "Deen App - Faith Based Learning Platform",
+    title: "Arkan App - Faith Based Learning Platform",
     description:
       "Internal content management system to manage assets and listing data for real estate applications. Streamlined production workflows and reduced content update time significantly.",
     tech: ["React Native", "TypeScript", "Expo", "Firebase", "REST APIs"],
-    liveUrl: "https://deen-app--84zaizf70p.expo.app/",
-    githubUrl: "https://github.com/MohamadAlsyouf/deen-app",
+    liveUrl: "https://deen-app--osuy87lnks.expo.app/",
+    githubUrl: "https://github.com/MohamadAlsyouf/Arkan",
   },
   {
     id: 4,
