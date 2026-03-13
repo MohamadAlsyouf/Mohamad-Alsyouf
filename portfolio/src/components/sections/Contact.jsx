@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import CanvasWrapper from '../three/CanvasWrapper'
 import ContactScene from '../three/ContactScene'
+import { useTheme } from '../../context/ThemeContext'
 import { personalInfo } from '../../data/content'
 
 const socialLinks = [
@@ -39,10 +40,15 @@ const socialLinks = [
 ]
 
 export default function Contact() {
+  const { isLightMode } = useTheme()
+
   return (
-    <section id="contact" className="relative py-24 lg:py-32 overflow-hidden">
+    <section
+      id="contact"
+      className="relative overflow-hidden bg-gradient-to-b from-background to-background-secondary/70 py-24 transition-colors duration-300 lg:py-32"
+    >
       {/* 3D Background */}
-      <div className="absolute inset-0 opacity-30">
+      <div className={`absolute inset-0 ${isLightMode ? 'opacity-50' : 'opacity-30'}`}>
         <CanvasWrapper className="w-full h-full">
           <ContactScene />
         </CanvasWrapper>
@@ -94,7 +100,7 @@ export default function Contact() {
                 href={link.href}
                 target={link.name !== 'Email' ? '_blank' : undefined}
                 rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
-                className="flex items-center gap-2 px-5 py-3 bg-[#12121a] border border-[#1f1f2e] rounded-lg text-foreground hover:border-accent/50 hover:text-accent transition-all"
+                className="flex items-center gap-2 rounded-lg border border-border bg-background-surface/90 px-5 py-3 text-foreground transition-all hover:border-accent/50 hover:text-accent"
               >
                 {link.icon}
                 <span>{link.name}</span>
@@ -103,7 +109,7 @@ export default function Contact() {
           </motion.div>
 
           <motion.div
-            className="mt-16 pt-8 border-t border-[#1f1f2e]"
+            className="mt-16 border-t border-border pt-8"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

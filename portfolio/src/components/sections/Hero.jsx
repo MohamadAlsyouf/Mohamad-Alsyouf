@@ -2,21 +2,24 @@ import { motion } from 'framer-motion'
 import CanvasWrapper from '../three/CanvasWrapper'
 import HeroScene from '../three/HeroScene'
 import ContactScene from '../three/ContactScene'
+import { useTheme } from '../../context/ThemeContext'
 import { personalInfo } from '../../data/content'
 
 export default function Hero() {
+  const { isLightMode } = useTheme()
+
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-[#0d0d14]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background-secondary" />
 
       {/* Stars background */}
-      <div className="absolute inset-0 opacity-50">
+      <div className={`absolute inset-0 ${isLightMode ? 'opacity-70' : 'opacity-50'}`}>
         <CanvasWrapper className="w-full h-full">
-          <ContactScene />
+          <ContactScene primaryCount={180} accentCount={240} />
         </CanvasWrapper>
       </div>
 
@@ -75,7 +78,7 @@ export default function Hero() {
               </a>
               <a
                 href="#contact"
-                className="px-5 sm:px-6 py-2.5 sm:py-3 border border-[#2a2a35] text-foreground rounded-lg font-medium hover:border-accent/50 transition-colors text-sm sm:text-base"
+                className="rounded-lg border border-border bg-background-surface/40 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-background-surface/70 sm:px-6 sm:py-3 sm:text-base"
               >
                 Get in Touch
               </a>

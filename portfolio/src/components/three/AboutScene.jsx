@@ -3,8 +3,9 @@ import { useFrame, useThree, useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three'
 import * as THREE from 'three'
 import headshotImg from '../../assets/selfie.jpg'
+import { useTheme } from '../../context/ThemeContext'
 
-function Stars({ count = 80 }) {
+function Stars({ color, count = 80 }) {
   const meshRef = useRef()
 
   const stars = useMemo(() => {
@@ -37,7 +38,7 @@ function Stars({ count = 80 }) {
       </bufferGeometry>
       <pointsMaterial
         size={0.04}
-        color="#ffffff"
+        color={color}
         transparent
         opacity={0.7}
         sizeAttenuation
@@ -46,7 +47,7 @@ function Stars({ count = 80 }) {
   )
 }
 
-function SpeedStars({ count = 50, isHovering }) {
+function SpeedStars({ color, count = 50, isHovering }) {
   const meshRef = useRef()
 
   const particles = useMemo(() => {
@@ -93,7 +94,7 @@ function SpeedStars({ count = 50, isHovering }) {
       </bufferGeometry>
       <pointsMaterial
         size={isHovering ? 0.05 : 0.02}
-        color="#ffffff"
+        color={color}
         transparent
         opacity={isHovering ? 0.8 : 0}
         sizeAttenuation
@@ -102,7 +103,7 @@ function SpeedStars({ count = 50, isHovering }) {
   )
 }
 
-function Rocket({ isHovering, isMoving }) {
+function Rocket({ isHovering, isMoving, palette }) {
   const groupRef = useRef()
   const targetPos = useRef(new THREE.Vector3(0, 0, 0))
   const targetRotation = useRef({ x: 0, z: 0 })
@@ -165,9 +166,9 @@ function Rocket({ isHovering, isMoving }) {
     }
   })
 
-  const bodyColor = "#e8e8e8"
-  const accentColor = "#6366f1"
-  const windowColor = "#61dafb"
+  const bodyColor = palette.rocketBodyColor
+  const accentColor = palette.rocketAccentColor
+  const windowColor = palette.rocketWindowColor
 
   return (
     <group ref={groupRef} scale={0.5} rotation={[0, 0, 0]}>
@@ -204,7 +205,12 @@ function Rocket({ isHovering, isMoving }) {
       {/* Window rim */}
       <mesh position={[0, 0.3, 0.53]}>
         <ringGeometry args={[0.32, 0.4, 64, 1, 0, Math.PI * 2]} />
-        <meshStandardMaterial color="#888888" metalness={0.6} roughness={0.3} side={THREE.DoubleSide} />
+        <meshStandardMaterial
+          color={palette.rocketRimColor}
+          metalness={0.6}
+          roughness={0.3}
+          side={THREE.DoubleSide}
+        />
       </mesh>
 
       {/* Accent stripe */}
@@ -232,7 +238,11 @@ function Rocket({ isHovering, isMoving }) {
       {/* Engine base */}
       <mesh position={[0, -1.1, 0]}>
         <cylinderGeometry args={[0.35, 0.3, 0.2, 16]} />
-        <meshStandardMaterial color="#444444" metalness={0.6} roughness={0.4} />
+        <meshStandardMaterial
+          color={palette.rocketEngineColor}
+          metalness={0.6}
+          roughness={0.4}
+        />
       </mesh>
 
       {/* Flame */}
@@ -262,7 +272,7 @@ function Rocket({ isHovering, isMoving }) {
   )
 }
 
-function Scene() {
+function Scene({ palette }) {
   const [isHovering, setIsHovering] = useState(false)
   const [isMoving, setIsMoving] = useState(false)
   const lastMousePos = useRef({ x: 0, y: 0 })
@@ -318,16 +328,26 @@ function Scene() {
 
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <pointLight position={[5, 5, 5]} intensity={0.8} color="#ffffff" />
-      <pointLight position={[-5, -5, 5]} intensity={0.4} color="#6366f1" />
-      <Stars count={100} />
-      <SpeedStars count={50} isHovering={isHovering} />
-      <Rocket isHovering={isHovering} isMoving={isMoving} />
+      <ambientLight intensity={palette.ambientIntensity} />
+      <pointLight
+        position={[5, 5, 5]}
+        intensity={palette.keyLightIntensity}
+        color={palette.keyLightColor}
+      />
+      <pointLight
+        position={[-5, -5, 5]}
+        intensity={palette.fillLightIntensity}
+        color={palette.fillLightColor}
+      />
+      <Stars color={palette.starColor} count={170} />
+      <SpeedStars color={palette.speedStarColor} count={110} isHovering={isHovering} />
+      <Rocket isHovering={isHovering} isMoving={isMoving} palette={palette} />
     </>
   )
 }
 
 export default function AboutScene() {
-  return <Scene />
+  const { themePalette } = useTheme()
+
+  return <Scene palette={themePalette.canvas.about} />
 }

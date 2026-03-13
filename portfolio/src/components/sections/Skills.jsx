@@ -4,7 +4,7 @@ import { skills } from '../../data/content'
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 bg-[#0c0c12]">
+    <section id="skills" className="bg-background-secondary py-20 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.span

@@ -43,7 +43,7 @@ export default function ProjectCard({ project }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="bg-[#12121a] border border-[#1f1f2e] rounded-xl p-6 h-full"
+        className="h-full rounded-xl border border-border bg-background-surface p-6 transition-colors duration-300"
         style={{
           transformStyle: 'preserve-3d',
         }}
@@ -70,7 +70,7 @@ export default function ProjectCard({ project }) {
             {project.tech.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 text-xs bg-[#1a1a25] text-accent rounded-full"
+                className="rounded-full bg-background-secondary px-3 py-1 text-xs text-accent"
               >
                 {tech}
               </span>

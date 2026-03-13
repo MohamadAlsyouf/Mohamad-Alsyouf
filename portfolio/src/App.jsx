@@ -7,7 +7,7 @@ import Contact from './components/sections/Contact'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-300">
       <Navbar />
       <main>
         <Hero />

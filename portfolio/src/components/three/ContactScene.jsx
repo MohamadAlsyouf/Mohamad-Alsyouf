@@ -1,8 +1,9 @@
 import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import { useTheme } from '../../context/ThemeContext'
 
-function Particles({ count = 50, color = "#ffffff", size = 0.05, opacity = 0.6 }) {
+function Particles({ count = 50, color = '#ffffff', size = 0.05, opacity = 0.6 }) {
   const meshRef = useRef()
 
   const particles = useMemo(() => {
@@ -64,14 +65,28 @@ function Particles({ count = 50, color = "#ffffff", size = 0.05, opacity = 0.6 }
   )
 }
 
-export default function ContactScene() {
+export default function ContactScene({
+  primaryCount = 130,
+  accentCount = 160,
+}) {
+  const { themePalette } = useTheme()
+  const contactPalette = themePalette.canvas.contact
+
   return (
     <>
-      <ambientLight intensity={0.2} />
-      {/* White stars */}
-      <Particles count={80} color="#ffffff" size={0.04} opacity={0.7} />
-      {/* Accent colored stars */}
-      <Particles count={100} color="#6366f1" size={0.06} opacity={0.6} />
+      <ambientLight intensity={contactPalette.ambientIntensity} />
+      <Particles
+        count={primaryCount}
+        color={contactPalette.primaryStarColor}
+        size={0.04}
+        opacity={contactPalette.primaryStarOpacity}
+      />
+      <Particles
+        count={accentCount}
+        color={contactPalette.accentStarColor}
+        size={0.06}
+        opacity={contactPalette.accentStarOpacity}
+      />
     </>
   )
 }

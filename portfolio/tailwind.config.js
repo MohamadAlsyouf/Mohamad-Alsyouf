@@ -7,11 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0a0a0f',
-        foreground: '#f5f5f7',
-        muted: '#8b8b92',
-        accent: '#6366f1',
-        'accent-glow': 'rgba(99, 102, 241, 0.2)',
+        background: 'rgb(var(--color-background) / <alpha-value>)',
+        'background-secondary': 'rgb(var(--color-background-secondary) / <alpha-value>)',
+        'background-surface': 'rgb(var(--color-background-surface) / <alpha-value>)',
+        foreground: 'rgb(var(--color-foreground) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        'accent-soft': 'rgb(var(--color-accent-soft) / <alpha-value>)',
+        border: 'rgb(var(--color-border) / <alpha-value>)',
+        'border-strong': 'rgb(var(--color-border-strong) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

@@ -2,6 +2,7 @@ import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
 import * as THREE from 'three'
+import { useTheme } from '../../context/ThemeContext'
 
 function BMWLogo({ scale = 1 }) {
   const bmwBlue = "#0066b1"
@@ -71,7 +72,7 @@ function BMWLogo({ scale = 1 }) {
   )
 }
 
-function EllipticalOrbit({ rotationZ = 0 }) {
+function EllipticalOrbit({ color, rotationZ = 0 }) {
   // Create an elliptical torus shape
   const geometry = useMemo(() => {
     const curve = new THREE.EllipseCurve(
@@ -96,8 +97,8 @@ function EllipticalOrbit({ rotationZ = 0 }) {
     <group rotation={[0, 0, rotationZ]}>
       <mesh geometry={geometry}>
         <meshStandardMaterial
-          color="#61dafb"
-          emissive="#61dafb"
+          color={color}
+          emissive={color}
           emissiveIntensity={0.4}
         />
       </mesh>
@@ -105,7 +106,7 @@ function EllipticalOrbit({ rotationZ = 0 }) {
   )
 }
 
-function ReactLogo() {
+function ReactLogo({ color }) {
   const groupRef = useRef()
 
   useFrame(() => {
@@ -117,14 +118,14 @@ function ReactLogo() {
   return (
     <group ref={groupRef}>
       {/* Three elliptical orbits at 60° intervals */}
-      <EllipticalOrbit rotationZ={0} />
-      <EllipticalOrbit rotationZ={Math.PI / 3} />
-      <EllipticalOrbit rotationZ={(2 * Math.PI) / 3} />
+      <EllipticalOrbit color={color} rotationZ={0} />
+      <EllipticalOrbit color={color} rotationZ={Math.PI / 3} />
+      <EllipticalOrbit color={color} rotationZ={(2 * Math.PI) / 3} />
     </group>
   )
 }
 
-function ReactBMWLogo() {
+function ReactBMWLogo({ orbitColor }) {
   const groupRef = useRef()
 
   useFrame(() => {
@@ -142,20 +143,35 @@ function ReactBMWLogo() {
         </group>
 
         {/* React orbits around it */}
-        <ReactLogo />
+        <ReactLogo color={orbitColor} />
       </group>
     </Float>
   )
 }
 
 export default function HeroScene() {
+  const { themePalette } = useTheme()
+  const heroPalette = themePalette.canvas.hero
+
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={1} color="#ffffff" />
-      <pointLight position={[-5, 3, -5]} intensity={0.6} color="#61dafb" />
-      <pointLight position={[5, -2, 5]} intensity={0.4} color="#ffffff" />
-      <ReactBMWLogo />
+      <ambientLight intensity={heroPalette.ambientIntensity} />
+      <directionalLight
+        position={[5, 5, 5]}
+        intensity={heroPalette.directionalIntensity}
+        color={heroPalette.directionalColor}
+      />
+      <pointLight
+        position={[-5, 3, -5]}
+        intensity={heroPalette.primaryLightIntensity}
+        color={heroPalette.primaryLightColor}
+      />
+      <pointLight
+        position={[5, -2, 5]}
+        intensity={heroPalette.secondaryLightIntensity}
+        color={heroPalette.secondaryLightColor}
+      />
+      <ReactBMWLogo orbitColor={heroPalette.orbitColor} />
     </>
   )
 }

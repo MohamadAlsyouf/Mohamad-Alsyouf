@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 export default function SkillCard({ skill, index }) {
   return (
     <motion.div
-      className="bg-[#12121a] border border-[#1f1f2e] rounded-lg p-4 flex items-center gap-3 hover:border-accent/30 transition-colors"
+      className="flex items-center gap-3 rounded-lg border border-border bg-background-surface p-4 transition-colors hover:border-accent/30"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
