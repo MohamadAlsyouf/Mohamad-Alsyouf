@@ -63,7 +63,9 @@ export default function ThemeToggleButton() {
     <motion.button
       type="button"
       onClick={toggleTheme}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-background-surface/90 text-foreground shadow-lg shadow-accent/10 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+      className={`fixed right-6 top-3 z-[70] inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background-surface/90 text-foreground shadow-lg shadow-accent/10 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/30 lg:right-8 ${
+        !isLightMode ? "border-gray-400" : ""
+      }`}
       whileTap={{ scale: 0.94 }}
       aria-label={isLightMode ? "Switch to dark mode" : "Switch to light mode"}
       aria-pressed={isLightMode}
