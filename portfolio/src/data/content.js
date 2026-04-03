@@ -64,7 +64,7 @@ export const projects = [
     description:
       "Internal content management system to manage assets and listing data for real estate applications. Streamlined production workflows and reduced content update time significantly.",
     tech: ["React Native", "TypeScript", "Expo", "Firebase", "REST APIs"],
-    liveUrl: "https://arkan--usbtv5doi5.expo.app/",
+    liveUrl: "https://arkan-app.expo.app/",
     githubUrl: null,
   },
   {
