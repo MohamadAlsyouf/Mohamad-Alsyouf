@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#d5ff63" stroke-opacity=".045"/>
+    </pattern>
+    <radialGradient id="aura">
+      <stop stop-color="#a6dc2f" stop-opacity=".17"/>
+      <stop offset="1" stop-color="#111310" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#efffc6"/>
+      <stop offset=".45" stop-color="#d5ff63"/>
+      <stop offset="1" stop-color="#538213"/>
+    </linearGradient>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="shadow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="#111310"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <ellipse cx="985" cy="306" rx="435" ry="360" fill="url(#aura)"/>
+  <path d="M62 55h14m-7-7v14M1131 55h14m-7-7v14M62 575h14m-7-7v14M1131 575h14m-7-7v14" stroke="#747d67" stroke-width="1"/>
+  <rect x="89" y="75" width="37" height="37" rx="10" fill="#d5ff63"/>
+  <path d="M96 101V86l8 10 8-10v15m3 0 4-14 4 14m-6-5h5" fill="none" stroke="#111310" stroke-width="2.5"/>
+  <text x="141" y="100" fill="#f5f7ed" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="-.5">Mohamad Alsyouf<tspan fill="#d5ff63">.</tspan></text>
+  <circle cx="917" cy="95" r="4" fill="#d5ff63"/>
+  <text x="932" y="100" fill="#bac3b0" font-family="monospace" font-size="11" letter-spacing="1.4">ENGINEERING WITH INTENT</text>
+  <text x="87" y="235" fill="#f5f7ed" font-family="Arial,sans-serif" font-size="88" font-weight="700" letter-spacing="-5">Big ideas.</text>
+  <text x="87" y="331" fill="#f5f7ed" font-family="Arial,sans-serif" font-size="88" font-weight="700" letter-spacing="-5">Real systems.</text>
+  <text x="87" y="427" fill="#d5ff63" font-family="Arial,sans-serif" font-size="88" font-weight="700" letter-spacing="-5">Lasting impact.</text>
+  <g transform="translate(966 298) rotate(-28)">
+    <ellipse cx="0" cy="150" rx="141" ry="15" fill="#020500" opacity=".8" filter="url(#shadow)"/>
+    <ellipse rx="154" ry="64" fill="none" stroke="#d5ff63" stroke-opacity=".28" stroke-width="22" transform="rotate(55)" filter="url(#glow)"/>
+    <ellipse rx="154" ry="64" fill="none" stroke="url(#ring)" stroke-width="14" transform="rotate(55)"/>
+    <ellipse rx="154" ry="64" fill="none" stroke="url(#ring)" stroke-width="14" transform="rotate(115)"/>
+    <ellipse rx="154" ry="64" fill="none" stroke="url(#ring)" stroke-width="14" transform="rotate(-5)"/>
+    <circle cx="0" cy="0" r="16" fill="#e7ffb0"/>
+    <circle cx="-146" cy="-43" r="9" fill="#f1ffd5"/>
+    <circle cx="94" cy="116" r="6" fill="#d5ff63"/>
+  </g>
+  <path d="M89 482h1022" stroke="#31382b"/>
+  <text x="90" y="520" fill="#f5f7ed" font-family="Arial,sans-serif" font-size="17" font-weight="600">Mohamad Alsyouf</text>
+  <text x="90" y="548" fill="#a9b09f" font-family="Arial,sans-serif" font-size="15">Senior full-stack engineer × AI-native builder</text>
+  <text x="1111" y="535" text-anchor="end" fill="#d5ff63" font-family="monospace" font-size="13" letter-spacing=".4">mohamadalsyouf.com ↗</text>
+</svg>

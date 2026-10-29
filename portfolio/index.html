@@ -1,25 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link
-      type="image/png"
-      sizes="32x32"
-      rel="icon"
-      href="./src/assets/selfie.jpg"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Full Stack Developer Portfolio" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+    <meta name="theme-color" content="#111310" />
+    <meta name="color-scheme" content="dark light" />
+    <meta
+      name="description"
+      content="Mohamad Alsyouf is a senior full stack engineer and AI-native builder in California. Enterprise systems, products used by 1M+ monthly users, and cross-functional leadership."
     />
-    <title>Mohamad Alsyouf | Software Dev</title>
+    <meta name="author" content="Mohamad Alsyouf" />
+    <link rel="canonical" href="https://mohamadalsyouf.com/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Mohamad Alsyouf" />
+    <meta property="og:url" content="https://mohamadalsyouf.com/" />
+    <meta
+      property="og:title"
+      content="Mohamad Alsyouf — Senior Engineer & AI-Native Builder"
+    />
+    <meta
+      property="og:description"
+      content="Big ideas. Real systems. Lasting impact. Full stack engineering, enterprise products, and the leadership to bring it all together."
+    />
+    <meta
+      property="og:image"
+      content="https://mohamadalsyouf.com/social-card.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Big ideas. Real systems. Lasting impact. Mohamad Alsyouf, senior full-stack engineer and AI-native builder."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Mohamad Alsyouf — Senior Engineer & AI-Native Builder"
+    />
+    <meta
+      name="twitter:description"
+      content="Big ideas. Real systems. Lasting impact. Explore my work in full stack engineering, enterprise systems, and AI-assisted development."
+    />
+    <meta
+      name="twitter:image"
+      content="https://mohamadalsyouf.com/social-card.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Big ideas. Real systems. Lasting impact. Mohamad Alsyouf."
+    />
+    <script>
+      ;(() => {
+        let theme = 'dark'
+        try {
+          theme =
+            localStorage.getItem('portfolio-theme') === 'light'
+              ? 'light'
+              : 'dark'
+        } catch {}
+        document.documentElement.dataset.theme = theme
+        document.documentElement.style.colorScheme = theme
+        document.querySelector('meta[name="theme-color"]').content =
+          theme === 'dark' ? '#111310' : '#f4f5ee'
+      })()
+    </script>
+    <link
+      rel="preload"
+      href="/fonts/space-grotesk-latin.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/dm-sans-latin.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mohamad Alsyouf",
+        "url": "https://mohamadalsyouf.com/",
+        "jobTitle": "Senior Full Stack Developer, R&D",
+        "description": "Senior full stack engineer building enterprise platforms and customer applications with React, TypeScript, Node.js, and AWS.",
+        "email": "mailto:mohamadalsyouf99@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Anaheim",
+          "addressRegion": "CA",
+          "addressCountry": "US"
+        },
+        "worksFor": { "@type": "Organization", "name": "Focus 360" },
+        "sameAs": [
+          "https://www.linkedin.com/in/mohamad-alsyouf/",
+          "https://github.com/MohamadAlsyouf"
+        ],
+        "knowsAbout": [
+          "Full Stack Development",
+          "React",
+          "TypeScript",
+          "Node.js",
+          "Amazon Web Services",
+          "Scrum",
+          "Cross-functional collaboration",
+          "AI-assisted development"
+        ]
+      }
+    </script>
+    <title>Mohamad Alsyouf — Senior Engineer & AI-Native Builder</title>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p>Mohamad Alsyouf — Senior Full Stack Engineer & AI-Native Builder.</p>
+      <p>
+        Enable JavaScript to explore my work, or
+        <a href="/Mohamad-Alsyouf-Resume.pdf">download my résumé</a>.
+      </p>
+      <p>
+        <a href="mailto:mohamadalsyouf99@gmail.com">Get in touch</a> ·
+        <a href="https://www.linkedin.com/in/mohamad-alsyouf/">LinkedIn</a>
+      </p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
