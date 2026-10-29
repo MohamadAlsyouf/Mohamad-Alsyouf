@@ -1,7 +1,122 @@
-import { aboutText, capabilities, experience, personalInfo } from '../../data/content'
+import {
+  aboutText,
+  capabilities,
+  experience,
+  personalInfo,
+} from '../../data/content'
 import portrait from '../../assets/meeee.jpg'
 import Reveal, { SectionLabel } from '../ui/Reveal'
 import Icon from '../ui/Icon'
 export default function About() {
-  return <section id="about" className="about-section section-space"><div className="page-width"><Reveal><SectionLabel number="02">THE PERSON BEHIND THE CODE</SectionLabel></Reveal><div className="about-intro"><Reveal className="portrait-composition"><div className="portrait-frame"><img src={portrait} alt="Mohamad Alsyouf" loading="lazy" width="400" height="400" /><div className="portrait-corner">MA /</div><div className="portrait-caption"><span><span className="status-dot" /> ALWAYS BUILDING</span><span>ANAHEIM, CA</span></div></div><div className="portrait-note"><span className="handdrawn-arrow">↳</span> A systems thinker with a builder’s heart.</div></Reveal><Reveal className="about-copy" delay={0.1}><h2>A builder.<br />A bridge.<br /><span className="accent-text">A force multiplier.</span></h2><p>{aboutText}</p><p>Give me a complex workflow, a room full of different perspectives, and an ambitious goal. I’ll help turn it into a clear plan—and a product that delivers.</p><a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">The longer story on LinkedIn<Icon size={16} /></a></Reveal></div><div className="capabilities-grid">{capabilities.map((item, index) => <Reveal className="capability" key={item.number} delay={index * 0.05}><div className="capability-top"><Icon name={item.icon === 'orbit' ? 'layers' : item.icon} size={23} /><span className="mono">{item.number}</span></div><h3>{item.title}</h3><p>{item.description}</p></Reveal>)}</div><Reveal className="experience"><div className="experience-label"><span className="mono">THE EXPERIENCE</span><span>Growing through ownership.</span></div><div className="experience-list">{experience.map((item, index) => <div className="experience-row" key={item.title}><span className={`experience-point ${index === 0 ? 'current' : ''}`} /><div><span className="mono experience-period">{item.period}</span><h3>{item.title}</h3><p>{item.company} <span>· {item.location}</span></p><p className="experience-description">{item.description}</p></div>{index === 0 && <span className="current-role mono">CURRENT</span>}</div>)}</div></Reveal></div></section>
+  return (
+    <section id="about" className="about-section section-space">
+      <div className="page-width">
+        <Reveal>
+          <SectionLabel number="02">THE PERSON BEHIND THE CODE</SectionLabel>
+        </Reveal>
+        <div className="about-intro">
+          <Reveal className="portrait-composition">
+            <div className="portrait-frame">
+              <img
+                src={portrait}
+                alt="Mohamad Alsyouf"
+                loading="lazy"
+                width="400"
+                height="400"
+              />
+              <div className="portrait-corner">MA /</div>
+              <div className="portrait-caption">
+                <span>
+                  <span className="status-dot" /> ALWAYS BUILDING
+                </span>
+                <span>ANAHEIM, CA</span>
+              </div>
+            </div>
+            <div className="portrait-note">
+              <span className="handdrawn-arrow">↳</span> A systems thinker with
+              a builder’s heart.
+            </div>
+          </Reveal>
+          <Reveal className="about-copy" delay={0.1}>
+            <h2>
+              A builder.
+              <br />A bridge.
+              <br />
+              <span className="accent-text">A force multiplier.</span>
+            </h2>
+            <p>{aboutText}</p>
+            <p>
+              Give me a complex workflow, a room full of different perspectives,
+              and an ambitious goal. I’ll help turn it into a clear plan—and a
+              product that delivers.
+            </p>
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-link"
+            >
+              The longer story on LinkedIn
+              <Icon size={16} />
+            </a>
+          </Reveal>
+        </div>
+        <div className="capabilities-grid">
+          {capabilities.map((item, index) => (
+            <Reveal
+              className="capability"
+              key={item.number}
+              delay={index * 0.05}
+            >
+              <div className="capability-top">
+                <Icon
+                  name={item.icon === 'orbit' ? 'layers' : item.icon}
+                  size={23}
+                />
+                <span className="mono">{item.number}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal className="experience">
+          <div className="experience-label">
+            <span className="mono">THE EXPERIENCE</span>
+            <span>Growing through ownership.</span>
+          </div>
+          <div className="experience-list">
+            {experience.map((item, index) => (
+              <div className="experience-row" key={item.title}>
+                <span
+                  className={`experience-point ${index === 0 ? 'current' : ''}`}
+                />
+                <div>
+                  <span className="mono experience-period">{item.period}</span>
+                  <h3>{item.title}</h3>
+                  <p>
+                    {item.company} <span>· {item.location}</span>
+                  </p>
+                  <p className="experience-description">{item.description}</p>
+                  <details className="experience-details" open={index === 0}>
+                    <summary>
+                      Inside the role <Icon name="plus" size={13} />
+                    </summary>
+                    <ul>
+                      {item.highlights.map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                  </details>
+                </div>
+                {index === 0 && (
+                  <span className="current-role mono">CURRENT</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
 }
