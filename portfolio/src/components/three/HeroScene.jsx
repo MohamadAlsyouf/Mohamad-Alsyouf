@@ -8,305 +8,128 @@ import {
 } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
-import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
-
-const LIME = '#d5ff63'
-
-function SceneFallback() {
-  return (
-    <div
-      className="scene-fallback"
-      aria-hidden="true"
-      style={{
-        width: '100%',
-        height: '100%',
-        display: 'grid',
-        placeItems: 'center',
-      }}
-    >
-      <div
-        style={{
-          width: '58%',
-          aspectRatio: '1',
-          borderRadius: '50%',
-          border: '1px solid #a9ce5d',
-          boxShadow:
-            'inset -30px -25px 60px #000, inset 12px 10px 35px #526331, 0 0 70px #b2dc4520',
-          background:
-            'repeating-radial-gradient(ellipse at 38% 32%, #9fbe5330 0 1px, transparent 2px 11px), #151b12',
-        }}
-      />
-    </div>
-  )
-}
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
+import E30Body from './ImportedE30'
+import E30Interior from './E30Interior'
+import E30Fallback from './E30Fallback'
 
 class SceneBoundary extends Component {
   state = { failed: false }
-
   static getDerivedStateFromError() {
     return { failed: true }
   }
-
   render() {
-    return this.state.failed ? <SceneFallback /> : this.props.children
+    return this.state.failed ? <E30Fallback /> : this.props.children
   }
 }
 
-function Core({ reducedMotion }) {
-  const core = useRef()
-  const { lattice, bands } = useMemo(() => {
-    const latticeParts = []
-    const bandParts = []
-
-    for (let index = 0; index < 23; index++) {
-      const angle = ((index - 11) / 25) * Math.PI
-      const radius = Math.cos(angle) * 1.14
-      const y = Math.sin(angle) * 1.14
-      latticeParts.push(
-        new THREE.TorusGeometry(radius, 0.0032, 4, 96)
-          .rotateX(Math.PI / 2)
-          .translate(0, y, 0),
-      )
-      bandParts.push(
-        new THREE.TorusGeometry(
-          radius + 0.002,
-          0.008,
-          5,
-          64,
-          Math.PI * (index % 3 === 0 ? 1.45 : 0.74),
-        )
-          .rotateX(Math.PI / 2)
-          .rotateY(index * 0.63)
-          .translate(0, y, 0),
-      )
+function StudioEnvironment({ lightMode }) {
+  const { gl, scene } = useThree()
+  useEffect(() => {
+    const room = new RoomEnvironment()
+    const generator = new THREE.PMREMGenerator(gl)
+    const environment = generator.fromScene(room, 0.2)
+    const previous = scene.environment
+    scene.environment = environment.texture
+    return () => {
+      scene.environment = previous
+      environment.dispose()
+      generator.dispose()
+      room.dispose()
     }
-
-    for (let index = 0; index < 16; index++) {
-      latticeParts.push(
-        new THREE.TorusGeometry(1.142, 0.0025, 4, 96).rotateY(
-          (index / 16) * Math.PI,
-        ),
-      )
-    }
-
-    // Each static surface takes one draw call instead of one per latitude.
-    // The declarative bufferGeometry below owns the GPU resource lifecycle.
-    const merge = (parts) => {
-      const merged = mergeGeometries(parts)
-      const data = { index: merged.index, attributes: merged.attributes }
-      parts.forEach((geometry) => geometry.dispose())
-      merged.dispose()
-      return data
-    }
-
-    return { lattice: merge(latticeParts), bands: merge(bandParts) }
-  }, [])
-
-  useFrame((_, delta) => {
-    if (!reducedMotion && core.current)
-      core.current.rotation.y += Math.min(delta, 0.05) * 0.075
-  })
-
-  return (
-    <group ref={core} rotation={[0.16, 0.3, -0.24]}>
-      <mesh>
-        <sphereGeometry args={[1.128, 64, 48]} />
-        <meshStandardMaterial
-          color="#151b12"
-          metalness={0.68}
-          roughness={0.36}
-        />
-      </mesh>
-
-      {/* A real spherical lattice: the solid core naturally occludes its far side. */}
-      <mesh>
-        <bufferGeometry {...lattice} />
-        <meshBasicMaterial color="#89a950" transparent opacity={0.5} />
-      </mesh>
-      <mesh>
-        <bufferGeometry {...bands} />
-        <meshBasicMaterial color={LIME} toneMapped={false} />
-      </mesh>
-
-      <mesh position={[0, 1.145, 0]}>
-        <sphereGeometry args={[0.038, 12, 8]} />
-        <meshBasicMaterial color={LIME} toneMapped={false} />
-      </mesh>
-      <mesh position={[0, -1.145, 0]}>
-        <sphereGeometry args={[0.038, 12, 8]} />
-        <meshBasicMaterial color={LIME} toneMapped={false} />
-      </mesh>
-    </group>
-  )
-}
-
-function OrbitalRail({
-  radius,
-  rotation,
-  speed,
-  phase,
-  reducedMotion,
-  lightMode,
-}) {
-  const satellite = useRef()
-  const elapsed = useRef(0)
-
-  useFrame((_, delta) => {
-    if (!satellite.current || reducedMotion) return
-    elapsed.current += Math.min(delta, 0.05)
-    const angle = elapsed.current * speed + phase
-    satellite.current.position.set(
-      Math.cos(angle) * radius,
-      Math.sin(angle) * radius,
-      0,
-    )
-  })
-
-  return (
-    <group rotation={rotation}>
-      <mesh>
-        <torusGeometry args={[radius, 0.008, 6, 160]} />
-        <meshBasicMaterial
-          color={lightMode ? '#71805b' : '#6f7c54'}
-          transparent
-          opacity={0.65}
-        />
-      </mesh>
-      <mesh rotation={[0, 0, phase]}>
-        <torusGeometry args={[radius, 0.016, 6, 80, Math.PI * 0.34]} />
-        <meshBasicMaterial color={LIME} toneMapped={false} />
-      </mesh>
-      <group
-        ref={satellite}
-        position={[Math.cos(phase) * radius, Math.sin(phase) * radius, 0]}
-      >
-        <mesh>
-          <sphereGeometry args={[0.064, 20, 16]} />
-          <meshStandardMaterial
-            color="#e1ff9b"
-            emissive={LIME}
-            emissiveIntensity={0.65}
-            metalness={0.4}
-            roughness={0.25}
-          />
-        </mesh>
-        <mesh>
-          <sphereGeometry args={[0.105, 12, 8]} />
-          <meshBasicMaterial
-            color={LIME}
-            transparent
-            opacity={0.09}
-            depthWrite={false}
-          />
-        </mesh>
-      </group>
-    </group>
-  )
-}
-
-function Dust({ lightMode }) {
-  const points = useMemo(() => {
-    const positions = new Float32Array(42 * 3)
-    // Deterministic placement keeps the composition stable across rerenders.
-    for (let i = 0; i < 42; i++) {
-      const angle = i * 2.399963
-      const radius = 2.05 + ((i * 17) % 11) / 12
-      positions[i * 3] = Math.cos(angle) * radius
-      positions[i * 3 + 1] = Math.sin(angle) * radius * 0.8
-      positions[i * 3 + 2] = ((i * 7) % 13) / 8 - 1.2
-    }
-    return positions
-  }, [])
-
-  return (
-    <points>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          array={points}
-          count={42}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.018}
-        color={lightMode ? '#5e7841' : '#b8d18b'}
-        transparent
-        opacity={0.6}
-        sizeAttenuation
-        depthWrite={false}
-      />
-    </points>
-  )
-}
-
-function Sculpture({ reducedMotion, lightMode }) {
-  const sculpture = useRef()
-  const elapsed = useRef(0)
-
-  useFrame(({ pointer }, delta) => {
-    if (!sculpture.current || reducedMotion) return
-    elapsed.current += Math.min(delta, 0.05)
-    const ease = 1 - Math.exp(-Math.min(delta, 0.05) * 3)
-    sculpture.current.rotation.y = THREE.MathUtils.lerp(
-      sculpture.current.rotation.y,
-      pointer.x * 0.16,
-      ease,
-    )
-    sculpture.current.rotation.x = THREE.MathUtils.lerp(
-      sculpture.current.rotation.x,
-      -pointer.y * 0.12,
-      ease,
-    )
-    sculpture.current.position.y = Math.sin(elapsed.current * 0.55) * 0.065
-  })
-
+  }, [gl, scene])
   return (
     <>
-      <ambientLight intensity={0.8} />
-      <directionalLight position={[-3, 4, 4]} color="#efffd7" intensity={3.1} />
-      <directionalLight position={[3, -1, -2]} color={LIME} intensity={2.5} />
-      <pointLight
-        position={[-2, -2, 2]}
-        color="#b1cc75"
-        intensity={3}
-        distance={8}
+      <ambientLight intensity={lightMode ? 0.55 : 0.3} />
+      <hemisphereLight args={['#e9f0e2', '#272e21', 0.9]} />
+      <directionalLight
+        position={[-4, 7, 5]}
+        intensity={lightMode ? 2.4 : 2.1}
+        color="#fff9e9"
       />
-      <group ref={sculpture} rotation={[0, 0, -0.12]}>
-        <Core reducedMotion={reducedMotion} />
-        <OrbitalRail
-          radius={1.78}
-          rotation={[0.88, 0.35, -0.35]}
-          speed={0.13}
-          phase={0.45}
-          reducedMotion={reducedMotion}
-          lightMode={lightMode}
-        />
-        <OrbitalRail
-          radius={2.04}
-          rotation={[-0.5, 0.58, 0.8]}
-          speed={-0.095}
-          phase={3.8}
-          reducedMotion={reducedMotion}
-          lightMode={lightMode}
-        />
-        <OrbitalRail
-          radius={1.57}
-          rotation={[0.25, -1.05, 0.3]}
-          speed={0.16}
-          phase={2.2}
-          reducedMotion={reducedMotion}
-          lightMode={lightMode}
-        />
-        <Dust lightMode={lightMode} />
-      </group>
+      <directionalLight position={[3, 4, -5]} intensity={1.5} color="#e5efff" />
+      <directionalLight position={[4, 1, 4]} intensity={0.55} color="#d5ff9e" />
     </>
+  )
+}
+
+function Framing() {
+  const { camera, size, invalidate } = useThree()
+  useEffect(() => {
+    // Keep a full turn of the car in frame on both tall phones and wide displays.
+    const target = new THREE.Vector3(0, 0.59, 0)
+    const distance = camera.position.distanceTo(target)
+    const aspect = size.width / size.height
+    const visibleWidth = Math.max(5.25, 3.75 * aspect)
+    camera.fov = THREE.MathUtils.radToDeg(
+      2 * Math.atan(visibleWidth / aspect / (2 * distance)),
+    )
+    camera.lookAt(target)
+    camera.updateProjectionMatrix()
+    invalidate()
+  }, [camera, size.width, size.height, invalidate])
+  return null
+}
+
+function Ground({ lightMode }) {
+  const texture = useMemo(() => {
+    const surface = document.createElement('canvas')
+    surface.width = surface.height = 128
+    const context = surface.getContext('2d')
+    const gradient = context.createRadialGradient(64, 64, 5, 64, 64, 64)
+    gradient.addColorStop(0, 'rgba(0,0,0,.65)')
+    gradient.addColorStop(0.45, 'rgba(0,0,0,.32)')
+    gradient.addColorStop(1, 'rgba(0,0,0,0)')
+    context.fillStyle = gradient
+    context.fillRect(0, 0, 128, 128)
+    return new THREE.CanvasTexture(surface)
+  }, [])
+  useEffect(() => () => texture.dispose(), [texture])
+  return (
+    <group>
+      <mesh
+        position={[0, -0.016, 0]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        scale={[5.65, 3.3, 1]}
+      >
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial
+          map={texture}
+          transparent
+          opacity={lightMode ? 0.5 : 0.85}
+          depthWrite={false}
+          toneMapped={false}
+        />
+      </mesh>
+      <mesh position={[0, -0.023, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[2.54, 2.548, 128]} />
+        <meshBasicMaterial
+          color={lightMode ? '#71894d' : '#76954c'}
+          transparent
+          opacity={0.24}
+          depthWrite={false}
+        />
+      </mesh>
+    </group>
+  )
+}
+
+function Turntable({ paused }) {
+  const car = useRef()
+  useFrame((_, delta) => {
+    if (car.current && !paused)
+      car.current.rotation.y += Math.min(delta, 0.05) * 0.16
+  })
+  return (
+    <group ref={car} rotation={[0, -0.22, 0]}>
+      <E30Body />
+      <E30Interior />
+    </group>
   )
 }
 
 function ContextHealth({ onFailure }) {
   const renderer = useThree((state) => state.gl)
-
   useEffect(() => {
     const onContextLost = (event) => {
       event.preventDefault()
@@ -316,7 +139,13 @@ function ContextHealth({ onFailure }) {
     return () =>
       renderer.domElement.removeEventListener('webglcontextlost', onContextLost)
   }, [renderer, onFailure])
+  return null
+}
 
+function SceneReady({ onReady }) {
+  useEffect(() => {
+    onReady(true)
+  }, [onReady])
   return null
 }
 
@@ -325,8 +154,8 @@ export default function HeroScene({ reducedMotion = false, theme = 'dark' }) {
   const [visible, setVisible] = useState(true)
   const [pageVisible, setPageVisible] = useState(true)
   const [contextLost, setContextLost] = useState(false)
+  const [modelReady, setModelReady] = useState(false)
   const paused = reducedMotion || !visible || !pageVisible
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
@@ -342,29 +171,42 @@ export default function HeroScene({ reducedMotion = false, theme = 'dark' }) {
       document.removeEventListener('visibilitychange', onVisibility)
     }
   }, [])
-
   return (
     <div
       ref={container}
-      className="hero-scene"
+      className="hero-scene e30-scene"
+      data-model-ready={modelReady && !contextLost ? 'true' : 'false'}
       aria-hidden="true"
       style={{ width: '100%', height: '100%' }}
     >
       <SceneBoundary>
         {contextLost ? (
-          <SceneFallback />
+          <E30Fallback />
         ) : (
           <Canvas
             dpr={[1, 1.5]}
-            camera={{ position: [0, 0, 6.3], fov: 46, near: 0.1, far: 30 }}
+            camera={{
+              position: [-5.4, 3.25, 5.4],
+              fov: 32,
+              near: 0.1,
+              far: 40,
+            }}
             gl={{ antialias: true, alpha: true, powerPreference: 'low-power' }}
             frameloop={paused ? 'demand' : 'always'}
-            fallback={<SceneFallback />}
+            fallback={<E30Fallback />}
+            onCreated={({ gl }) => {
+              gl.toneMapping = THREE.ACESFilmicToneMapping
+              gl.toneMappingExposure = 1.15
+            }}
             style={{ width: '100%', height: '100%' }}
           >
             <Suspense fallback={null}>
               <ContextHealth onFailure={setContextLost} />
-              <Sculpture reducedMotion={paused} lightMode={theme === 'light'} />
+              <Framing />
+              <StudioEnvironment lightMode={theme === 'light'} />
+              <Ground lightMode={theme === 'light'} />
+              <Turntable paused={paused} />
+              <SceneReady onReady={setModelReady} />
             </Suspense>
           </Canvas>
         )}

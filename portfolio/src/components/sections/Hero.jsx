@@ -3,15 +3,10 @@ import { motion } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
 import { personalInfo, metrics } from '../../data/content'
 import Icon from '../ui/Icon'
+import E30Fallback from '../three/E30Fallback'
 const HeroScene = lazy(() => import('../three/HeroScene'))
 function CoreFallback() {
-  return (
-    <div className="core-fallback">
-      <div className="fallback-orbit orbit-one" />
-      <div className="fallback-orbit orbit-two" />
-      <div className="fallback-sphere" />
-    </div>
-  )
+  return <E30Fallback />
 }
 class SceneBoundary extends Component {
   state = { failed: false }
@@ -90,7 +85,7 @@ export default function Hero() {
           </motion.div>
         </div>
         <motion.div
-          className="hero-art"
+          className="hero-art hero-car-art"
           initial={reducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
@@ -103,9 +98,9 @@ export default function Hero() {
           <div className="art-cross cross-bottom">+</div>
           <div className="art-label art-label-top">
             <span className="status-dot" />
-            THE BUILDER’S MINDSET<span>FIG. 01</span>
+            OFF THE CLOCK<span>1989 / E30</span>
           </div>
-          <div className="orbital-scene" aria-hidden="true">
+          <div className="car-scene" aria-hidden="true">
             <SceneBoundary>
               <Suspense fallback={<CoreFallback />}>
                 <HeroScene theme={theme} reducedMotion={reducedMotion} />
@@ -113,16 +108,35 @@ export default function Hero() {
             </SceneBoundary>
           </div>
           <div className="orbit-tag tag-one">
-            <span className="tag-bracket">[</span>think in systems
+            <span className="tag-bracket">[</span>timeless by design
             <span className="tag-bracket">]</span>
           </div>
           <div className="orbit-tag tag-two">
-            <span className="mini-spark">✦</span> built for what’s next
+            <span className="mini-spark">✦</span> made to move
           </div>
           <div className="art-label art-label-bottom">
-            <span>HUMAN INTENT × MACHINE POTENTIAL</span>
-            <span className="coordinate">33.83° N / 117.91° W</span>
+            <span>BMW E30 CONVERTIBLE / TOP DOWN</span>
+            <span className="coordinate">A LOVE FOR THE DETAILS</span>
           </div>
+          <p className="model-credit">
+            E30 model by{' '}
+            <a
+              href="https://sketchfab.com/3d-models/free-bmw-m3-e30-ac3c7013434e403e8faff87948caf422"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Martin Trafas
+            </a>
+            {' · '}
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              CC BY 4.0
+            </a>
+            {' · adapted'}
+          </p>
         </motion.div>
       </div>
       <div className="hero-bottom">
