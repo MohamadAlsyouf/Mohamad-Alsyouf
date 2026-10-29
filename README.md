@@ -4,7 +4,7 @@ Personal portfolio for Mohamad Alsyouf, senior full stack engineer and AI-native
 
 **Website:** https://mohamadalsyouf.com/
 
-The redesign pairs graphite and electric lime with oversized editorial typography, a procedural 3D hero, interactive project stories, and a complete light theme. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
+The redesign pairs graphite and electric lime with oversized editorial typography, a rotating red E30 convertible, interactive project stories, and a complete light theme. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
 
 ## Run locally
 
@@ -56,7 +56,17 @@ The suite uses an installed Chrome or Edge browser and Node's built-in browser p
 | `portfolio/index.html`                   | Font loading, initial theme, SEO metadata, and Person structured data                                   |
 | `portfolio/public/`                      | Downloadable résumé, favicon, social preview, robots, and sitemap                                       |
 
-The app uses React 18, Vite, Three.js, React Three Fiber, and Framer Motion. Graphics are procedural, so the visual identity does not depend on external 3D model downloads.
+The app uses React 18, Vite, Three.js, React Three Fiber, and Framer Motion. The hero loads its optimized 3D model from this site's own static assets; it does not make third-party runtime requests.
+
+## E30 hero
+
+The hero combines a licensed, textured E30 M3 exterior with an original four-seat black-leather cabin, dashboard, steering wheel, and controls. The roof, rear and side windows, pillars, and wing are removed from the source coupe. The result is a 1989-inspired convertible adaptation rather than a factory-exact digital twin.
+
+The exterior is adapted from **[FREE] BMW M3 E30** by **Martin Trafas**, licensed under **CC BY 4.0**. The hero displays the required credit; full source and license details are in `portfolio/public/models/LICENSE-E30.txt`. Preserve both when reusing the model. The self-contained `bmw-e30.glb` is approximately 3.6 MB, with compressed embedded textures and meshopt geometry. Attribution metadata remains embedded.
+
+`HeroScene.jsx` provides a slow, frame-rate-independent turntable, studio reflections, responsive camera framing, and a static illustrated car fallback. Rendering pauses offscreen, when the tab is hidden, and when motion is disabled. `ImportedE30.jsx` preserves texture coordinates and smooth normals during the convertible conversion. `E30Interior.jsx` supplies the original cabin.
+
+With the production preview running, `npm run test:car` verifies actual car loading, changing rotation frames, pixel-identical reduced-motion frames, both themes, mobile layout, asset loading, and WebGL failure fallback. Screenshots and diagnostics go to the ignored `portfolio/.qa/` directory.
 
 Space Grotesk, DM Sans, and IBM Plex Mono are self-hosted in `portfolio/public/fonts/`, so typography does not depend on a third-party font CDN. The fonts come from the official Google Fonts repository; each family's SIL Open Font License is included beside its font file. Preserve those licenses when updating or redistributing the assets.
 
