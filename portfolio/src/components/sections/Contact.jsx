@@ -1,126 +1,20 @@
-import { motion } from 'framer-motion'
-import CanvasWrapper from '../three/CanvasWrapper'
-import ContactScene from '../three/ContactScene'
-import { useTheme } from '../../context/ThemeContext'
+import { useEffect, useRef, useState } from 'react'
 import { personalInfo } from '../../data/content'
-
-const socialLinks = [
-  {
-    name: 'Email',
-    href: `mailto:${personalInfo.email}`,
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-        />
-      </svg>
-    ),
-  },
-  {
-    name: 'GitHub',
-    href: personalInfo.github,
-    icon: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-      </svg>
-    ),
-  },
-  {
-    name: 'LinkedIn',
-    href: personalInfo.linkedin,
-    icon: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-      </svg>
-    ),
-  },
-]
-
+import { useTheme } from '../../context/ThemeContext'
+import Reveal from '../ui/Reveal'
+import Icon, { BrandMark } from '../ui/Icon'
 export default function Contact() {
-  const { isLightMode } = useTheme()
-
-  return (
-    <section
-      id="contact"
-      className="relative overflow-hidden bg-gradient-to-b from-background to-background-secondary/70 py-24 transition-colors duration-300 lg:py-32"
-    >
-      {/* 3D Background */}
-      <div className={`absolute inset-0 ${isLightMode ? 'opacity-50' : 'opacity-30'}`}>
-        <CanvasWrapper className="w-full h-full">
-          <ContactScene />
-        </CanvasWrapper>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto text-center">
-          <motion.span
-            className="text-accent font-medium"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Get in Touch
-          </motion.span>
-
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold text-foreground mt-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Let's Work Together
-          </motion.h2>
-
-          <motion.p
-            className="text-muted mt-4 mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Have a project in mind or just want to chat? Feel free to reach out.
-            I'm always open to discussing new opportunities.
-          </motion.p>
-
-          <motion.div
-            className="flex flex-wrap justify-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            {socialLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                target={link.name !== 'Email' ? '_blank' : undefined}
-                rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
-                className="flex items-center gap-2 rounded-lg border border-border bg-background-surface/90 px-5 py-3 text-foreground transition-all hover:border-accent/50 hover:text-accent"
-              >
-                {link.icon}
-                <span>{link.name}</span>
-              </a>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="mt-16 border-t border-border pt-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <p className="text-sm text-muted">
-              © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
-            </p>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  )
+  const [copyState, setCopyState] = useState('idle')
+  const resetTimer = useRef()
+  const { reducedMotion, toggleMotion } = useTheme()
+  useEffect(() => () => clearTimeout(resetTimer.current), [])
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.email)
+      setCopyState('copied')
+    } catch { setCopyState('failed') }
+    clearTimeout(resetTimer.current)
+    resetTimer.current = setTimeout(() => setCopyState('idle'), 4000)
+  }
+  return <section id="contact" className="contact-section page-width"><Reveal className="contact-panel"><div className="contact-top"><span className="mono"><span className="status-dot" />OPEN TO THE RIGHT OPPORTUNITY</span><span className="mono">04 / WHAT’S NEXT</span></div><div className="contact-main"><div><h2>Let’s build<br />what’s next<span>.</span></h2><p>Have a hard problem, a big idea, or a team<br className="desktop-break" /> that could use a builder? I’d love to hear it.</p></div><a className="contact-arrow" href={`mailto:${personalInfo.email}`} aria-label="Email Mohamad Alsyouf"><Icon size={58} /></a></div><div className="contact-bottom"><a className="contact-email" href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a><button className="copy-button" onClick={copyEmail} aria-label="Copy email address"><Icon name={copyState === 'copied' ? 'check' : 'copy'} size={17} /><span>{copyState === 'copied' ? 'Copied!' : 'Copy email'}</span></button><span className="copy-status" role="status">{copyState === 'copied' ? 'Email address copied.' : copyState === 'failed' ? 'Copy unavailable. Use the email link to get in touch.' : ''}</span></div></Reveal><footer className="site-footer"><a className="footer-brand" href="#hero" aria-label="Back to top"><BrandMark /><span>Thoughtfully engineered.<br /><strong>By Mohamad Alsyouf.</strong></span></a><div className="footer-links"><a href={personalInfo.github} target="_blank" rel="noopener noreferrer">GitHub<Icon size={13} /></a><a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn<Icon size={13} /></a><a href={personalInfo.resume} download>Résumé<Icon name="download" size={13} /></a></div><div className="footer-meta"><span>© {new Date().getFullYear()} Mohamad Alsyouf</span><button onClick={toggleMotion} aria-pressed={!reducedMotion}><Icon name={reducedMotion ? 'play' : 'pause'} size={12} />{reducedMotion ? 'Motion off' : 'Pause motion'}</button></div></footer></section>
 }

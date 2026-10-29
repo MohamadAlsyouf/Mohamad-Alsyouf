@@ -1,50 +1,7 @@
-import { motion } from 'framer-motion'
+import { projects, personalInfo } from '../../data/content'
 import ProjectCard from '../ui/ProjectCard'
-import { projects } from '../../data/content'
-
+import Reveal, { SectionLabel } from '../ui/Reveal'
+import Icon from '../ui/Icon'
 export default function Projects() {
-  return (
-    <section id="projects" className="py-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <motion.span
-            className="text-accent font-medium"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Featured Work
-          </motion.span>
-
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold text-foreground mt-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Recent Projects
-          </motion.h2>
-
-          <motion.p
-            className="text-muted max-w-2xl mx-auto mt-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            A selection of projects that showcase my skills and passion for building
-            great digital products.
-          </motion.p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+  return <section id="work" className="work-section section-space page-width"><Reveal><SectionLabel number="01">SELECTED WORK</SectionLabel><div className="section-heading-row"><h2>Built with purpose.<br /><span className="muted-heading">Measured in impact.</span></h2><p>A few things I’ve helped take<br className="desktop-break" /> from “what if” to the real world.</p></div></Reveal><div className="projects-grid">{projects.map((project, index) => <ProjectCard key={project.id} project={project} featured={index === 0} />)}</div><div className="work-footnote"><p><span className="tiny-cross">✳</span> Real projects. Real outcomes. Interface visuals are illustrative.</p><a className="text-link" href={personalInfo.github} target="_blank" rel="noopener noreferrer">More on GitHub<Icon size={15} /></a></div></section>
 }
