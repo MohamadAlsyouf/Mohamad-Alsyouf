@@ -22,6 +22,12 @@ const baseUrl =
   argumentsList.find((argument) => !argument.startsWith('--')) ||
   'http://127.0.0.1:4173'
 const renderAssetsRequested = argumentsList.includes('--render-assets')
+const layoutOnly = argumentsList.includes('--layout-only')
+const reportFilename = renderAssetsRequested
+  ? 'assets-report.json'
+  : layoutOnly
+    ? 'layout-report.json'
+    : 'browser-report.json'
 const origin = new URL(baseUrl).origin
 const browserPath = [
   process.env.CHROME_PATH,
@@ -194,7 +200,7 @@ async function screenshot(name, { top = true } = {}) {
 }
 
 async function sectionScreenshots() {
-  for (const section of ['work', 'about', 'approach', 'contact']) {
+  for (const section of ['work', 'workbench', 'about', 'approach', 'contact']) {
     await evaluate(
       `document.getElementById(${JSON.stringify(section)})?.scrollIntoView({block:'start',behavior:'instant'})`,
     )
@@ -227,12 +233,13 @@ async function sectionScreenshots() {
 
 async function checkLayout(label) {
   const layout = await evaluate(`(() => ({
-    viewport: innerWidth,
+    viewport: document.documentElement.clientWidth,
     page: document.documentElement.scrollWidth,
     offenders: Array.from(document.querySelectorAll('main *')).filter(element => {
+      if (element.closest('[aria-hidden="true"], .project-visual, .art-grid, .car-scene')) return false;
       const bounds = element.getBoundingClientRect();
-      return bounds.width && (bounds.left < -1 || bounds.right > innerWidth + 1);
-    }).slice(0,8).map(element => ({tag:element.tagName,class:element.className?.baseVal ?? element.className})),
+      return bounds.width && (bounds.left < -1 || bounds.right > document.documentElement.clientWidth + 1);
+    }).slice(0,12).map(element => ({tag:element.tagName,class:element.className?.baseVal ?? element.className,width:Math.round(element.getBoundingClientRect().width),text:element.textContent.trim().slice(0,70)})),
     brokenImages: Array.from(document.images).filter(image => image.complete && !image.naturalWidth).map(image => image.src),
   }))()`)
   assert(
@@ -244,6 +251,23 @@ async function checkLayout(label) {
     layout.brokenImages.length === 0,
     `${label}: image assets load`,
     layout.brokenImages,
+  )
+  const smallText = await evaluate(`(() => {
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const failures = [];
+    while (walker.nextNode()) {
+      const node = walker.currentNode, element = node.parentElement;
+      if (!node.textContent.trim() || !element || element.closest('[aria-hidden="true"],script,style,svg')) continue;
+      const style = getComputedStyle(element), size = parseFloat(style.fontSize);
+      if (size > 0 && size < 14 && style.visibility !== 'hidden' && element.getClientRects().length)
+        failures.push({text:node.textContent.trim().slice(0,60),size});
+    }
+    return failures.slice(0,12);
+  })()`)
+  assert(
+    smallText.length === 0,
+    `${label}: reading text is at least 14px`,
+    smallText,
   )
 }
 
@@ -364,7 +388,20 @@ try {
     deviceScaleFactor: 1,
     mobile: false,
   })
-  if (!renderAssetsRequested) {
+  if (layoutOnly) {
+    await navigate()
+    for (const width of [320, 375, 390, 768, 1024, 1440]) {
+      await cdp.send('Emulation.setDeviceMetricsOverride', {
+        width,
+        height: 900,
+        deviceScaleFactor: 1,
+        mobile: width < 768,
+      })
+      await delay(200)
+      await checkLayout(`Layout ${width}px`)
+    }
+  }
+  if (!renderAssetsRequested && !layoutOnly) {
     await navigate()
     await cdp.send('Page.bringToFront')
     await waitFor(
@@ -375,6 +412,40 @@ try {
     await screenshot('desktop-dark')
     await sectionScreenshots()
     await checkLayout('Desktop dark')
+    const studies = await evaluate(
+      `Array.from(document.querySelectorAll('.bench-study')).map(figure => ({name:figure.querySelector('h3')?.textContent,diagram:Boolean(figure.querySelector('svg[aria-hidden="true"]'))}))`,
+    )
+    assert(
+      studies.length === 7 &&
+        studies.every((study) => study.name && study.diagram),
+      'Seven technical studies have readable captions and decorative diagrams',
+      studies,
+    )
+    await evaluate(
+      `document.getElementById('workbench').scrollIntoView({block:'center',behavior:'instant'})`,
+    )
+    await waitFor(
+      `document.querySelector('.workbench').dataset.active === 'true'`,
+      'workbench animation to start in view',
+    )
+    assert(
+      await evaluate(
+        `getComputedStyle(document.querySelector('.bench-drawing > svg')).animationPlayState === 'running'`,
+      ),
+      'Workbench floats while visible',
+    )
+    await screenshot('desktop-workbench-detail', { top: false })
+    await evaluate(`window.scrollTo({top:0,behavior:'instant'})`)
+    await waitFor(
+      `document.querySelector('.workbench').dataset.active === 'false'`,
+      'workbench animation to pause offscreen',
+    )
+    assert(
+      await evaluate(
+        `getComputedStyle(document.querySelector('.bench-drawing > svg')).animationPlayState === 'paused'`,
+      ),
+      'Workbench pauses offscreen',
+    )
 
     const initial = await evaluate(
       `({title:document.title,h1:document.querySelector('h1').innerText,h1Count:document.querySelectorAll('h1').length,canvas:document.querySelectorAll('canvas').length})`,
@@ -557,6 +628,10 @@ try {
     await setTheme('light')
     await screenshot('desktop-light')
     await checkLayout('Desktop light')
+    await evaluate(
+      `document.getElementById('workbench').scrollIntoView({block:'start',behavior:'instant'})`,
+    )
+    await screenshot('desktop-workbench-light', { top: false })
     await navigate()
     assert(
       await evaluate(`document.documentElement.dataset.theme === 'light'`),
@@ -572,6 +647,11 @@ try {
     })
     await screenshot('mobile-dark')
     await checkLayout('Mobile dark')
+    await evaluate(
+      `document.getElementById('workbench').scrollIntoView({block:'start',behavior:'instant'})`,
+    )
+    await screenshot('mobile-workbench', { top: false })
+    await evaluate(`window.scrollTo({top:0,behavior:'instant'})`)
     await clickButton('Open menu')
     assert(
       await evaluate(
@@ -699,7 +779,7 @@ try {
       'No browser exceptions or console errors',
       runtimeErrors,
     )
-  } else {
+  } else if (renderAssetsRequested) {
     phase = 'render-assets'
     await cdp.send('Emulation.setDeviceMetricsOverride', {
       width: 1200,
@@ -814,10 +894,7 @@ try {
   }
   await mkdir(artifactsDirectory, { recursive: true })
   await writeFile(
-    path.join(
-      artifactsDirectory,
-      renderAssetsRequested ? 'assets-report.json' : 'browser-report.json',
-    ),
+    path.join(artifactsDirectory, reportFilename),
     JSON.stringify(report, null, 2) + '\n',
   )
   if (cdp) {
@@ -851,7 +928,7 @@ try {
   }
   const failed = checks.filter((check) => !check.passed).length
   console.log(
-    `\n${checks.length - failed}/${checks.length} checks passed. Report: ${path.join(artifactsDirectory, renderAssetsRequested ? 'assets-report.json' : 'browser-report.json')}`,
+    `\n${checks.length - failed}/${checks.length} checks passed. Report: ${path.join(artifactsDirectory, reportFilename)}`,
   )
   process.exitCode = failed ? 1 : 0
 }

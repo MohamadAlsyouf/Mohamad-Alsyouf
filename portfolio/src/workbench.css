@@ -1,0 +1,613 @@
+main {
+  position: relative;
+  isolation: isolate;
+}
+main > section {
+  position: relative;
+  z-index: 1;
+}
+.systems-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--accent);
+}
+.systems-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(
+    90deg,
+    #0008,
+    transparent 30%,
+    transparent 70%,
+    #0008
+  );
+}
+.systems-diagrams {
+  position: absolute;
+  inset: 0;
+  opacity: 0.26;
+  mask-image: linear-gradient(
+    90deg,
+    #000,
+    #0009 12%,
+    transparent 34%,
+    transparent 66%,
+    #0009 88%,
+    #000
+  );
+}
+.systems-diagrams > svg {
+  position: absolute;
+  width: 380px;
+  animation: schematic-float 17s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.systems-diagrams > svg[data-active='true'] {
+  animation-play-state: running;
+}
+.background-pi {
+  top: 1%;
+  left: -130px;
+  rotate: -22deg;
+}
+.background-camera {
+  top: 7%;
+  right: -100px;
+  rotate: 18deg;
+}
+.background-engine {
+  top: 21%;
+  right: -130px;
+  rotate: -18deg;
+}
+.background-sword {
+  top: 43%;
+  left: -90px;
+  rotate: 16deg;
+}
+.background-drone {
+  top: 62%;
+  right: -120px;
+  rotate: 12deg;
+}
+.background-wheel {
+  top: 77%;
+  left: -120px;
+  rotate: -15deg;
+}
+.background-fishing {
+  top: 91%;
+  right: -80px;
+  rotate: 12deg;
+}
+.code-stream {
+  position: absolute;
+  font:
+    16px/2.2 'IBM Plex Mono',
+    monospace;
+  letter-spacing: 8px;
+  writing-mode: vertical-rl;
+  opacity: 0.12;
+}
+.code-stream-one {
+  top: 170px;
+  right: 20px;
+}
+.code-stream-two {
+  top: 51%;
+  left: 20px;
+}
+.engineering-diagram {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.diagram-fine {
+  opacity: 0.55;
+  stroke-width: 0.8;
+}
+.diagram-guide {
+  opacity: 0.35;
+  stroke-dasharray: 5 7;
+  stroke-width: 0.8;
+}
+.diagram-wash {
+  fill: currentColor;
+  fill-opacity: 0.08;
+}
+.workbench-section {
+  border-block: 1px solid var(--line);
+  background: linear-gradient(140deg, var(--section), transparent 72%);
+}
+.workbench-heading > p {
+  max-width: 360px;
+}
+.workbench {
+  position: relative;
+  overflow: clip;
+  border-block: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse at 50% 45%, #58ff9308, transparent 65%), var(--bg);
+  isolation: isolate;
+}
+.workbench::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: linear-gradient(transparent, #000, transparent);
+}
+.workbench-topline,
+.workbench-bottomline {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding-block: 25px;
+  color: var(--muted);
+}
+.workbench-topline > :first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent);
+}
+.workbench-bottomline {
+  border-top: 1px solid var(--line);
+}
+.circuit-traces {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--accent);
+  opacity: 0.12;
+  pointer-events: none;
+}
+.trace-secondary {
+  opacity: 0.5;
+}
+.trace-signal {
+  stroke-dasharray: 24 1500;
+  animation: circuit-flow 16s linear infinite;
+}
+.workbench-studies {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 32px 26px;
+  padding: 20px 0 45px;
+}
+.bench-study {
+  grid-column: span 3;
+  min-width: 0;
+  position: relative;
+}
+.bench-fishing {
+  grid-column: span 6;
+}
+.bench-drawing {
+  position: relative;
+  aspect-ratio: 340 / 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bench-drawing > svg {
+  width: 100%;
+  max-height: 290px;
+  color: var(--accent);
+  filter: drop-shadow(0 0 9px #58ff9320);
+  animation: schematic-float 9s ease-in-out infinite;
+}
+.bench-pi svg {
+  rotate: -13deg;
+  animation-delay: -2s;
+}
+.bench-camera svg {
+  rotate: 13deg;
+  animation-delay: -5s;
+}
+.bench-engine svg {
+  rotate: -6deg;
+  animation-delay: -4s;
+}
+.bench-drone svg {
+  rotate: 9deg;
+  animation-delay: -7s;
+}
+.bench-sword svg {
+  rotate: -10deg;
+  animation-delay: -3s;
+}
+.bench-wheel svg {
+  rotate: -8deg;
+  animation-delay: -6s;
+}
+.bench-fishing .bench-drawing {
+  aspect-ratio: 680 / 300;
+}
+.bench-fishing svg {
+  width: 76%;
+  max-height: 290px;
+  rotate: -5deg;
+}
+.bench-cross {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: var(--faint);
+  font: 20px monospace;
+}
+.bench-study figcaption {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.bench-index {
+  color: var(--accent);
+}
+.bench-study h3 {
+  font:
+    500 16px/1.5 'Space Grotesk',
+    sans-serif;
+}
+.bench-study p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+  margin-top: 5px;
+}
+.workbench .wheel-center {
+  animation: wheel-separate 9s ease-in-out infinite;
+}
+.workbench .wheel-lip {
+  animation: wheel-separate 9s ease-in-out -1s infinite reverse;
+}
+.workbench .bench-drawing > svg,
+.workbench .trace-signal,
+.workbench .wheel-center,
+.workbench .wheel-lip {
+  animation-play-state: paused;
+}
+.workbench[data-active='true'] .bench-drawing > svg,
+.workbench[data-active='true'] .trace-signal,
+.workbench[data-active='true'] .wheel-center,
+.workbench[data-active='true'] .wheel-lip {
+  animation-play-state: running;
+}
+@keyframes schematic-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+@keyframes circuit-flow {
+  to {
+    stroke-dashoffset: -3048;
+  }
+}
+@keyframes wheel-separate {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+/* Give the larger type room to breathe instead of shrinking it at breakpoints. */
+.hero-actions,
+.footer-links {
+  flex-wrap: wrap;
+}
+.hero-location {
+  align-items: flex-start;
+}
+.hero-location svg {
+  margin-top: 4px;
+}
+.art-label {
+  letter-spacing: 0.02em;
+}
+.art-label-bottom {
+  bottom: 0;
+}
+.hero-car-art .tag-one {
+  top: 17%;
+}
+.hero-car-art .tag-two {
+  bottom: 12%;
+}
+.experience-row > div {
+  min-width: 0;
+}
+.experience-row {
+  flex-wrap: wrap;
+}
+.current-role {
+  align-self: flex-start;
+}
+.work-footnote {
+  flex-wrap: wrap;
+}
+.work-footnote p {
+  max-width: 700px;
+  align-items: flex-start;
+}
+.work-footnote p svg {
+  flex-shrink: 0;
+}
+.terminal-code {
+  padding: 24px 18px;
+}
+.code-line {
+  align-items: baseline;
+  min-height: 30px;
+}
+.code-line code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.terminal-bottom {
+  height: auto;
+  min-height: 44px;
+  padding-block: 10px;
+}
+.contact-email {
+  overflow-wrap: anywhere;
+}
+.contact-main p {
+  max-width: 470px;
+}
+.footer-links > a > svg {
+  min-width: 14px;
+  min-height: 14px;
+}
+.mono,
+.section-label {
+  letter-spacing: 0.045em;
+}
+@media (min-width: 761px) and (max-width: 1050px) {
+  .hero-main {
+    grid-template-columns: 1fr;
+    padding-bottom: 60px;
+  }
+  .hero-copy {
+    max-width: 720px;
+  }
+  .hero h1 {
+    font-size: clamp(58px, 8vw, 82px);
+  }
+  .hero-art {
+    width: 100%;
+    max-width: 700px;
+    margin-inline: auto;
+  }
+  .hero-description {
+    max-width: 590px;
+  }
+  .desktop-nav {
+    gap: 20px;
+  }
+  .navigation {
+    gap: 20px;
+  }
+  .section-heading-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .stack-groups {
+    grid-template-columns: 1fr 1fr;
+  }
+  .capabilities-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 0;
+  }
+  .capability:nth-child(3) {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .experience {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 1000px) {
+  .workbench-studies {
+    gap: 30px 24px;
+  }
+  .bench-study {
+    grid-column: span 6;
+  }
+  .bench-fishing {
+    grid-column: span 12;
+  }
+  .bench-fishing .bench-drawing {
+    aspect-ratio: 680 / 260;
+  }
+}
+@media (max-width: 760px) {
+  .nav-contact {
+    display: none;
+  }
+  .hero-topline > .mono {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .hero-main {
+    padding-bottom: 58px;
+  }
+  .hero-art {
+    height: 390px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 9.7vw, 70px);
+    letter-spacing: -0.055em;
+  }
+  .hero-actions {
+    gap: 15px 22px;
+  }
+  .hero-location {
+    line-height: 1.8;
+  }
+  .hero-bottom {
+    align-items: center;
+  }
+  .hero-bottom .mono {
+    font-size: 14px;
+  }
+  .model-credit {
+    bottom: -37px;
+    text-align: left;
+    line-height: 1.7;
+  }
+  .art-label-top {
+    font-size: 14px;
+  }
+  .art-label-bottom {
+    font-size: 14px;
+  }
+  .hero-car-art .tag-two {
+    bottom: 10%;
+  }
+  .work-footnote p {
+    max-width: 100%;
+  }
+  .work-footnote .text-link {
+    font-size: 14px;
+  }
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .capability {
+    border-left: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 24px 0;
+    margin-top: 0;
+  }
+  .capability h3 {
+    font-size: 22px;
+  }
+  .experience-row {
+    gap: 12px;
+  }
+  .current-role {
+    margin-left: 0;
+  }
+  .portrait-caption {
+    height: auto;
+    min-height: 46px;
+    flex-wrap: wrap;
+    padding-block: 10px;
+  }
+  .portrait-note {
+    white-space: normal;
+  }
+  .stack-heading > .mono {
+    font-size: 14px;
+  }
+  .contact-top .mono {
+    font-size: 14px;
+  }
+  .contact-main {
+    flex-wrap: wrap;
+  }
+  .contact-main h2 {
+    font-size: clamp(39px, 9vw, 59px);
+    letter-spacing: -0.055em;
+  }
+  .contact-arrow {
+    width: 58px;
+    height: 58px;
+  }
+  .contact-email {
+    font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+  .footer-brand {
+    flex-basis: 100%;
+  }
+  .footer-links {
+    gap: 20px;
+  }
+  .footer-meta {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .systems-diagrams {
+    opacity: 0.15;
+  }
+  .systems-diagrams > svg {
+    width: 260px;
+  }
+  .code-stream {
+    display: none;
+  }
+  .workbench-topline,
+  .workbench-bottomline {
+    padding-block: 20px;
+  }
+  .workbench-topline > :last-child,
+  .workbench-bottomline > :last-child {
+    display: none;
+  }
+  .workbench-studies {
+    gap: 28px 18px;
+    padding-top: 0;
+  }
+  .bench-drawing {
+    aspect-ratio: 1 / 1;
+  }
+  .bench-study figcaption {
+    gap: 8px;
+  }
+  .bench-study h3 {
+    font-size: 15px;
+  }
+  .bench-study p {
+    font-size: 14px;
+  }
+  .bench-index {
+    display: none;
+  }
+  .bench-fishing svg {
+    width: 90%;
+  }
+}
+@media (max-width: 380px) {
+  .bench-study {
+    grid-column: span 12;
+  }
+  .bench-drawing {
+    aspect-ratio: 340 / 270;
+  }
+  .bench-fishing .bench-drawing {
+    aspect-ratio: 340 / 270;
+  }
+  .bench-fishing svg {
+    width: 100%;
+  }
+}

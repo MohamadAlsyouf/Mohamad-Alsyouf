@@ -4,7 +4,7 @@ Personal portfolio for Mohamad Alsyouf, senior full stack engineer and AI-native
 
 **Website:** https://mohamadalsyouf.com/
 
-The redesign pairs dark graphite and electric violet with oversized editorial typography, a rotating navy-blue E30 convertible, interactive project stories, and a complete light theme. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
+The redesign pairs near-black and phosphor green with oversized typography, a rotating navy-blue E30 convertible, interactive project stories, and a complete light theme. Floating technical diagrams and a curiosity workbench connect software, hardware, cars, gaming, and fishing. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
 
 ## Run locally
 
@@ -88,7 +88,7 @@ To regenerate the social PNG and the legacy ICO favicon with the preview server 
 
 ## Theme, motion, and accessibility
 
-The accent palette starts with `rgb(83, 25, 255)` (`#5319FF`). Primary buttons and the contact panel use that exact violet; lighter violet text maintains contrast on dark surfaces. Both themes use coordinated violet neutrals.
+The Matrix-inspired palette uses phosphor green (`#58FF93`) over near-black, with deep green accents on the light theme. Body text is 16–18px, and supporting labels are at least 14px. The curiosity workbench and decorative background contain original SVG studies of a Raspberry Pi 5, Camera Module 3, M50B25 engine, compact drone, BBS RS wheel assembly, Lava Spine sword, and fishing setup with rainbow trout. [Visual references and implementation notes](portfolio/docs/visual-references.md) record the research behind those illustrations.
 
 Dark mode is the default. The selected theme is stored under `portfolio-theme` and applied before React renders to avoid a flash of the wrong theme. Browsers with View Transitions animate the change from the toggle position; other browsers use the regular theme transition.
 

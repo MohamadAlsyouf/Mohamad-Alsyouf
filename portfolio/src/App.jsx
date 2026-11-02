@@ -4,6 +4,8 @@ import About from './components/sections/About'
 import Skills from './components/sections/Skills'
 import Projects from './components/sections/Projects'
 import Contact from './components/sections/Contact'
+import Workbench from './components/sections/Workbench'
+import SystemsBackdrop from './components/ui/SystemsBackdrop'
 export default function App() {
   return (
     <>
@@ -12,8 +14,10 @@ export default function App() {
       </a>
       <Navbar />
       <main id="main">
+        <SystemsBackdrop />
         <Hero />
         <Projects />
+        <Workbench />
         <About />
         <Skills />
         <Contact />

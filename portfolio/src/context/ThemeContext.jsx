@@ -29,7 +29,7 @@ export function ThemeProvider({ children }) {
     document.documentElement.style.colorScheme = theme
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === 'dark' ? '#100d18' : '#f8f6ff')
+      ?.setAttribute('content', theme === 'dark' ? '#050a07' : '#f1f6f0')
     savePreference(THEME_STORAGE_KEY, theme)
   }, [theme])
   useEffect(() => {
