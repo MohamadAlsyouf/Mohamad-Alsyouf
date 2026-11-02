@@ -41,14 +41,14 @@ function StudioEnvironment({ lightMode }) {
   return (
     <>
       <ambientLight intensity={lightMode ? 0.55 : 0.3} />
-      <hemisphereLight args={['#e9f0e2', '#272e21', 0.9]} />
+      <hemisphereLight args={['#eee8fb', '#201a2b', 0.9]} />
       <directionalLight
         position={[-4, 7, 5]}
         intensity={lightMode ? 2.4 : 2.1}
         color="#fff9e9"
       />
       <directionalLight position={[3, 4, -5]} intensity={1.5} color="#e5efff" />
-      <directionalLight position={[4, 1, 4]} intensity={0.55} color="#d5ff9e" />
+      <directionalLight position={[4, 1, 4]} intensity={0.55} color="#c9c0ff" />
     </>
   )
 }
@@ -104,7 +104,7 @@ function Ground({ lightMode }) {
       <mesh position={[0, -0.023, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[2.54, 2.548, 128]} />
         <meshBasicMaterial
-          color={lightMode ? '#71894d' : '#76954c'}
+          color={lightMode ? '#8665c7' : '#9171e2'}
           transparent
           opacity={0.24}
           depthWrite={false}

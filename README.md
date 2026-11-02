@@ -4,7 +4,7 @@ Personal portfolio for Mohamad Alsyouf, senior full stack engineer and AI-native
 
 **Website:** https://mohamadalsyouf.com/
 
-The redesign pairs graphite and electric lime with oversized editorial typography, a rotating navy-blue E30 convertible, interactive project stories, and a complete light theme. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
+The redesign pairs dark graphite and electric violet with oversized editorial typography, a rotating navy-blue E30 convertible, interactive project stories, and a complete light theme. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
 
 ## Run locally
 
@@ -87,6 +87,8 @@ The downloadable résumé is `portfolio/public/Mohamad-Alsyouf-Resume.pdf`. Repl
 To regenerate the social PNG and the legacy ICO favicon with the preview server running, use `node scripts/browser-check.mjs --render-assets`, then rebuild. Routine browser tests only write ignored artifacts.
 
 ## Theme, motion, and accessibility
+
+The accent palette starts with `rgb(83, 25, 255)` (`#5319FF`). Primary buttons and the contact panel use that exact violet; lighter violet text maintains contrast on dark surfaces. Both themes use coordinated violet neutrals.
 
 Dark mode is the default. The selected theme is stored under `portfolio-theme` and applied before React renders to avoid a flash of the wrong theme. Browsers with View Transitions animate the change from the toggle position; other browsers use the regular theme transition.
 
