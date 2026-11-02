@@ -1,3 +1,5 @@
+import { E30_PAINT } from './e30Paint'
+
 export default function E30Fallback() {
   return (
     <div className="scene-fallback e30-fallback" aria-hidden="true">
@@ -11,9 +13,9 @@ export default function E30Fallback() {
             y2="260"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#f4433e" />
-            <stop offset=".5" stopColor="#b50f1c" />
-            <stop offset="1" stopColor="#470811" />
+            <stop stopColor={E30_PAINT.illustration.highlight} />
+            <stop offset=".5" stopColor={E30_PAINT.illustration.base} />
+            <stop offset="1" stopColor={E30_PAINT.illustration.shadow} />
           </linearGradient>
           <linearGradient
             id="e30-side"
@@ -23,8 +25,8 @@ export default function E30Fallback() {
             y2="270"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#d52a2d" />
-            <stop offset="1" stopColor="#5e1016" />
+            <stop stopColor={E30_PAINT.illustration.sideHighlight} />
+            <stop offset="1" stopColor={E30_PAINT.illustration.sideShadow} />
           </linearGradient>
           <radialGradient id="e30-shadow">
             <stop stopColor="#050905" stopOpacity=".6" />

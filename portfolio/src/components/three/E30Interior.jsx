@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
+import { E30_PAINT } from './e30Paint'
 
 // Original four-seat open cabin, matched to the normalized imported E30 body.
 // Nose points -X. Belt line is Y=.878; nothing here closes the open cabin.
@@ -570,7 +571,7 @@ function InstrumentCluster() {
   )
 }
 
-export default function E30Interior({ paint = '#b71920', ...props }) {
+export default function E30Interior({ paint = E30_PAINT.color, ...props }) {
   const batches = useMemo(buildInterior, [])
   const grain = useMemo(createLeatherGrain, [])
   useEffect(() => () => grain.dispose(), [grain])
@@ -594,7 +595,11 @@ export default function E30Interior({ paint = '#b71920', ...props }) {
     seam: { color: '#34383a', roughness: 0.91, metalness: 0 },
     carpet: { color: '#101111', roughness: 1, metalness: 0 },
     mat: { color: '#0b0c0d', roughness: 1, metalness: 0 },
-    paint: { color: paint, roughness: 0.33, metalness: 0.05 },
+    paint: {
+      color: paint,
+      roughness: E30_PAINT.roughness,
+      metalness: E30_PAINT.metalness,
+    },
     red: { color: '#a12726', roughness: 0.57, metalness: 0.03 },
     instrument: {
       color: '#10130f',

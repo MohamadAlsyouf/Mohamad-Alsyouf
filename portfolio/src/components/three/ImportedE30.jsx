@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js'
+import { E30_PAINT } from './e30Paint'
 
 // Based on "[FREE] BMW M3 E30" by Martin Trafas, CC BY 4.0.
 // The derived open-top mesh retains the artist's UVs, normals and PBR textures.
@@ -223,7 +224,7 @@ function convertGeometry(mesh) {
   return geometry
 }
 
-export function createConvertible(source, paint = '#b71920') {
+export function createConvertible(source, paint = E30_PAINT.color) {
   source.updateMatrixWorld(true)
   const result = new THREE.Group()
   const materials = new Map()
@@ -238,10 +239,10 @@ export function createConvertible(source, paint = '#b71920') {
         material.color.set(paint)
         material.roughnessMap = null
         material.metalnessMap = null
-        material.metalness = 0.05
-        material.roughness = 0.33
-        material.clearcoat = 1
-        material.clearcoatRoughness = 0.2
+        material.metalness = E30_PAINT.metalness
+        material.roughness = E30_PAINT.roughness
+        material.clearcoat = E30_PAINT.clearcoat
+        material.clearcoatRoughness = E30_PAINT.clearcoatRoughness
       } else if (material.name.endsWith('_BLACKOUT')) {
         material.color.set('#171819')
         material.roughness = 0.62
@@ -283,7 +284,7 @@ export function createConvertible(source, paint = '#b71920') {
   return oriented
 }
 
-export default function ImportedE30({ paint = '#b71920', ...props }) {
+export default function ImportedE30({ paint = E30_PAINT.color, ...props }) {
   const gltf = useLoader(GLTFLoader, '/models/bmw-e30.glb', (loader) => {
     loader.setMeshoptDecoder(MeshoptDecoder)
   })

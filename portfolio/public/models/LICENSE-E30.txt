@@ -17,7 +17,8 @@ Modifications for this portfolio:
 - Preserved exterior UV coordinates, smooth normals, and textured details.
 - Replaced the coupe's cabin shell with an originally authored four-seat
   black-leather interior, dashboard, gauges, steering wheel, and controls.
-- Adjusted red paint and windshield materials for the site's studio lighting.
+- Adjusted Macao Blue-inspired navy metallic paint and windshield materials
+  for the site's studio lighting.
 - Optimized opaque embedded textures to JPEG quality 92 at their original
   1024-pixel dimensions; this includes normal maps.
 - Reoriented and centered the model for a rotating web presentation.

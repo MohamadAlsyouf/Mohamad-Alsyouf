@@ -4,7 +4,7 @@ Personal portfolio for Mohamad Alsyouf, senior full stack engineer and AI-native
 
 **Website:** https://mohamadalsyouf.com/
 
-The redesign pairs graphite and electric lime with oversized editorial typography, a rotating red E30 convertible, interactive project stories, and a complete light theme. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
+The redesign pairs graphite and electric lime with oversized editorial typography, a rotating navy-blue E30 convertible, interactive project stories, and a complete light theme. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
 
 ## Run locally
 
@@ -61,6 +61,8 @@ The app uses React 18, Vite, Three.js, React Three Fiber, and Framer Motion. The
 ## E30 hero
 
 The hero combines a licensed, textured E30 M3 exterior with an original four-seat black-leather cabin, dashboard, steering wheel, and controls. The roof, rear and side windows, pillars, and wing are removed from the source coupe. The result is a 1989-inspired convertible adaptation rather than a factory-exact digital twin.
+
+The navy metallic finish is inspired by **Macao Blue metallic (Macaoblau, BMW code 250)**, referenced against [BMW's E30 M3 Convertible photographs](https://www.bmw-m.com/en/topics/magazine-article-pool/classic-bmw-m-paint-finishes.html). The shared palette in `e30Paint.js` keeps the body, painted cabin trim, rear cover, and fallback illustration consistent. Its screen colour is an artistic approximation under the site's studio lighting.
 
 The exterior is adapted from **[FREE] BMW M3 E30** by **Martin Trafas**, licensed under **CC BY 4.0**. The hero displays the required credit; full source and license details are in `portfolio/public/models/LICENSE-E30.txt`. Preserve both when reusing the model. The self-contained `bmw-e30.glb` is approximately 3.6 MB, with compressed embedded textures and meshopt geometry. Attribution metadata remains embedded.
 
