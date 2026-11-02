@@ -244,12 +244,13 @@ export function createConvertible(source, paint = E30_PAINT.color) {
         material.clearcoat = E30_PAINT.clearcoat
         material.clearcoatRoughness = E30_PAINT.clearcoatRoughness
       } else if (material.name.endsWith('_BLACKOUT')) {
-        material.color.set('#171819')
-        material.roughness = 0.62
+        material.color.set('#08090b')
+        material.roughness = 0.78
         material.metalness = 0
+        material.envMapIntensity = 0.25
       } else if (material.name.endsWith('_WINDOWS')) {
-        material.color.set('#c0d9df')
-        material.opacity = 0.22
+        material.color.set('#b8c8c5')
+        material.opacity = 0.12
         material.transparent = true
         material.depthWrite = false
         material.roughness = 0.08
@@ -266,9 +267,14 @@ export function createConvertible(source, paint = E30_PAINT.color) {
     material.name.endsWith('_PAINT'),
   )
   if (paintMaterial) {
+    // The source AO atlas describes the coupe body. The new cover has its own
+    // UVs, so reusing that atlas would imprint unrelated cabin silhouettes.
+    const coverMaterial = paintMaterial.clone()
+    coverMaterial.aoMap = null
+    coverMaterial.name = 'E30_CONVERTIBLE_COVER_PAINT'
     const tonneau = new THREE.Mesh(
       new RoundedBoxGeometry(1.32, 0.035, 0.56, 3, 0.012),
-      paintMaterial,
+      coverMaterial,
     )
     tonneau.position.set(0, 0.895, -1.48)
     tonneau.name = 'E30_CONVERTIBLE_TONNEAU'
