@@ -68,6 +68,10 @@ The exterior is adapted from **[FREE] BMW M3 E30** by **Martin Trafas**, license
 
 `HeroScene.jsx` provides a slow, frame-rate-independent turntable, studio reflections, responsive camera framing, and a static illustrated car fallback. Rendering pauses offscreen, when the tab is hidden, and when motion is disabled. `ImportedE30.jsx` preserves texture coordinates and smooth normals during the convertible conversion. `E30Interior.jsx` supplies the original cabin.
 
+The black cabin is shaped from [BMW's E30 M3 Convertible reference](https://www.bmw-m.com/en/topics/magazine-article-pool/bmw-m3-e30-convertible.html) and photographs of original E30 sport upholstery. Continuous seat surfaces, broad horizontal leather panels, separate squat headrests, and a sculpted rear bench replace the earlier block construction. The low dashboard, driver-facing controls, and M Tech I steering wheel follow the period layout. Subtle grain, satin vinyl, and roughness variation distinguish leather, trim, and carpet. These are authored reference-based meshes, not a scan of a factory interior.
+
+`e30/seatGeometry.js` and `e30/cockpitGeometry.js` build the cabin meshes; `e30/interiorMaterials.js` supplies the surface materials and instrument textures. `npm run test:interior` verifies matching vertex, normal, and UV counts, finite data, valid indices, material-batch merging, and body clearance. This guards against the missing cap normals that previously made closed headrest surfaces look hollow.
+
 With the production preview running, `npm run test:car` verifies actual car loading, changing rotation frames, pixel-identical reduced-motion frames, both themes, mobile layout, asset loading, and WebGL failure fallback. Screenshots and diagnostics go to the ignored `portfolio/.qa/` directory.
 
 Space Grotesk, DM Sans, and IBM Plex Mono are self-hosted in `portfolio/public/fonts/`, so typography does not depend on a third-party font CDN. The fonts come from the official Google Fonts repository; each family's SIL Open Font License is included beside its font file. Preserve those licenses when updating or redistributing the assets.

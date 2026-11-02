@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "test:browser": "node scripts/browser-check.mjs",
     "test:car": "node scripts/car-check.mjs",
+    "test:interior": "node scripts/check-interior.mjs",
     "format": "prettier --write src scripts index.html package.json vite.config.js"
   },
   "dependencies": {
