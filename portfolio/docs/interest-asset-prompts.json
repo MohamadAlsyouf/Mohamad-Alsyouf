@@ -1,4 +1,4 @@
-﻿{
+{
   "tool": "Built-in image_gen",
   "date": "2026-11-10",
   "usage": "Photorealistic illustrative renders for the portfolio; not official product photography or engineering documentation.",
@@ -46,6 +46,16 @@
       "output": "artwork/interests/phone.png",
       "web": "public/interests/phone.webp",
       "source": "C:\\Users\\mohamada\\.codex\\generated_images\\01a188cb-2dd5-7880-a5bc-cbd5fe8afc8d\\exec-78461a3f-fd82-4560-a854-55f20acdd06f.png"
+    },
+    {
+      "kind": "e30",
+      "date": "2026-11-10",
+      "prompt": "Use case: product-mockup.\nAsset type: transparent photorealistic cutout for the floating hero collection on a premium green-and-black engineering portfolio.\nSubject: one gorgeous, factory-bodied 1988 BMW E30 325i two-door CONVERTIBLE, roof fully lowered and stowed, deep DARK NAVY BLUE metallic paint, BLACK leather interior, and clearly visible polished CHROME bumpers with narrow black rubber impact strips. A standard 325i, with narrow original fenders, classic four round headlights, small chrome kidney grilles, BMW hood roundel, thin chrome windshield surround, black side rub strips, authentic silver BMW basketweave wheels and period tire sidewalls. The four-seat cabin must be visible and realistic: black leather sport seats with separate low headrests, black rear bench, period dashboard and steering wheel. No M3 box flares, no wings, no racing body kit, no modern large grilles, no modern plastic bumpers.\nComposition: entire car, front-left three-quarter view with the nose pointing toward the lower left, elevated camera enough to see the open black leather cabin. Car fills most of the square image width, elegantly centered. Leave a clean transparent margin on every side. Do not crop any bumper, wheel, mirror, or windscreen. Vehicle sits visually level, not dramatically tilted.\nLighting: premium studio automotive photography with a broad neutral softbox reflecting softly across navy body panels, controlled bright chrome highlights, subtly emerald rim-lit edges to match the other portfolio product cutouts. The paint must read rich dark BLUE rather than black. Convincing rubber, real leather grain, textured grilles, crisp headlights, physically realistic metal and glass. Tasteful clean restored condition.\nBackground: completely transparent with true alpha, no floor, scenery, backdrop, rectangle, colored fog, text labels, captions, watermark, people or added objects. No fake checkerboard. High-end photographic realism, not an illustration or diagram.",
+      "correction": "Use case: background-extraction. The attached image is the edit target. Preserve this exact navy-blue BMW E30 325i convertible, its camera angle, open black leather cabin, chrome bumpers, basketweave wheels, and photographic detail. Remove ALL background completely: every black backdrop pixel, gray haze, glow, floor and shadow. Output the car alone as a clean product cutout with REAL TRANSPARENT ALPHA around it and through empty open areas; no checkerboard illustration. Do not change the car or add any new detail. Place the entire cutout centered on a SQUARE transparent canvas with 7% empty margin at left and right and generous empty transparent space above and below; absolutely no cropping. The car must retain its natural wide proportions, do not stretch it. Transparent background is essential for displaying this asset over both white and black web pages.",
+      "output": "artwork/interests/e30.png",
+      "web": "public/interests/e30.webp",
+      "source": "C:\\Users\\mohamada\\.codex\\generated_images\\01a188cb-2dd5-7880-a5bc-cbd5fe8afc8d\\exec-bf20cd4c-42dc-4840-9df4-9884a4c5f5c0.png",
+      "reference": "https://www.carandclassic.com/auctions/1988-bmw-325i-convertible-e30-4B19kn"
     }
   ]
 }
