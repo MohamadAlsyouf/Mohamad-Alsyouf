@@ -102,7 +102,7 @@ export default function About() {
                     <summary>
                       Inside the role <Icon name="plus" size={13} />
                     </summary>
-                    <ul>
+                    <ul role="list">
                       {item.highlights.map((highlight) => (
                         <li key={highlight}>{highlight}</li>
                       ))}

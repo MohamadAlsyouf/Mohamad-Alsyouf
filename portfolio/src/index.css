@@ -1399,12 +1399,20 @@ h2 {
   margin-top: 12px;
 }
 .experience {
+  --led-core: #c7ffdc;
+  --led-glow: #58ff9366;
+  --led-halo: #58ff9326;
   display: grid;
   grid-template-columns: 0.75fr 1.7fr;
   gap: 50px;
   margin-top: 70px;
   border-top: 1px solid var(--line);
   padding-top: 35px;
+}
+[data-theme='light'] .experience {
+  --led-core: #75efa0;
+  --led-glow: #176b3759;
+  --led-halo: #176b3720;
 }
 .experience-label {
   display: flex;
@@ -1438,14 +1446,15 @@ h2 {
   height: 7px;
   left: -29px;
   top: 3px;
-  border: 1px solid var(--faint);
-  background: var(--section);
-  border-radius: 50%;
 }
 .experience-point.current {
-  background: var(--accent);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--section);
+  width: 9px;
+  height: 9px;
+  left: -30px;
+  top: 2px;
+}
+.experience-row:nth-child(even) .experience-point {
+  animation-delay: -1.4s;
 }
 .experience-period {
   color: var(--faint);
@@ -1473,17 +1482,64 @@ h2 {
   transform: rotate(45deg);
 }
 .experience-details ul {
-  padding-left: 14px;
+  padding-left: 0;
   margin-top: 10px;
   max-width: 450px;
+  list-style: none;
 }
 .experience-details li {
+  position: relative;
   line-height: 1.9;
   margin-top: 6px;
-  padding-left: 2px;
+  padding-left: 20px;
 }
-.experience-details li::marker {
-  color: var(--accent);
+.experience-details li::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: calc(0.95em - 3.5px);
+  width: 7px;
+  height: 7px;
+}
+.experience-point,
+.experience-details li::before {
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    var(--led-core),
+    var(--accent) 65%
+  );
+  box-shadow:
+    0 0 5px var(--led-glow),
+    0 0 12px var(--led-halo);
+  animation: experience-led-pulse 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.experience-details li:nth-child(4n + 2)::before {
+  animation-delay: -0.8s;
+}
+.experience-details li:nth-child(4n + 3)::before {
+  animation-delay: -1.6s;
+}
+.experience-details li:nth-child(4n + 4)::before {
+  animation-delay: -2.4s;
+}
+@keyframes experience-led-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.85);
+    box-shadow:
+      0 0 3px var(--led-glow),
+      0 0 7px var(--led-halo);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+    box-shadow:
+      0 0 7px var(--led-glow),
+      0 0 18px 2px var(--led-halo);
+  }
 }
 .footer-meta button:disabled {
   cursor: default;
