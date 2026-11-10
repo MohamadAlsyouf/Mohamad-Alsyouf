@@ -1,0 +1,51 @@
+﻿{
+  "tool": "Built-in image_gen",
+  "date": "2026-11-10",
+  "usage": "Photorealistic illustrative renders for the portfolio; not official product photography or engineering documentation.",
+  "packaging": "Original transparent PNGs preserved in artwork/interests. Responsive alpha WebP encoded at 480 and 960 pixels by scripts/browser-check.mjs --encode-interests.",
+  "assets": [
+    {
+      "kind": "wheel",
+      "prompt": "Use case: product-mockup. Create one photorealistic premium studio-rendered website cutout, square composition, fully transparent background with real alpha. Precise detailed materials, convincing depth and subtle surface texture, soft neutral key light with a restrained emerald rim light for a green-and-black engineering portfolio. Entire subject fully visible with a small clean transparent margin. No backdrop, floor, cast shadow rectangle, border, diagram lines, captions or watermark. Subject: one classic BBS RS style THREE-PIECE cross-spoke alloy wheel in a beautiful EXPLODED assembly, three major components separated along one tilted axle: a deep polished aluminum inner barrel at back, a fine gold cross-spoke/mesh wheel center in the middle with five lug holes and small center cap, and a highly polished silver outer rim lip at the front. A ring of realistic small stainless fasteners. Three-quarter front view, visually obvious concentric alignment and gaps between the three parts. Metallic highlights crisp and controlled, real machining marks. No tire, no vehicle, no invented extra wheel faces. The result should look like high-end automotive product photography, not a schematic.",
+      "output": "artwork/interests/wheel.png",
+      "web": "public/interests/wheel.webp",
+      "source": "C:\\Users\\mohamada\\.codex\\generated_images\\01a188cb-2dd5-7880-a5bc-cbd5fe8afc8d\\exec-d0766b04-34ef-419c-ab2a-61796224ec52.png"
+    },
+    {
+      "kind": "pi",
+      "prompt": "Use case: product-mockup. Create one photorealistic premium studio-rendered website cutout, square composition, fully transparent background with real alpha. Precise detailed materials, convincing depth and subtle surface texture, soft neutral key light with a restrained emerald rim light for a green-and-black engineering portfolio. Entire subject fully visible with a small clean transparent margin. No backdrop, floor, cast shadow rectangle, border, diagram lines, captions or watermark. Subject: an authentic-looking Raspberry Pi 5 single-board computer, realistic green PCB, viewed from above at a mild three-quarter angle with the full rectangular board visible. Four corner mounting holes, 40-pin gold GPIO header along the long top edge, Broadcom processor package, RP1 I/O chip, tiny capacitors and board traces, two stacked USB housings and Ethernet socket on the short edge, USB-C and dual micro-HDMI connectors on the other long edge. Photographic electronic assembly detail and accurate board proportions. Small natural PCB silkscreen; no overlaid writing. No heatsink, case, external cables or floating parts.",
+      "output": "artwork/interests/pi.png",
+      "web": "public/interests/pi.webp",
+      "source": "C:\\Users\\mohamada\\.codex\\generated_images\\01a188cb-2dd5-7880-a5bc-cbd5fe8afc8d\\exec-6c38f482-b4ed-44f9-96d0-f3724046647c.png",
+      "correction": "Use case: precise-object-edit. Edit this transparent Raspberry Pi board render to remove the incorrect black round 3.5mm audio jack on the bottom edge, between the micro-HDMI connectors and the Ethernet housing. Raspberry Pi 5 has no audio jack. Replace only that jack and its mounting footprint with realistic green PCB and tiny surface-mount components. Keep all other board components, exact visible Raspberry Pi 5 text, green PCB, GPIO header, processor, USB and Ethernet sockets, perspective, lighting, framing, and transparent alpha background unchanged. No backdrop or extra elements."
+    },
+    {
+      "kind": "fishing",
+      "prompt": "Use case: product-mockup. Create one photorealistic premium studio-rendered website cutout, square composition, fully transparent background with real alpha. Precise detailed materials, convincing depth and subtle surface texture, soft neutral key light with a restrained emerald rim light for a green-and-black engineering portfolio. Entire subject fully visible with a small clean transparent margin. No backdrop, floor, cast shadow rectangle, border, diagram lines, captions or watermark. Subject: a realistic bass-fishing still life, with a sleek graphite fishing rod and compact baitcasting reel with cork grip, fishing line and a small minnow-style lure, alongside one handsome LARGEMOUTH BASS fish. Arrange the rod diagonally from lower left toward upper right and the fish horizontally in the lower half, all fully contained in the composition. Fish has natural olive green scales, a dark broken lateral stripe, pale cream belly, large lower jaw and mouth extending behind its eye, connected spiny and soft dorsal fin. Natural wet scale highlights and true anatomical detail. No trout spots, no people, hands, blood, water scene or landscape. Exquisite sporting-goods photography with a lifelike fish, beautiful curated composition.",
+      "output": "artwork/interests/fishing.png",
+      "web": "public/interests/fishing.webp",
+      "source": "C:\\Users\\mohamada\\.codex\\generated_images\\01a188cb-2dd5-7880-a5bc-cbd5fe8afc8d\\exec-659265a5-b77e-48dc-8c9c-d57e87a9b47e.png"
+    },
+    {
+      "kind": "sword",
+      "prompt": "Use case: product-mockup. Create one photorealistic premium studio-rendered website cutout, square composition, fully transparent background with real alpha. Precise detailed materials, convincing depth and subtle surface texture, soft neutral key light with a restrained emerald rim light for a green-and-black engineering portfolio. Entire subject fully visible with a small clean transparent margin. No backdrop, floor, cast shadow rectangle, border, diagram lines, captions or watermark. Subject: a single elaborate high-fantasy greatsword inspired by the visual language of AION 2. Full sword, tip upward, nearly vertical with a subtle diagonal tilt. Long beautifully beveled double-edged silver blade with an elegant central ridge, intricate ancient engraving, sculpted wing-shaped silver and antique gold crossguard, dark leather wrapped two-handed grip and refined faceted emerald gem in the guard. A faint controlled green magical inlay down the blade. Premium realistic videogame cinematic prop, physically convincing brushed metal and polished cutting edges. Elegant celestial MMORPG weapon silhouette, not a simple medieval sword, not a cartoon or pixel art. No character, hands, scabbard, text or logos.",
+      "output": "artwork/interests/sword.png",
+      "web": "public/interests/sword.webp",
+      "source": "C:\\Users\\mohamada\\.codex\\generated_images\\01a188cb-2dd5-7880-a5bc-cbd5fe8afc8d\\exec-af25a0b0-8fe6-44e6-a384-8d96ecddda5d.png"
+    },
+    {
+      "kind": "engine",
+      "prompt": "Use case: product-mockup. Create one photorealistic premium studio-rendered website cutout, square composition, fully transparent background with real alpha. Precise detailed materials, convincing depth and subtle surface texture, soft neutral key light with a restrained emerald rim light for a green-and-black engineering portfolio. Entire subject fully visible with a small clean transparent margin. No backdrop, floor, cast shadow rectangle, border, diagram lines, captions or watermark. Subject: BMW M50B25 inline-six engine, exactly TOP-DOWN / overhead orthographic product view, isolated whole engine assembly without a car or engine bay. A long black cam/valve cover on the right, with six ignition-coil positions along its center, distinctive parallel raised SILVER ribs and the clearly legible raised metallic word \"BMW\" (exactly B M W, no extra letters) prominently on the black cover. Six curved black intake runners on the left joining one intake plenum, dark hoses, cast aluminum head edges, bolts and realistic accessories. Long engine axis vertical. Period-correct M50 appearance, no M Power badge, no V8 configuration, no individual open throttle trumpets. Detailed clean used metal, rubber and black textured polymer, sharp enough to read BMW in a website hero.",
+      "output": "artwork/interests/engine.png",
+      "web": "public/interests/engine.webp",
+      "source": "C:\\Users\\mohamada\\.codex\\generated_images\\01a188cb-2dd5-7880-a5bc-cbd5fe8afc8d\\exec-01e54af5-46fa-4711-b110-9d8eeebe35b9.png"
+    },
+    {
+      "kind": "phone",
+      "prompt": "Use case: product-mockup. Create one photorealistic premium studio-rendered website cutout, square composition, fully transparent background with real alpha. Precise detailed materials, convincing depth and subtle surface texture, soft neutral key light with a restrained emerald rim light for a green-and-black engineering portfolio. Entire subject fully visible with a small clean transparent margin. No backdrop, floor, cast shadow rectangle, border, diagram lines, captions or watermark. Subject: a modern Apple iPhone in dark titanium, front three-quarter view with a very mild rotation showing its slim metal frame, full device in portrait orientation centered in the square canvas. Realistic rounded corners, thin black bezels and pill-shaped Dynamic Island at top. Glass OLED screen displays an exquisitely minimal mobile app developer's dark dashboard: small title \"Build\", three spacious rounded dark cards, one emerald green line chart, a few clean simple icons and a large green action button labelled \"Ship\". Only these two readable words, no other small typography. Restrained reflections leave the screen visible. Photoreal premium consumer technology product shot, no hands, charging cable or second phone.",
+      "output": "artwork/interests/phone.png",
+      "web": "public/interests/phone.webp",
+      "source": "C:\\Users\\mohamada\\.codex\\generated_images\\01a188cb-2dd5-7880-a5bc-cbd5fe8afc8d\\exec-78461a3f-fd82-4560-a854-55f20acdd06f.png"
+    }
+  ]
+}
