@@ -204,7 +204,7 @@ async function screenshot(name, { top = true } = {}) {
 }
 
 async function sectionScreenshots() {
-  for (const section of ['work', 'workbench', 'about', 'approach', 'contact']) {
+  for (const section of ['about', 'work', 'approach', 'contact']) {
     await evaluate(
       `document.getElementById(${JSON.stringify(section)})?.scrollIntoView({block:'start',behavior:'instant'})`,
     )
@@ -482,49 +482,27 @@ try {
     })
     await sectionScreenshots()
     await checkLayout('Desktop dark')
-    const studies = await evaluate(
-      `Array.from(document.querySelectorAll('.bench-study')).map(figure => {const img = figure.querySelector('img'); return {name:figure.querySelector('h3')?.textContent,loaded:img?.complete && img.naturalWidth > 0,alt:img?.alt}})`,
-    )
-    assert(
-      studies.length === 6 &&
-        studies.every((study) => study.name && study.loaded && study.alt),
-      'Six realistic interest studies load with captions and descriptive alternatives',
-      studies,
-    )
     await evaluate(
-      `document.getElementById('workbench').scrollIntoView({block:'center',behavior:'instant'})`,
+      `document.getElementById('about').scrollIntoView({block:'center',behavior:'instant'})`,
     )
     await waitFor(
-      `document.querySelector('.workbench').dataset.active === 'true'`,
-      'workbench animation to start in view',
+      `document.querySelector('.interest-showcase').dataset.active === 'false'`,
+      'hero animation to pause offscreen',
     )
     assert(
       await evaluate(
-        `getComputedStyle(document.querySelector('.bench-drawing > img')).animationPlayState === 'running'`,
-      ),
-      'Workbench floats while visible',
-    )
-    assert(
-      await evaluate(
-        `document.querySelector('.interest-showcase').dataset.active === 'false' && getComputedStyle(document.querySelector('.interest-float')).animationPlayState === 'paused'`,
+        `getComputedStyle(document.querySelector('.interest-float')).animationPlayState === 'paused'`,
       ),
       'Hero floating motion pauses offscreen',
     )
-    await screenshot('desktop-workbench-detail', { top: false })
     await evaluate(`window.scrollTo({top:0,behavior:'instant'})`)
     await waitFor(
-      `document.querySelector('.workbench').dataset.active === 'false'`,
-      'workbench animation to pause offscreen',
+      `document.querySelector('.interest-showcase').dataset.active === 'true'`,
+      'hero animation to resume in view',
     )
     assert(
       await evaluate(
-        `getComputedStyle(document.querySelector('.bench-drawing > img')).animationPlayState === 'paused'`,
-      ),
-      'Workbench pauses offscreen',
-    )
-    assert(
-      await evaluate(
-        `document.querySelector('.interest-showcase').dataset.active === 'true' && getComputedStyle(document.querySelector('.interest-float')).animationPlayState === 'running'`,
+        `getComputedStyle(document.querySelector('.interest-float')).animationPlayState === 'running'`,
       ),
       'Hero floating motion resumes in view',
     )
@@ -711,9 +689,9 @@ try {
     await screenshot('desktop-light')
     await checkLayout('Desktop light')
     await evaluate(
-      `document.getElementById('workbench').scrollIntoView({block:'start',behavior:'instant'})`,
+      `document.getElementById('about').scrollIntoView({block:'start',behavior:'instant'})`,
     )
-    await screenshot('desktop-workbench-light', { top: false })
+    await screenshot('desktop-about-light', { top: false })
     await navigate()
     assert(
       await evaluate(`document.documentElement.dataset.theme === 'light'`),
@@ -730,9 +708,9 @@ try {
     await screenshot('mobile-dark')
     await checkLayout('Mobile dark')
     await evaluate(
-      `document.getElementById('workbench').scrollIntoView({block:'start',behavior:'instant'})`,
+      `document.getElementById('about').scrollIntoView({block:'start',behavior:'instant'})`,
     )
-    await screenshot('mobile-workbench', { top: false })
+    await screenshot('mobile-about', { top: false })
     await evaluate(
       `document.querySelector('.interest-showcase').scrollIntoView({block:'center',behavior:'instant'})`,
     )
@@ -795,12 +773,12 @@ try {
     })
 
     const heroInterests = await evaluate(
-      `Array.from(document.querySelectorAll('.interest-object')).map(link => ({label:link.getAttribute('aria-label'),target:!!document.querySelector(link.getAttribute('href')),loaded:link.querySelector('img').complete && link.querySelector('img').naturalWidth > 0}))`,
+      `Array.from(document.querySelectorAll('.interest-object')).map(object => ({label:object.querySelector('img').alt,loaded:object.querySelector('img').complete && object.querySelector('img').naturalWidth > 0}))`,
     )
     assert(
       heroInterests.length === 6 &&
-        heroInterests.every((item) => item.label && item.target && item.loaded),
-      'Six hero objects load and link to their matching interest studies',
+        heroInterests.every((item) => item.label && item.loaded),
+      'Six hero objects load with descriptive alternatives',
       heroInterests,
     )
     assert(

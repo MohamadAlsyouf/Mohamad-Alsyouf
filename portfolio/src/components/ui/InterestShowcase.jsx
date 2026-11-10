@@ -67,14 +67,10 @@ export default function InterestShowcase() {
           style={{ rotateX, rotateY }}
         >
           {interests.map((interest, index) => (
-            <a
+            <div
               className={`interest-object interest-${interest.kind}`}
-              href={`#interest-${interest.kind}`}
               key={interest.kind}
-              aria-label={`Explore ${interest.name}`}
               onPointerEnter={() => setActive(interest)}
-              onFocus={() => setActive(interest)}
-              onBlur={() => setActive(null)}
               style={{ '--float-delay': `${index * -1.7}s` }}
             >
               <span className="interest-float">
@@ -84,12 +80,12 @@ export default function InterestShowcase() {
                   sizes="(max-width: 600px) 220px, 320px"
                   width="960"
                   height="960"
-                  alt=""
+                  alt={interest.alt}
                   fetchPriority={index === 0 ? 'high' : 'auto'}
                   draggable="false"
                 />
               </span>
-            </a>
+            </div>
           ))}
         </motion.div>
       </div>
@@ -101,9 +97,9 @@ export default function InterestShowcase() {
           <span>{active ? active.name : 'Curiosity doesn’t clock out.'}</span>
         </div>
         <a
-          href="#workbench"
+          href="#about"
           className="showcase-explore"
-          aria-label="Explore the curiosity workbench"
+          aria-label="Meet the person behind the code"
         >
           <Icon name="down" size={20} />
         </a>

@@ -74,7 +74,7 @@ export default function Hero() {
       </div>
       <div className="hero-bottom">
         <span className="mono">LESS FRICTION. MORE FORWARD.</span>
-        <a href="#work" className="scroll-cue">
+        <a href="#about" className="scroll-cue">
           A LITTLE SCROLL GOES A LONG WAY
           <Icon name="down" size={15} />
         </a>

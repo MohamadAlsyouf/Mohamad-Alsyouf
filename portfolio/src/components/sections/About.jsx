@@ -12,7 +12,7 @@ export default function About() {
     <section id="about" className="about-section section-space">
       <div className="page-width">
         <Reveal>
-          <SectionLabel number="02">THE PERSON BEHIND THE CODE</SectionLabel>
+          <SectionLabel number="01">THE PERSON BEHIND THE CODE</SectionLabel>
         </Reveal>
         <div className="about-intro">
           <Reveal className="portrait-composition">

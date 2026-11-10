@@ -1,6 +1,6 @@
 # Green systems / visual references
 
-The direction uses phosphor green, near-black, quiet code columns, and signal paths. Six realistic transparent renders now replace the E30 hero and the workbench's line drawings. The background retains subtle SVG studies of the same interests. The Matrix's green code imagery remains the mood reference.
+The direction uses phosphor green, near-black, quiet code columns, and signal paths. Six realistic transparent renders replace the E30 hero. The separate workbench section has been removed; the photo/about section now follows the hero. The background retains subtle SVG studies of the same interests. The Matrix's green code imagery remains the mood reference.
 
 ## Current artwork — November 10, 2026
 
@@ -15,7 +15,7 @@ The direction uses phosphor green, near-black, quiet code columns, and signal pa
 
 All six final images were generated with the built-in `image_gen` tool. They are photorealistic interpretations, not official product photography or technical specifications. The [complete prompts and source paths](interest-asset-prompts.json) record generation and the Pi correction. Original PNGs are saved in `artwork/interests/`; responsive 480px/960px WebP files are in `public/interests/`. Encoding preserves alpha. Originals are excluded from the deployment directory.
 
-Both the hero and gallery use `src/data/interests.js`. The hero adds pointer-driven perspective and independent floating motion; it links each object to its gallery study. Motion pauses offscreen, in hidden tabs, and under the system or manual reduced-motion preference. Images use responsive sources, explicit dimensions, and descriptive alternatives in the gallery. All artwork loads from this site.
+The hero uses `src/data/interests.js` with pointer-driven perspective and independent floating motion. Its down arrow links to the photo/about section. Motion pauses offscreen, in hidden tabs, and under the system or manual reduced-motion preference. Images use responsive sources, explicit dimensions, and descriptive alternatives in the hero. All artwork loads from this site.
 
 ## Earlier line-study references
 

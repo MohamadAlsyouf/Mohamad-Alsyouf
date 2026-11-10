@@ -4,7 +4,7 @@ Personal portfolio for Mohamad Alsyouf, senior full stack engineer and AI-native
 
 **Website:** https://mohamadalsyouf.com/
 
-The redesign pairs near-black and phosphor green with oversized typography, a floating collection of realistic personal-interest visuals, interactive project stories, and a complete light theme. Floating technical diagrams and a photographic curiosity workbench connect software, hardware, automotive engineering, gaming, and bass fishing. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
+The redesign pairs near-black and phosphor green with oversized typography, a floating collection of realistic personal-interest visuals, interactive project stories, and a complete light theme. The hero artwork and floating technical diagrams connect software, hardware, automotive engineering, gaming, and bass fishing. The photo/about section follows the hero, ahead of selected projects. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
 
 ## Run locally
 
@@ -48,7 +48,7 @@ The suite uses an installed Chrome or Edge browser and Node's built-in browser p
 | `portfolio/src/data/content.js`          | Personal details, résumé-backed metrics, project stories, experience, capabilities, workflow, and stack |
 | `portfolio/src/components/sections/`     | Hero, selected work, engineering approach, capabilities, and contact                                    |
 | `portfolio/src/components/layout/`       | Responsive navigation and global controls                                                               |
-| `portfolio/src/data/interests.js`        | Shared artwork, accessible descriptions, and captions for the hero and workbench                        |
+| `portfolio/src/data/interests.js`        | Artwork and accessible descriptions for the hero                                                        |
 | `portfolio/src/components/ui/`           | Shared motion, icon, and interaction components                                                         |
 | `portfolio/src/context/ThemeContext.jsx` | Theme persistence, view transitions, and motion preferences                                             |
 | `portfolio/src/theme/theme.js`           | Safe preference storage helpers                                                                         |
@@ -60,13 +60,13 @@ The app uses React 18, Vite, and Framer Motion. All artwork and fonts are served
 
 ## Personal-interest showcase
 
-The hero features six transparent, photorealistic renders: an exploded three-piece BBS-style wheel, Raspberry Pi 5, overhead BMW M50 with visible BMW lettering, fishing rod and largemouth bass, an Aion 2-inspired fantasy sword, and an iPhone representing mobile app development. Each object links to its larger workbench study. Mouse movement adds subtle perspective; the objects float independently. All six remain visible when motion is disabled, with no WebGL dependency.
+The hero features six transparent, photorealistic renders: an exploded three-piece BBS-style wheel, Raspberry Pi 5, overhead BMW M50 with visible BMW lettering, fishing rod and largemouth bass, an Aion 2-inspired fantasy sword, and an iPhone representing mobile app development. The artwork stays in the hero, whose down arrow leads into the photo/about section. Mouse movement adds subtle perspective; the objects float independently. All six remain visible when motion is disabled, with no WebGL dependency.
 
 The artwork was created with the built-in image generation tool. Original transparent PNGs are preserved in `portfolio/artwork/interests/` outside the deployed public directory. Alpha WebP variants at 480px and 960px live in `portfolio/public/interests/`. The browser selects an appropriate size; the six 480px files total about 270 KB. These are illustrative renders, not official product photographs or exact engineering models. [References](portfolio/docs/visual-references.md) and the complete [generation prompt set](portfolio/docs/interest-asset-prompts.json) document the assets.
 
 To re-encode responsive WebP files after replacing the PNG originals, run `npm run assets:interests` from `portfolio`. It uses the installed browser's image encoder, preserves transparency, and does not need a preview server or external credentials. Rebuild afterward.
 
-`InterestShowcase.jsx` handles the hero composition; `Workbench.jsx` renders the shared interest collection. `useSceneActivity.js` pauses CSS animation offscreen and in hidden tabs. ThemeContext handles OS and manual reduced-motion preferences. Browser checks cover image loading, both themes, responsive layouts, pointer depth, offscreen pausing, motion controls, accessible links, and existing portfolio interactions. The superseded E30 scene, model, tests, and Three.js dependencies have been removed.
+`InterestShowcase.jsx` handles the hero composition. `useSceneActivity.js` pauses CSS animation offscreen and in hidden tabs. ThemeContext handles OS and manual reduced-motion preferences. Browser checks cover image loading, both themes, responsive layouts, pointer depth, offscreen pausing, motion controls, accessible links, and existing portfolio interactions. The superseded E30 scene, model, tests, and Three.js dependencies have been removed.
 
 Space Grotesk, DM Sans, and IBM Plex Mono are self-hosted in `portfolio/public/fonts/`, so typography does not depend on a third-party font CDN. The fonts come from the official Google Fonts repository; each family's SIL Open Font License is included beside its font file. Preserve those licenses when updating or redistributing the assets.
 
@@ -82,7 +82,7 @@ To regenerate the social PNG and the legacy ICO favicon with the preview server 
 
 ## Theme, motion, and accessibility
 
-The Matrix-inspired palette uses phosphor green (`#58FF93`) over near-black, with deep green accents on the light theme. Body text is 16–18px, and supporting labels are at least 14px. The workbench uses realistic artwork with generous captions; the background uses quiet SVG line studies of the same six interests. Decorative background graphics are hidden from assistive technology, while gallery images have descriptive alternatives.
+The Matrix-inspired palette uses phosphor green (`#58FF93`) over near-black, with deep green accents on the light theme. Body text is 16–18px, and supporting labels are at least 14px. The hero uses realistic artwork; the background uses quiet SVG line studies of the same six interests. Decorative background graphics are hidden from assistive technology, while hero images have descriptive alternatives.
 
 Dark mode is the default. The selected theme is stored under `portfolio-theme` and applied before React renders to avoid a flash of the wrong theme. Browsers with View Transitions animate the change from the toggle position; other browsers use the regular theme transition.
 

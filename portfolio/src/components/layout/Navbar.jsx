@@ -5,8 +5,8 @@ import Icon, { BrandMark } from '../ui/Icon'
 import { personalInfo } from '../../data/content'
 import { useTheme } from '../../context/ThemeContext'
 const links = [
-  { name: 'Work', id: 'work' },
   { name: 'About', id: 'about' },
+  { name: 'Work', id: 'work' },
   { name: 'Approach', id: 'approach' },
 ]
 export default function Navbar() {

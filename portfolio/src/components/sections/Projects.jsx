@@ -6,7 +6,7 @@ export default function Projects() {
   return (
     <section id="work" className="work-section section-space page-width">
       <Reveal>
-        <SectionLabel number="01">SELECTED WORK</SectionLabel>
+        <SectionLabel number="02">SELECTED WORK</SectionLabel>
         <div className="section-heading-row">
           <h2>
             Built with purpose.

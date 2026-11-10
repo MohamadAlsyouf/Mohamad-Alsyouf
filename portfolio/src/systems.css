@@ -1,3 +1,4 @@
+/* Decorative engineering backdrop and shared readable layouts. */
 main {
   position: relative;
   isolation: isolate;
@@ -122,177 +123,6 @@ main > section {
   fill: currentColor;
   fill-opacity: 0.08;
 }
-.workbench-section {
-  border-block: 1px solid var(--line);
-  background: linear-gradient(140deg, var(--section), transparent 72%);
-}
-.workbench-heading > p {
-  max-width: 360px;
-}
-.workbench {
-  position: relative;
-  overflow: clip;
-  border-block: 1px solid var(--line);
-  background:
-    radial-gradient(ellipse at 50% 45%, #58ff9308, transparent 65%), var(--bg);
-  isolation: isolate;
-}
-.workbench::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 30px 30px;
-  mask-image: linear-gradient(transparent, #000, transparent);
-}
-.workbench-topline,
-.workbench-bottomline {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px 28px;
-  padding-block: 25px;
-  color: var(--muted);
-}
-.workbench-topline > :first-child {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--accent);
-}
-.workbench-bottomline {
-  border-top: 1px solid var(--line);
-}
-.circuit-traces {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: var(--accent);
-  opacity: 0.12;
-  pointer-events: none;
-}
-.trace-secondary {
-  opacity: 0.5;
-}
-.trace-signal {
-  stroke-dasharray: 24 1500;
-  animation: circuit-flow 16s linear infinite;
-}
-.workbench-studies {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 32px 26px;
-  padding: 20px 0 45px;
-}
-.bench-study {
-  grid-column: span 3;
-  min-width: 0;
-  position: relative;
-}
-.bench-fishing {
-  grid-column: span 6;
-}
-.bench-drawing {
-  position: relative;
-  aspect-ratio: 340 / 300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.bench-drawing > svg {
-  width: 100%;
-  max-height: 290px;
-  color: var(--accent);
-  filter: drop-shadow(0 0 9px #58ff9320);
-  animation: schematic-float 9s ease-in-out infinite;
-}
-.bench-pi svg {
-  rotate: -13deg;
-  animation-delay: -2s;
-}
-.bench-camera svg {
-  rotate: 13deg;
-  animation-delay: -5s;
-}
-.bench-engine svg {
-  rotate: -6deg;
-  animation-delay: -4s;
-}
-.bench-drone svg {
-  rotate: 9deg;
-  animation-delay: -7s;
-}
-.bench-sword svg {
-  rotate: -10deg;
-  animation-delay: -3s;
-}
-.bench-wheel svg {
-  rotate: -8deg;
-  animation-delay: -6s;
-}
-.bench-fishing .bench-drawing {
-  aspect-ratio: 680 / 300;
-}
-.bench-fishing svg {
-  width: 76%;
-  max-height: 290px;
-  rotate: -5deg;
-}
-.bench-cross {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  color: var(--faint);
-  font: 20px monospace;
-}
-.bench-study figcaption {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  position: relative;
-  z-index: 1;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-}
-.bench-index {
-  color: var(--accent);
-}
-.bench-study h3 {
-  font:
-    500 16px/1.5 'Space Grotesk',
-    sans-serif;
-}
-.bench-study p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.65;
-  margin-top: 5px;
-}
-.workbench .wheel-center {
-  animation: wheel-separate 9s ease-in-out infinite;
-}
-.workbench .wheel-lip {
-  animation: wheel-separate 9s ease-in-out -1s infinite reverse;
-}
-.workbench .bench-drawing > svg,
-.workbench .trace-signal,
-.workbench .wheel-center,
-.workbench .wheel-lip {
-  animation-play-state: paused;
-}
-.workbench[data-active='true'] .bench-drawing > svg,
-.workbench[data-active='true'] .trace-signal,
-.workbench[data-active='true'] .wheel-center,
-.workbench[data-active='true'] .wheel-lip {
-  animation-play-state: running;
-}
 @keyframes schematic-float {
   0%,
   100% {
@@ -300,20 +130,6 @@ main > section {
   }
   50% {
     transform: translateY(-9px);
-  }
-}
-@keyframes circuit-flow {
-  to {
-    stroke-dashoffset: -3048;
-  }
-}
-@keyframes wheel-separate {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(7px);
   }
 }
 
@@ -417,20 +233,6 @@ main > section {
     grid-template-columns: 1fr;
   }
 }
-@media (max-width: 1000px) {
-  .workbench-studies {
-    gap: 30px 24px;
-  }
-  .bench-study {
-    grid-column: span 6;
-  }
-  .bench-fishing {
-    grid-column: span 12;
-  }
-  .bench-fishing .bench-drawing {
-    aspect-ratio: 680 / 260;
-  }
-}
 @media (max-width: 760px) {
   .nav-contact {
     display: none;
@@ -531,49 +333,5 @@ main > section {
   }
   .code-stream {
     display: none;
-  }
-  .workbench-topline,
-  .workbench-bottomline {
-    padding-block: 20px;
-  }
-  .workbench-topline > :last-child,
-  .workbench-bottomline > :last-child {
-    display: none;
-  }
-  .workbench-studies {
-    gap: 28px 18px;
-    padding-top: 0;
-  }
-  .bench-drawing {
-    aspect-ratio: 1 / 1;
-  }
-  .bench-study figcaption {
-    gap: 8px;
-  }
-  .bench-study h3 {
-    font-size: 15px;
-  }
-  .bench-study p {
-    font-size: 14px;
-  }
-  .bench-index {
-    display: none;
-  }
-  .bench-fishing svg {
-    width: 90%;
-  }
-}
-@media (max-width: 380px) {
-  .bench-study {
-    grid-column: span 12;
-  }
-  .bench-drawing {
-    aspect-ratio: 340 / 270;
-  }
-  .bench-fishing .bench-drawing {
-    aspect-ratio: 340 / 270;
-  }
-  .bench-fishing svg {
-    width: 100%;
   }
 }
