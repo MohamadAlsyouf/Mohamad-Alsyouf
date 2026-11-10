@@ -1,17 +1,51 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { motion, useSpring } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
 import { interests } from '../../data/interests'
 import useSceneActivity from '../../hooks/useSceneActivity'
 import Icon from './Icon'
+import InterestStory from './InterestStory'
 
 export default function InterestShowcase() {
   const scene = useRef(null)
+  const panel = useRef(null)
+  const triggers = useRef(new Map())
+  const suppressFocus = useRef(false)
+  const storyId = useId()
   const { reducedMotion } = useTheme()
   const [active, setActive] = useState(null)
   const rotateX = useSpring(0, { stiffness: 90, damping: 24 })
   const rotateY = useSpring(0, { stiffness: 90, damping: 24 })
   useSceneActivity(scene)
+
+  const dismiss = useCallback(() => {
+    const restoreFocus = panel.current?.contains(document.activeElement)
+    setActive(null)
+    if (restoreFocus && active) {
+      suppressFocus.current = true
+      triggers.current.get(active.kind)?.focus({ preventScroll: true })
+      suppressFocus.current = false
+    }
+  }, [active])
+
+  useEffect(() => {
+    if (!active) return
+    const keydown = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        dismiss()
+      }
+    }
+    const outside = (event) => {
+      if (!scene.current?.contains(event.target)) setActive(null)
+    }
+    document.addEventListener('keydown', keydown)
+    document.addEventListener('pointerdown', outside)
+    return () => {
+      document.removeEventListener('keydown', keydown)
+      document.removeEventListener('pointerdown', outside)
+    }
+  }, [active, dismiss])
 
   useEffect(() => {
     if (reducedMotion) {
@@ -30,7 +64,6 @@ export default function InterestShowcase() {
   function reset() {
     rotateX.set(0)
     rotateY.set(0)
-    setActive(null)
   }
 
   return (
@@ -41,6 +74,16 @@ export default function InterestShowcase() {
       initial={reducedMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: reducedMotion ? 0 : 1.1 }}
+      onPointerLeave={(event) => {
+        if (
+          event.pointerType === 'mouse' &&
+          !scene.current.contains(document.activeElement)
+        )
+          setActive(null)
+      }}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setActive(null)
+      }}
     >
       <div className="showcase-topline mono">
         <span>
@@ -67,10 +110,28 @@ export default function InterestShowcase() {
           style={{ rotateX, rotateY }}
         >
           {interests.map((interest, index) => (
-            <div
+            <button
+              type="button"
               className={`interest-object interest-${interest.kind}`}
               key={interest.kind}
-              onPointerEnter={() => setActive(interest)}
+              ref={(element) => {
+                if (element) triggers.current.set(interest.kind, element)
+                else triggers.current.delete(interest.kind)
+              }}
+              aria-label={`About ${interest.name}`}
+              aria-expanded={active?.kind === interest.kind}
+              aria-controls={
+                active?.kind === interest.kind ? storyId : undefined
+              }
+              aria-describedby={`${storyId}-${interest.kind}-summary`}
+              data-selected={active?.kind === interest.kind}
+              onPointerEnter={(event) => {
+                if (event.pointerType === 'mouse') setActive(interest)
+              }}
+              onFocus={() => {
+                if (!suppressFocus.current) setActive(interest)
+              }}
+              onClick={() => setActive(interest)}
               style={{ '--float-delay': `${index * -1.7}s` }}
             >
               <span className="interest-float">
@@ -89,16 +150,29 @@ export default function InterestShowcase() {
                   draggable="false"
                 />
               </span>
-            </div>
+            </button>
           ))}
         </motion.div>
       </div>
+      {active && (
+        <InterestStory
+          key={active.kind}
+          interest={active}
+          anchor={triggers.current.get(active.kind)}
+          scene={scene}
+          panel={panel}
+          id={storyId}
+          onClose={dismiss}
+        />
+      )}
       <div className="showcase-bottomline">
         <div className="showcase-readout">
           <span className="readout-mark" aria-hidden="true">
             ↳
           </span>
-          <span>{active ? active.name : 'Curiosity doesn’t clock out.'}</span>
+          <span>
+            {active ? active.name : 'Hover or tap an item. There’s a story.'}
+          </span>
         </div>
         <a
           href="#about"
@@ -108,6 +182,16 @@ export default function InterestShowcase() {
           <Icon name="down" size={20} />
         </a>
       </div>
+      {interests.map((interest) => (
+        <span
+          key={interest.kind}
+          id={`${storyId}-${interest.kind}-summary`}
+          className="sr-only"
+        >
+          {interest.detail}
+          {interest.funFact ? ` Fun fact: ${interest.funFact}` : ''}
+        </span>
+      ))}
     </motion.div>
   )
 }

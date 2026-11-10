@@ -11,7 +11,7 @@ export const interests = [
     name: 'Three-piece wheels',
     label: 'BUILT IN LAYERS',
     detail:
-      'I build and source period-correct three-piece wheels for the classic BMW community. On the side, I enjoy fusing passion and profit.',
+      'I build and source period-correct three-piece wheels to sell within the classic BMW community. On the side, I enjoy fusing passion and profit.',
     alt: 'Exploded three-piece BBS-style wheel with a gold mesh center, polished barrel, and separate outer lip.',
   },
   {

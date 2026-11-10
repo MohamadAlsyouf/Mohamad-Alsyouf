@@ -483,6 +483,122 @@ try {
       x: 10,
       y: 10,
     })
+    for (const [kind, phrase] of [
+      ['e30', 'from the ground up'],
+      ['wheel', 'passion and profit'],
+      ['pi', 'embedded software'],
+      ['engine', 'individual parts'],
+      ['fishing', 'Marquette High School Fishing Club'],
+      ['sword', 'World of Warcraft and Aion 2'],
+      ['phone', 'App Store review'],
+    ]) {
+      const point = await evaluate(
+        `(async () => {const button=document.querySelector('.interest-${kind}');button.scrollIntoView({block:'center',behavior:'instant'});await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));const r=button.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()`,
+      )
+      await cdp.send('Input.dispatchMouseEvent', {
+        type: 'mouseMoved',
+        ...point,
+      })
+      try {
+        await waitFor(
+          `document.querySelector('.interest-story')?.dataset.interest === '${kind}'`,
+          `${kind} hover story`,
+        )
+      } catch (error) {
+        const detail = await evaluate(
+          `({active:document.querySelector('.interest-story')?.dataset.interest,hit:document.elementFromPoint(${point.x},${point.y})?.outerHTML.slice(0,400),hovered:[...document.querySelectorAll('.interest-object:hover')].map(el=>el.className)})`,
+        )
+        await screenshot('interest-hover-failure', { top: false })
+        throw new Error(`${error.message} ${JSON.stringify(detail)}`)
+      }
+      assert(
+        await evaluate(
+          `document.querySelector('.interest-story').textContent.includes(${JSON.stringify(phrase)})`,
+        ),
+        `${kind} hover reveals its personal connection`,
+      )
+      if (kind === 'fishing')
+        await screenshot('desktop-interest-story', { top: false })
+      if (kind === 'phone') {
+        const card = await evaluate(
+          `(() => {const r=document.querySelector('.interest-story').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()`,
+        )
+        await cdp.send('Input.dispatchMouseEvent', {
+          type: 'mouseMoved',
+          ...card,
+        })
+        await delay(200)
+        assert(
+          await evaluate(
+            `document.querySelector('.interest-story')?.dataset.interest === 'phone'`,
+          ),
+          'Story remains open when the pointer moves onto its content',
+        )
+        assert(
+          await evaluate(
+            `document.querySelector('.interest-story-link')?.href === 'https://arkan-app.com/'`,
+          ),
+          'Mobile app story links to Arkan',
+        )
+      }
+      await pressEscape()
+      await waitFor(
+        `!document.querySelector('.interest-story')`,
+        'Escape to dismiss the story',
+      )
+      await cdp.send('Input.dispatchMouseEvent', {
+        type: 'mouseMoved',
+        x: 10,
+        y: 10,
+      })
+    }
+    await evaluate(`document.querySelector('.interest-phone').focus()`)
+    await waitFor(
+      `document.querySelector('.interest-story')?.dataset.interest === 'phone'`,
+      'keyboard focus to reveal a story',
+    )
+    for (let step = 0; step < 2; step++) {
+      await cdp.send('Input.dispatchKeyEvent', {
+        type: 'keyDown',
+        key: 'Tab',
+        code: 'Tab',
+        windowsVirtualKeyCode: 9,
+      })
+      await cdp.send('Input.dispatchKeyEvent', {
+        type: 'keyUp',
+        key: 'Tab',
+        code: 'Tab',
+        windowsVirtualKeyCode: 9,
+      })
+    }
+    assert(
+      await evaluate(`document.activeElement.matches('.interest-story-link')`),
+      'Keyboard navigation reaches the Arkan link',
+    )
+    await pressEscape()
+    assert(
+      await evaluate(
+        `!document.querySelector('.interest-story') && document.activeElement.matches('.interest-phone')`,
+      ),
+      'Escape closes the story and returns keyboard focus without reopening it',
+    )
+    await evaluate(`document.activeElement.blur()`)
+    await evaluate(`document.querySelector('.interest-phone').click()`)
+    await waitFor(
+      `document.querySelector('.interest-story')`,
+      'story before scrolling away',
+    )
+    await evaluate(
+      `document.getElementById('contact').scrollIntoView({block:'start',behavior:'instant'})`,
+    )
+    await waitFor(
+      `!document.querySelector('.interest-story')`,
+      'story to dismiss when the hero leaves the viewport',
+    )
+    assert(
+      await evaluate(`!document.querySelector('.interest-story')`),
+      'Personal story closes when its hero scrolls out of view',
+    )
     await sectionScreenshots()
     await checkLayout('Desktop dark')
     await evaluate(
@@ -718,6 +834,46 @@ try {
       `document.querySelector('.interest-showcase').scrollIntoView({block:'center',behavior:'instant'})`,
     )
     await screenshot('mobile-interests', { top: false })
+    await cdp.send('Emulation.setTouchEmulationEnabled', {
+      enabled: true,
+      maxTouchPoints: 1,
+    })
+    const fishingPoint = await evaluate(
+      `(async () => {const button=document.querySelector('.interest-fishing');button.scrollIntoView({block:'center',behavior:'instant'});await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));const r=button.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()`,
+    )
+    await cdp.send('Input.dispatchTouchEvent', {
+      type: 'touchStart',
+      touchPoints: [fishingPoint],
+    })
+    await cdp.send('Input.dispatchTouchEvent', {
+      type: 'touchEnd',
+      touchPoints: [],
+    })
+    await waitFor(
+      `document.querySelector('.interest-story')?.dataset.interest === 'fishing'`,
+      'tap to reveal the fishing story',
+    )
+    assert(
+      await evaluate(
+        `document.querySelector('.interest-story-fact')?.textContent.includes('St. Louis, Missouri')`,
+      ),
+      'Touch reveals the fishing-club story',
+    )
+    await checkLayout('Mobile interest story')
+    await screenshot('mobile-interest-story', { top: false })
+    await cdp.send('Input.dispatchTouchEvent', {
+      type: 'touchStart',
+      touchPoints: [{ x: 8, y: 100 }],
+    })
+    await cdp.send('Input.dispatchTouchEvent', {
+      type: 'touchEnd',
+      touchPoints: [],
+    })
+    await waitFor(
+      `!document.querySelector('.interest-story')`,
+      'outside tap to dismiss the story',
+    )
+    await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: false })
     await evaluate(`window.scrollTo({top:0,behavior:'instant'})`)
     await clickButton('Open menu')
     assert(
