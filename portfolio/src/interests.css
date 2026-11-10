@@ -31,7 +31,7 @@
 .interest-stage {
   position: relative;
   overflow: clip;
-  aspect-ratio: 1 / 1.04;
+  aspect-ratio: 1 / 1.12;
   perspective: 1100px;
   isolation: isolate;
 }
@@ -113,50 +113,57 @@
   filter: drop-shadow(0 18px 18px #00000040) drop-shadow(0 0 10px #58ff9324);
 }
 .interest-wheel {
-  width: 50%;
+  width: 38%;
   left: 1%;
-  top: 9%;
+  top: 3%;
   rotate: -12deg;
   z-index: 3;
   translate: 0 0 28px;
 }
 .interest-pi {
-  width: 37%;
-  left: 46%;
-  top: 3%;
+  width: 31%;
+  left: 43%;
+  top: 1%;
   rotate: 13deg;
   z-index: 2;
   translate: 0 0 12px;
 }
 .interest-engine {
-  width: 36%;
-  left: 66%;
-  top: 27%;
+  width: 29%;
+  left: 71%;
+  top: 19%;
   rotate: 12deg;
   z-index: 2;
 }
 .interest-sword {
-  width: 49%;
-  left: 29%;
-  top: 29%;
+  width: 39%;
+  left: 31%;
+  top: 20%;
   rotate: 21deg;
   z-index: 1;
 }
 .interest-fishing {
-  width: 53%;
+  width: 43%;
   left: 0;
-  top: 49%;
+  top: 25%;
   rotate: -5deg;
   z-index: 4;
   translate: 0 0 38px;
 }
 .interest-phone {
-  width: 36%;
-  left: 57%;
-  top: 64%;
+  width: 29%;
+  left: 74%;
+  top: 45%;
   rotate: -13deg;
   z-index: 5;
   translate: 0 0 22px;
+}
+.interest-e30 {
+  width: 78%;
+  left: 6%;
+  bottom: -10%;
+  z-index: 6;
+  translate: 0 0 24px;
 }
 .showcase-bottomline {
   min-height: 66px;
@@ -241,7 +248,7 @@
     gap: 8px;
   }
   .interest-stage {
-    aspect-ratio: 1 / 1.13;
+    aspect-ratio: 1 / 1.18;
   }
   .constellation-depth {
     inset-inline: 5%;
@@ -249,17 +256,14 @@
   .interest-object {
     translate: none;
   }
-  .interest-engine {
-    left: 65%;
-    width: 37%;
+  .interest-e30 {
+    width: 90%;
+    left: 0;
+    bottom: -6%;
   }
   .interest-phone {
-    top: 63%;
-    width: 39%;
-  }
-  .interest-fishing {
-    top: 52%;
-    width: 57%;
+    left: 80%;
+    width: 27%;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,12 @@
 export const interests = [
   {
+    kind: 'e30',
+    name: '1988 BMW 325i Convertible',
+    label: 'TOP DOWN. TIMELESS.',
+    detail: 'Dark blue paint, black leather, and classic chrome bumpers.',
+    alt: 'Dark navy-blue 1988 BMW E30 325i convertible with the top down, black leather interior, chrome bumpers, and silver basketweave wheels.',
+  },
+  {
     kind: 'wheel',
     name: 'Three-piece wheels',
     label: 'BUILT IN LAYERS',

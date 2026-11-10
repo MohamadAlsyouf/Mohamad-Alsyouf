@@ -60,9 +60,9 @@ The app uses React 18, Vite, and Framer Motion. All artwork and fonts are served
 
 ## Personal-interest showcase
 
-The hero features six transparent, photorealistic renders: an exploded three-piece BBS-style wheel, Raspberry Pi 5, overhead BMW M50 with visible BMW lettering, fishing rod and largemouth bass, an Aion 2-inspired fantasy sword, and an iPhone representing mobile app development. The artwork stays in the hero, whose down arrow leads into the photo/about section. Mouse movement adds subtle perspective; the objects float independently. All six remain visible when motion is disabled, with no WebGL dependency.
+The hero features seven transparent, photorealistic renders: a dark-blue 1988 BMW E30 325i convertible with black leather and chrome bumpers, an exploded three-piece BBS-style wheel, Raspberry Pi 5, overhead BMW M50 with visible BMW lettering, fishing rod and largemouth bass, an Aion 2-inspired fantasy sword, and an iPhone representing mobile app development. The artwork stays in the hero, whose down arrow leads into the photo/about section. Mouse movement adds subtle perspective; the objects float independently. All seven remain visible when motion is disabled, with no WebGL dependency.
 
-The artwork was created with the built-in image generation tool. Original transparent PNGs are preserved in `portfolio/artwork/interests/` outside the deployed public directory. Alpha WebP variants at 480px and 960px live in `portfolio/public/interests/`. The browser selects an appropriate size; the six 480px files total about 270 KB. These are illustrative renders, not official product photographs or exact engineering models. [References](portfolio/docs/visual-references.md) and the complete [generation prompt set](portfolio/docs/interest-asset-prompts.json) document the assets.
+The artwork was created with the built-in image generation tool. Original transparent PNGs are preserved in `portfolio/artwork/interests/` outside the deployed public directory. Alpha WebP variants at 480px and 960px live in `portfolio/public/interests/`. The browser selects an appropriate size; the smaller variants keep the collection lightweight. These are illustrative renders, not official product photographs or exact engineering models. [References](portfolio/docs/visual-references.md) and the complete [generation prompt set](portfolio/docs/interest-asset-prompts.json) document the assets.
 
 To re-encode responsive WebP files after replacing the PNG originals, run `npm run assets:interests` from `portfolio`. It uses the installed browser's image encoder, preserves transparency, and does not need a preview server or external credentials. Rebuild afterward.
 
@@ -82,7 +82,7 @@ To regenerate the social PNG and the legacy ICO favicon with the preview server 
 
 ## Theme, motion, and accessibility
 
-The Matrix-inspired palette uses phosphor green (`#58FF93`) over near-black, with deep green accents on the light theme. Body text is 16–18px, and supporting labels are at least 14px. The hero uses realistic artwork; the background uses quiet SVG line studies of the same six interests. Decorative background graphics are hidden from assistive technology, while hero images have descriptive alternatives.
+The Matrix-inspired palette uses phosphor green (`#58FF93`) over near-black, with deep green accents on the light theme. Body text is 16–18px, and supporting labels are at least 14px. The hero uses realistic artwork; the background uses quiet SVG line studies of hardware, wheels, fishing, and gaming. Decorative background graphics are hidden from assistive technology, while hero images have descriptive alternatives.
 
 Dark mode is the default. The selected theme is stored under `portfolio-theme` and applied before React renders to avoid a flash of the wrong theme. Browsers with View Transitions animate the change from the toggle position; other browsers use the regular theme transition.
 

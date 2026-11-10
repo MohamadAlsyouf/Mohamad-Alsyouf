@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs'
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { interests } from '../src/data/interests.js'
 
 // Dependency-free browser smoke test. Run against an existing Vite preview:
 // npm run preview -- --host 127.0.0.1
@@ -411,7 +412,7 @@ try {
   if (encodeInterests) {
     // Packaging only: preserve the generated artwork/alpha, encode responsive WebP.
     // Source files are deliberately outside public/ so originals are not deployed.
-    for (const kind of ['wheel', 'pi', 'engine', 'fishing', 'sword', 'phone']) {
+    for (const { kind } of interests) {
       const source = await readFile(
         path.join(projectDirectory, 'artwork', 'interests', `${kind}.png`),
       )
@@ -424,7 +425,9 @@ try {
           canvas.width = canvas.height = ${size};
           const context = canvas.getContext('2d');
           context.imageSmoothingQuality = 'high';
-          context.drawImage(img, 0, 0, ${size}, ${size});
+          const fit = Math.min(${size} / img.naturalWidth, ${size} / img.naturalHeight);
+          const width = img.naturalWidth * fit, height = img.naturalHeight * fit;
+          context.drawImage(img, (${size} - width) / 2, (${size} - height) / 2, width, height);
           const pixels = context.getImageData(0, 0, ${size}, ${size}).data;
           let transparent = 0;
           for (let i = 3; i < pixels.length; i += 4) if (pixels[i] === 0) transparent++;
@@ -776,9 +779,9 @@ try {
       `Array.from(document.querySelectorAll('.interest-object')).map(object => ({label:object.querySelector('img').alt,loaded:object.querySelector('img').complete && object.querySelector('img').naturalWidth > 0}))`,
     )
     assert(
-      heroInterests.length === 6 &&
+      heroInterests.length === interests.length &&
         heroInterests.every((item) => item.label && item.loaded),
-      'Six hero objects load with descriptive alternatives',
+      'All seven hero objects load with descriptive alternatives',
       heroInterests,
     )
     assert(

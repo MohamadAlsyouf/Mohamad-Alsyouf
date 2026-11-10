@@ -46,7 +46,7 @@ export default function InterestShowcase() {
         <span>
           <span className="status-dot" /> BEYOND THE CODE
         </span>
-        <span>06 / EXPLORATIONS</span>
+        <span>{String(interests.length).padStart(2, '0')} / EXPLORATIONS</span>
       </div>
       <div
         className="interest-stage"
@@ -77,7 +77,11 @@ export default function InterestShowcase() {
                 <img
                   src={interest.image}
                   srcSet={`${interest.imageSmall} 480w, ${interest.image} 960w`}
-                  sizes="(max-width: 600px) 220px, 320px"
+                  sizes={
+                    interest.kind === 'e30'
+                      ? '(max-width: 600px) 85vw, 480px'
+                      : '(max-width: 600px) 220px, 320px'
+                  }
                   width="960"
                   height="960"
                   alt={interest.alt}
