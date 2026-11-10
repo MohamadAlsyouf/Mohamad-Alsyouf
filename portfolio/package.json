@@ -8,16 +8,13 @@
     "build": "vite build",
     "preview": "vite preview",
     "test:browser": "node scripts/browser-check.mjs",
-    "test:car": "node scripts/car-check.mjs",
-    "test:interior": "node scripts/check-interior.mjs",
+    "assets:interests": "node scripts/browser-check.mjs --encode-interests",
     "format": "prettier --write src scripts index.html package.json vite.config.js"
   },
   "dependencies": {
-    "@react-three/fiber": "^8.15.0",
     "framer-motion": "^10.16.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "three": "^0.158.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

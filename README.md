@@ -4,7 +4,7 @@ Personal portfolio for Mohamad Alsyouf, senior full stack engineer and AI-native
 
 **Website:** https://mohamadalsyouf.com/
 
-The redesign pairs near-black and phosphor green with oversized typography, a rotating navy-blue E30 convertible, interactive project stories, and a complete light theme. Floating technical diagrams and a curiosity workbench connect software, hardware, cars, gaming, and fishing. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
+The redesign pairs near-black and phosphor green with oversized typography, a floating collection of realistic personal-interest visuals, interactive project stories, and a complete light theme. Floating technical diagrams and a photographic curiosity workbench connect software, hardware, automotive engineering, gaming, and bass fishing. The hiring story highlights enterprise delivery, cross-department collaboration, Scrum Master responsibilities, and AI-assisted engineering, grounded in the supplied October 2026 résumé.
 
 ## Run locally
 
@@ -48,7 +48,7 @@ The suite uses an installed Chrome or Edge browser and Node's built-in browser p
 | `portfolio/src/data/content.js`          | Personal details, résumé-backed metrics, project stories, experience, capabilities, workflow, and stack |
 | `portfolio/src/components/sections/`     | Hero, selected work, engineering approach, capabilities, and contact                                    |
 | `portfolio/src/components/layout/`       | Responsive navigation and global controls                                                               |
-| `portfolio/src/components/three/`        | Procedural React Three Fiber scenes and canvas handling                                                 |
+| `portfolio/src/data/interests.js`        | Shared artwork, accessible descriptions, and captions for the hero and workbench                        |
 | `portfolio/src/components/ui/`           | Shared motion, icon, and interaction components                                                         |
 | `portfolio/src/context/ThemeContext.jsx` | Theme persistence, view transitions, and motion preferences                                             |
 | `portfolio/src/theme/theme.js`           | Safe preference storage helpers                                                                         |
@@ -56,23 +56,17 @@ The suite uses an installed Chrome or Edge browser and Node's built-in browser p
 | `portfolio/index.html`                   | Font loading, initial theme, SEO metadata, and Person structured data                                   |
 | `portfolio/public/`                      | Downloadable résumé, favicon, social preview, robots, and sitemap                                       |
 
-The app uses React 18, Vite, Three.js, React Three Fiber, and Framer Motion. The hero loads its optimized 3D model from this site's own static assets; it does not make third-party runtime requests.
+The app uses React 18, Vite, and Framer Motion. All artwork and fonts are served locally; the page makes no third-party runtime image requests.
 
-## E30 hero
+## Personal-interest showcase
 
-The hero combines a licensed, textured E30 M3 exterior with an original four-seat black-leather cabin, dashboard, steering wheel, and controls. The roof, rear and side windows, pillars, and wing are removed from the source coupe. The result is a 1989-inspired convertible adaptation rather than a factory-exact digital twin.
+The hero features six transparent, photorealistic renders: an exploded three-piece BBS-style wheel, Raspberry Pi 5, overhead BMW M50 with visible BMW lettering, fishing rod and largemouth bass, an Aion 2-inspired fantasy sword, and an iPhone representing mobile app development. Each object links to its larger workbench study. Mouse movement adds subtle perspective; the objects float independently. All six remain visible when motion is disabled, with no WebGL dependency.
 
-The navy metallic finish is inspired by **Macao Blue metallic (Macaoblau, BMW code 250)**, referenced against [BMW's E30 M3 Convertible photographs](https://www.bmw-m.com/en/topics/magazine-article-pool/classic-bmw-m-paint-finishes.html). The shared palette in `e30Paint.js` keeps the body, painted cabin trim, rear cover, and fallback illustration consistent. Its screen colour is an artistic approximation under the site's studio lighting.
+The artwork was created with the built-in image generation tool. Original transparent PNGs are preserved in `portfolio/artwork/interests/` outside the deployed public directory. Alpha WebP variants at 480px and 960px live in `portfolio/public/interests/`. The browser selects an appropriate size; the six 480px files total about 270 KB. These are illustrative renders, not official product photographs or exact engineering models. [References](portfolio/docs/visual-references.md) and the complete [generation prompt set](portfolio/docs/interest-asset-prompts.json) document the assets.
 
-The exterior is adapted from **[FREE] BMW M3 E30** by **Martin Trafas**, licensed under **CC BY 4.0**. The hero displays the required credit; full source and license details are in `portfolio/public/models/LICENSE-E30.txt`. Preserve both when reusing the model. The self-contained `bmw-e30.glb` is approximately 3.6 MB, with compressed embedded textures and meshopt geometry. Attribution metadata remains embedded.
+To re-encode responsive WebP files after replacing the PNG originals, run `npm run assets:interests` from `portfolio`. It uses the installed browser's image encoder, preserves transparency, and does not need a preview server or external credentials. Rebuild afterward.
 
-`HeroScene.jsx` provides a slow, frame-rate-independent turntable, studio reflections, responsive camera framing, and a static illustrated car fallback. Rendering pauses offscreen, when the tab is hidden, and when motion is disabled. `ImportedE30.jsx` preserves texture coordinates and smooth normals during the convertible conversion. `E30Interior.jsx` supplies the original cabin.
-
-The black cabin is shaped from [BMW's E30 M3 Convertible reference](https://www.bmw-m.com/en/topics/magazine-article-pool/bmw-m3-e30-convertible.html) and photographs of original E30 sport upholstery. Continuous seat surfaces, broad horizontal leather panels, separate squat headrests, and a sculpted rear bench replace the earlier block construction. The low dashboard, driver-facing controls, and M Tech I steering wheel follow the period layout. Subtle grain, satin vinyl, and roughness variation distinguish leather, trim, and carpet. These are authored reference-based meshes, not a scan of a factory interior.
-
-`e30/seatGeometry.js` and `e30/cockpitGeometry.js` build the cabin meshes; `e30/interiorMaterials.js` supplies the surface materials and instrument textures. `npm run test:interior` verifies matching vertex, normal, and UV counts, finite data, valid indices, material-batch merging, and body clearance. This guards against the missing cap normals that previously made closed headrest surfaces look hollow.
-
-With the production preview running, `npm run test:car` verifies actual car loading, changing rotation frames, pixel-identical reduced-motion frames, both themes, mobile layout, asset loading, and WebGL failure fallback. Screenshots and diagnostics go to the ignored `portfolio/.qa/` directory.
+`InterestShowcase.jsx` handles the hero composition; `Workbench.jsx` renders the shared interest collection. `useSceneActivity.js` pauses CSS animation offscreen and in hidden tabs. ThemeContext handles OS and manual reduced-motion preferences. Browser checks cover image loading, both themes, responsive layouts, pointer depth, offscreen pausing, motion controls, accessible links, and existing portfolio interactions. The superseded E30 scene, model, tests, and Three.js dependencies have been removed.
 
 Space Grotesk, DM Sans, and IBM Plex Mono are self-hosted in `portfolio/public/fonts/`, so typography does not depend on a third-party font CDN. The fonts come from the official Google Fonts repository; each family's SIL Open Font License is included beside its font file. Preserve those licenses when updating or redistributing the assets.
 
@@ -88,7 +82,7 @@ To regenerate the social PNG and the legacy ICO favicon with the preview server 
 
 ## Theme, motion, and accessibility
 
-The Matrix-inspired palette uses phosphor green (`#58FF93`) over near-black, with deep green accents on the light theme. Body text is 16–18px, and supporting labels are at least 14px. The curiosity workbench and decorative background contain original SVG studies of a Raspberry Pi 5, Camera Module 3, M50B25 engine, compact drone, BBS RS wheel assembly, Lava Spine sword, and fishing setup with rainbow trout. [Visual references and implementation notes](portfolio/docs/visual-references.md) record the research behind those illustrations.
+The Matrix-inspired palette uses phosphor green (`#58FF93`) over near-black, with deep green accents on the light theme. Body text is 16–18px, and supporting labels are at least 14px. The workbench uses realistic artwork with generous captions; the background uses quiet SVG line studies of the same six interests. Decorative background graphics are hidden from assistive technology, while gallery images have descriptive alternatives.
 
 Dark mode is the default. The selected theme is stored under `portfolio-theme` and applied before React renders to avoid a flash of the wrong theme. Browsers with View Transitions animate the change from the toggle position; other browsers use the regular theme transition.
 

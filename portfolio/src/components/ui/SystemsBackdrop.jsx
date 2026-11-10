@@ -69,15 +69,13 @@ export default function SystemsBackdrop() {
     <div className="systems-backdrop" aria-hidden="true">
       <div className="systems-grid" />
       <div className="systems-diagrams" ref={diagrams}>
-        {['pi', 'camera', 'engine', 'sword', 'drone', 'wheel', 'fishing'].map(
-          (kind) => (
-            <EngineeringDiagram
-              key={kind}
-              kind={kind}
-              className={`background-${kind}`}
-            />
-          ),
-        )}
+        {['pi', 'engine', 'sword', 'phone', 'wheel', 'fishing'].map((kind) => (
+          <EngineeringDiagram
+            key={kind}
+            kind={kind}
+            className={`background-${kind}`}
+          />
+        ))}
       </div>
       <div className="code-stream code-stream-one">
         01001001

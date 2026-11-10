@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url'
 // npm run preview -- --host 127.0.0.1
 // node scripts/browser-check.mjs [http://127.0.0.1:4173]
 // Opt-in source asset generation: node scripts/browser-check.mjs --render-assets
+// Responsive interest asset encoding: node scripts/browser-check.mjs --encode-interests
 const projectDirectory = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
@@ -22,12 +23,15 @@ const baseUrl =
   argumentsList.find((argument) => !argument.startsWith('--')) ||
   'http://127.0.0.1:4173'
 const renderAssetsRequested = argumentsList.includes('--render-assets')
+const encodeInterests = argumentsList.includes('--encode-interests')
 const layoutOnly = argumentsList.includes('--layout-only')
-const reportFilename = renderAssetsRequested
-  ? 'assets-report.json'
-  : layoutOnly
-    ? 'layout-report.json'
-    : 'browser-report.json'
+const reportFilename = encodeInterests
+  ? 'interest-assets-report.json'
+  : renderAssetsRequested
+    ? 'assets-report.json'
+    : layoutOnly
+      ? 'layout-report.json'
+      : 'browser-report.json'
 const origin = new URL(baseUrl).origin
 const browserPath = [
   process.env.CHROME_PATH,
@@ -236,7 +240,7 @@ async function checkLayout(label) {
     viewport: document.documentElement.clientWidth,
     page: document.documentElement.scrollWidth,
     offenders: Array.from(document.querySelectorAll('main *')).filter(element => {
-      if (element.closest('[aria-hidden="true"], .project-visual, .art-grid, .car-scene')) return false;
+      if (element.closest('[aria-hidden="true"], .project-visual')) return false;
       const bounds = element.getBoundingClientRect();
       return bounds.width && (bounds.left < -1 || bounds.right > document.documentElement.clientWidth + 1);
     }).slice(0,12).map(element => ({tag:element.tagName,class:element.className?.baseVal ?? element.className,width:Math.round(element.getBoundingClientRect().width),text:element.textContent.trim().slice(0,70)})),
@@ -282,8 +286,11 @@ async function setTheme(theme) {
 
 try {
   await mkdir(profileDirectory, { recursive: true })
-  const response = await fetch(baseUrl)
-  if (!response.ok) throw new Error(`Preview returned HTTP ${response.status}.`)
+  if (!encodeInterests) {
+    const response = await fetch(baseUrl)
+    if (!response.ok)
+      throw new Error(`Preview returned HTTP ${response.status}.`)
+  }
 
   browser = spawn(
     browserPath,
@@ -401,7 +408,51 @@ try {
       await checkLayout(`Layout ${width}px`)
     }
   }
-  if (!renderAssetsRequested && !layoutOnly) {
+  if (encodeInterests) {
+    // Packaging only: preserve the generated artwork/alpha, encode responsive WebP.
+    // Source files are deliberately outside public/ so originals are not deployed.
+    for (const kind of ['wheel', 'pi', 'engine', 'fishing', 'sword', 'phone']) {
+      const source = await readFile(
+        path.join(projectDirectory, 'artwork', 'interests', `${kind}.png`),
+      )
+      for (const size of [480, 960]) {
+        const result = await evaluate(`(async () => {
+          const img = new Image();
+          img.src = 'data:image/png;base64,${source.toString('base64')}';
+          await img.decode();
+          const canvas = document.createElement('canvas');
+          canvas.width = canvas.height = ${size};
+          const context = canvas.getContext('2d');
+          context.imageSmoothingQuality = 'high';
+          context.drawImage(img, 0, 0, ${size}, ${size});
+          const pixels = context.getImageData(0, 0, ${size}, ${size}).data;
+          let transparent = 0;
+          for (let i = 3; i < pixels.length; i += 4) if (pixels[i] === 0) transparent++;
+          return {url: canvas.toDataURL('image/webp', .88), transparent};
+        })()`)
+        assert(
+          result.transparent > size * size * 0.1,
+          `${kind} ${size}px retains transparent alpha`,
+        )
+        assert(
+          result.url.startsWith('data:image/webp;base64,'),
+          `${kind} ${size}px is WebP`,
+        )
+        const output = Buffer.from(result.url.split(',')[1], 'base64')
+        await writeFile(
+          path.join(
+            projectDirectory,
+            'public',
+            'interests',
+            `${kind}${size === 480 ? '-480' : ''}.webp`,
+          ),
+          output,
+        )
+        console.log(`${kind} ${size}px: ${Math.round(output.length / 1024)} KB`)
+      }
+    }
+  }
+  if (!renderAssetsRequested && !layoutOnly && !encodeInterests) {
     await navigate()
     await cdp.send('Page.bringToFront')
     await waitFor(
@@ -410,15 +461,34 @@ try {
     )
     await setTheme('dark')
     await screenshot('desktop-dark')
+    const stageBounds = await evaluate(
+      `(() => {const r = document.querySelector('.interest-stage').getBoundingClientRect(); return {x:r.x + r.width * .75, y:r.y + r.height * .25}})()`,
+    )
+    await cdp.send('Input.dispatchMouseEvent', {
+      type: 'mouseMoved',
+      ...stageBounds,
+    })
+    await delay(500)
+    assert(
+      await evaluate(
+        `getComputedStyle(document.querySelector('.constellation-depth')).transform.startsWith('matrix3d')`,
+      ),
+      'Hero responds to the pointer with perspective depth',
+    )
+    await cdp.send('Input.dispatchMouseEvent', {
+      type: 'mouseMoved',
+      x: 10,
+      y: 10,
+    })
     await sectionScreenshots()
     await checkLayout('Desktop dark')
     const studies = await evaluate(
-      `Array.from(document.querySelectorAll('.bench-study')).map(figure => ({name:figure.querySelector('h3')?.textContent,diagram:Boolean(figure.querySelector('svg[aria-hidden="true"]'))}))`,
+      `Array.from(document.querySelectorAll('.bench-study')).map(figure => {const img = figure.querySelector('img'); return {name:figure.querySelector('h3')?.textContent,loaded:img?.complete && img.naturalWidth > 0,alt:img?.alt}})`,
     )
     assert(
-      studies.length === 7 &&
-        studies.every((study) => study.name && study.diagram),
-      'Seven technical studies have readable captions and decorative diagrams',
+      studies.length === 6 &&
+        studies.every((study) => study.name && study.loaded && study.alt),
+      'Six realistic interest studies load with captions and descriptive alternatives',
       studies,
     )
     await evaluate(
@@ -430,9 +500,15 @@ try {
     )
     assert(
       await evaluate(
-        `getComputedStyle(document.querySelector('.bench-drawing > svg')).animationPlayState === 'running'`,
+        `getComputedStyle(document.querySelector('.bench-drawing > img')).animationPlayState === 'running'`,
       ),
       'Workbench floats while visible',
+    )
+    assert(
+      await evaluate(
+        `document.querySelector('.interest-showcase').dataset.active === 'false' && getComputedStyle(document.querySelector('.interest-float')).animationPlayState === 'paused'`,
+      ),
+      'Hero floating motion pauses offscreen',
     )
     await screenshot('desktop-workbench-detail', { top: false })
     await evaluate(`window.scrollTo({top:0,behavior:'instant'})`)
@@ -442,9 +518,15 @@ try {
     )
     assert(
       await evaluate(
-        `getComputedStyle(document.querySelector('.bench-drawing > svg')).animationPlayState === 'paused'`,
+        `getComputedStyle(document.querySelector('.bench-drawing > img')).animationPlayState === 'paused'`,
       ),
       'Workbench pauses offscreen',
+    )
+    assert(
+      await evaluate(
+        `document.querySelector('.interest-showcase').dataset.active === 'true' && getComputedStyle(document.querySelector('.interest-float')).animationPlayState === 'running'`,
+      ),
+      'Hero floating motion resumes in view',
     )
 
     const initial = await evaluate(
@@ -651,6 +733,10 @@ try {
       `document.getElementById('workbench').scrollIntoView({block:'start',behavior:'instant'})`,
     )
     await screenshot('mobile-workbench', { top: false })
+    await evaluate(
+      `document.querySelector('.interest-showcase').scrollIntoView({block:'center',behavior:'instant'})`,
+    )
+    await screenshot('mobile-interests', { top: false })
     await evaluate(`window.scrollTo({top:0,behavior:'instant'})`)
     await clickButton('Open menu')
     assert(
@@ -708,22 +794,20 @@ try {
       mobile: true,
     })
 
-    const hadWebGL = await evaluate(`(() => {
-      const canvas=document.querySelector('.hero-art canvas');
-      if(!canvas)return false;
-      canvas.dispatchEvent(new Event('webglcontextlost',{cancelable:true}));
-      return true;
-    })()`)
-    assert(hadWebGL, 'Hero uses a real WebGL canvas')
-    await waitFor(
-      `document.querySelector('.hero-art .scene-fallback')`,
-      'WebGL context-loss fallback',
+    const heroInterests = await evaluate(
+      `Array.from(document.querySelectorAll('.interest-object')).map(link => ({label:link.getAttribute('aria-label'),target:!!document.querySelector(link.getAttribute('href')),loaded:link.querySelector('img').complete && link.querySelector('img').naturalWidth > 0}))`,
     )
     assert(
-      await evaluate(
-        `Boolean(document.querySelector('h1')?.textContent.trim() && document.querySelector('.hero-art .scene-fallback'))`,
+      heroInterests.length === 6 &&
+        heroInterests.every((item) => item.label && item.target && item.loaded),
+      'Six hero objects load and link to their matching interest studies',
+      heroInterests,
+    )
+    assert(
+      ![...networkRequests.values()].some((url) =>
+        /bmw-e30\.glb|\/three-/.test(url),
       ),
-      'WebGL context loss preserves the page and displays a fallback',
+      'Interest hero does not request the old car model or Three.js bundle',
     )
 
     await cdp.send('Emulation.setEmulatedMedia', {

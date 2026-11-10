@@ -232,12 +232,12 @@ function Wheel() {
 function Sword() {
   return (
     <g transform="translate(42 -5) rotate(27 120 138)">
-      <path d="m122 19 22 50-12-5 20 32-14-4 17 35-16-4 9 29-21 27-10-12-12 12-22-27 9-29-15 4 17-35-14 4 20-32-12 5z" />
+      <path d="m122 12 23 37-7 109-16 18-16-18-7-109z" />
       <path
-        d="m122 36 5 39-8 19 10 19-7 39m-13-72 8 14-13 16 9 18-11 20m32-53-8 13 14 25-9 20"
+        d="M122 28v130m-17-107 17 15 17-15m-32 25 15 13 15-13m-28 26 13 12 13-12m-25 24 12 12 12-12"
         className="diagram-fine"
       />
-      <path d="m110 161-23-7-15-23-5 36 39 18m27-24 23-7 15-23 5 36-39 18" />
+      <path d="M110 174q-32-34-54-38l10 20-16-4 15 17-12-1q19 25 53 17m28-11q32-34 54-38l-10 20 16-4-15 17 12-1q-19 25-53 17" />
       <path d="m110 178 12-9 12 9-5 13h-14zm5 13-2 47 10 7 9-7-3-47M112 202l19 7m-19 3 19 7m-19 3 19 7m-20 9-9 10 21 13 19-13-11-10" />
       <path d="m122 176 5 6-5 6-5-6z" className="diagram-wash" />
       <path d="M51 20v236m-7-236h14m-14 236h14" className="diagram-guide" />
@@ -272,19 +272,41 @@ function Fishing() {
         />
       </g>
       <g transform="translate(94 178)">
-        <path d="M0 39Q42-7 133 18l27 15 39-19-8 30 5 21-40-20Q70 85 0 48l-11-5z" />
-        <path d="M63 13 85-5l23 19m12 44 16 16 9-24M32 25Q52 44 35 62m7-21 18 17-18-1m30 4 9 12 14-13M46 38q60-1 109 4" />
+        <path d="M0 31Q48-9 132 18l28 15 39-19-8 30 5 21-40-20Q68 91-8 58l20-14z" />
+        <path d="m60 13 3-18 8 10 4-13 7 12 5-12 7 15 8-9 7 16q18-13 28 5M120 58l16 16 9-24M32 21Q53 43 33 65m7-25 23 17-20 3m29 1 9 12 14-13M45 36q60-1 110 6l-7 7q-50-5-100-2z" />
         <circle cx="21" cy="34" r="4" />
-        <path d="M1 44h19m140-7 26-13m-26 16 28-5m-28 9 25 10" />
-        {sequence(26).map((i) => (
-          <circle
-            key={i}
-            cx={48 + ((i * 19) % 98)}
-            cy={25 + ((i * 11) % 25)}
-            r="1.3"
-          />
-        ))}
+        <path d="m0 31 26 11-14 2-20 14m168-21 26-13m-26 16 28-5m-28 9 25 10" />
       </g>
+    </g>
+  )
+}
+
+function Phone() {
+  return (
+    <g transform="rotate(-13 170 145)">
+      <rect x="109" y="15" width="122" height="260" rx="24" />
+      <rect x="115" y="21" width="110" height="248" rx="20" />
+      <rect
+        x="150"
+        y="28"
+        width="40"
+        height="11"
+        rx="6"
+        className="diagram-wash"
+      />
+      <path d="m155 65-9 8 9 8m30-16 9 8-9 8m-10-20-9 24M127 131l19-12 18 3 20-20 26-10" />
+      <rect x="126" y="97" width="88" height="52" rx="8" />
+      <rect x="126" y="162" width="39" height="40" rx="8" />
+      <rect x="175" y="162" width="39" height="40" rx="8" />
+      <rect
+        x="126"
+        y="219"
+        width="88"
+        height="23"
+        rx="8"
+        className="diagram-wash"
+      />
+      <path d="M152 258h36M105 65v25m0 10v18m130-41v35" />
     </g>
   )
 }
@@ -297,6 +319,7 @@ const illustrations = {
   wheel: Wheel,
   sword: Sword,
   fishing: Fishing,
+  phone: Phone,
 }
 
 export default function EngineeringDiagram({ kind, className = '' }) {
