@@ -6,6 +6,9 @@
   width: 100%;
   isolation: isolate;
 }
+.interest-showcase[data-expanded='true'] {
+  z-index: 3;
+}
 .interest-showcase .sr-only {
   position: absolute;
   width: 1px;
@@ -250,15 +253,8 @@
 .interest-story-heading {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
-}
-.interest-story-label {
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  color: var(--accent);
-  margin-bottom: 8px;
 }
 .interest-story h3 {
   font-size: 22px;
@@ -287,12 +283,6 @@
 .interest-story-fact {
   border-top: 1px solid var(--line);
   padding-top: 16px;
-}
-.interest-story-fact strong {
-  display: block;
-  margin-bottom: 4px;
-  font-weight: 500;
-  color: var(--text);
 }
 .interest-story-link {
   font-size: 16px;

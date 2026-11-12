@@ -144,15 +144,6 @@ main > section {
 .hero-location svg {
   margin-top: 4px;
 }
-.experience-row > div {
-  min-width: 0;
-}
-.experience-row {
-  flex-wrap: wrap;
-}
-.current-role {
-  align-self: flex-start;
-}
 .work-footnote {
   flex-wrap: wrap;
 }
@@ -162,18 +153,6 @@ main > section {
 }
 .work-footnote p svg {
   flex-shrink: 0;
-}
-.terminal-code {
-  padding: 24px 18px;
-}
-.code-line {
-  align-items: baseline;
-  min-height: 30px;
-}
-.code-line code {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  min-width: 0;
 }
 .terminal-bottom {
   height: auto;
@@ -229,9 +208,6 @@ main > section {
     border-left: 0;
     padding-left: 0;
   }
-  .experience {
-    grid-template-columns: 1fr;
-  }
 }
 @media (max-width: 760px) {
   .nav-contact {
@@ -278,12 +254,6 @@ main > section {
   }
   .capability h3 {
     font-size: 22px;
-  }
-  .experience-row {
-    gap: 12px;
-  }
-  .current-role {
-    margin-left: 0;
   }
   .portrait-caption {
     height: auto;

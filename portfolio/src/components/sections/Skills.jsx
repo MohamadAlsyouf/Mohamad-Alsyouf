@@ -46,79 +46,30 @@ function Workflow() {
     </div>
   )
 }
-function AITerminal() {
+function DevelopmentTools() {
   return (
     <div className="ai-terminal">
       <div className="terminal-top">
-        <span className="terminal-dots">
-          <i />
-          <i />
-          <i />
-        </span>
-        <span>the-way-i-work.ts</span>
+        <span>Development tools</span>
         <Icon name="code" size={14} />
       </div>
-      <div className="terminal-code">
-        <div className="code-line">
-          <span>01</span>
-          <code className="code-comment">
-            // More intention. Less busywork.
-          </code>
+      <dl className="development-tools">
+        <div>
+          <dt>AI-assisted coding</dt>
+          <dd>Cursor, Claude, Codex</dd>
         </div>
-        <div className="code-line">
-          <span>02</span>
-          <code>
-            <b>const</b> builder = {'{'}
-          </code>
+        <div>
+          <dt>Testing</dt>
+          <dd>Cypress, Postman</dd>
         </div>
-        <div className="code-line">
-          <span>03</span>
-          <code>
-            {' '}
-            mindset: <em>"systems first"</em>,
-          </code>
+        <div>
+          <dt>Project planning</dt>
+          <dd>JIRA, Agile sprints</dd>
         </div>
-        <div className="code-line">
-          <span>04</span>
-          <code>
-            {' '}
-            tools: [<em>"Cursor"</em>, <em>"Claude"</em>, <em>"Codex"</em>],
-          </code>
-        </div>
-        <div className="code-line">
-          <span>05</span>
-          <code>
-            {' '}
-            superpower: <em>"connecting the dots"</em>,
-          </code>
-        </div>
-        <div className="code-line">
-          <span>06</span>
-          <code>
-            {' '}
-            accountability: <em>"always human"</em>
-          </code>
-        </div>
-        <div className="code-line">
-          <span>07</span>
-          <code>{'}'};</code>
-        </div>
-        <div className="code-line">
-          <span>08</span>
-          <code> </code>
-        </div>
-        <div className="code-line">
-          <span>09</span>
-          <code>
-            builder.<strong>turnIntentIntoImpact</strong>();
-            <span className="terminal-cursor">▌</span>
-          </code>
-        </div>
-      </div>
+      </dl>
       <div className="terminal-bottom">
         <span className="status-dot" />
-        <span>AI-ASSISTED. HUMAN-OWNED.</span>
-        <Icon name="spark" size={14} />
+        <span>CODE REVIEW & TESTING</span>
       </div>
     </div>
   )
@@ -133,24 +84,20 @@ export default function Skills() {
         <SectionLabel number="03">HOW I WORK</SectionLabel>
         <div className="section-heading-row">
           <h2>
-            Human at the core.
+            Development
             <br />
-            <span className="muted-heading">AI in the loop.</span>
+            <span className="muted-heading">process & tools.</span>
           </h2>
-          <p>
-            Better tools. Sharper thinking.
-            <br />
-            The same ownership of the outcome.
-          </p>
+          <p>Requirements, implementation, testing, and production delivery.</p>
         </div>
       </Reveal>
       <div className="approach-grid">
         <Reveal className="ai-story">
-          <AITerminal />
+          <DevelopmentTools />
           <p className="ai-caption">
-            AI is part of my process, from understanding a codebase to exploring
-            solutions and accelerating delivery. Architecture, validation, and
-            the final call stay with me.
+            I use AI tools to navigate codebases, explore implementation
+            options, and debug issues. I review generated code and test changes
+            before deployment.
           </p>
         </Reveal>
         <Reveal delay={0.1}>
@@ -159,12 +106,8 @@ export default function Skills() {
       </div>
       <Reveal className="stack-section">
         <div className="stack-heading">
-          <h3>
-            A practical toolkit.
-            <br />
-            <span className="muted-heading">Picked for the problem.</span>
-          </h3>
-          <span className="mono">THE STACK BEHIND THE WORK</span>
+          <h3>Technologies</h3>
+          <span className="mono">BY AREA</span>
         </div>
         <div className="stack-groups">
           {stackGroups.map((group) => (

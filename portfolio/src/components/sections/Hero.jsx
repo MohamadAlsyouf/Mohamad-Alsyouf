@@ -13,8 +13,7 @@ export default function Hero() {
     <section id="hero" className="hero page-width">
       <div className="hero-topline">
         <span className="mono">
-          <span className="tiny-cross">✳</span> SOFTWARE ENGINEER & CREATIVE
-          PROBLEM SOLVER
+          <span className="tiny-cross">✳</span> FULL STACK SOFTWARE ENGINEER
         </span>
         <a className="availability" href="#contact">
           <span className="status-dot" />
@@ -29,15 +28,15 @@ export default function Hero() {
             transition={{ duration: 0.65 }}
             className="hero-intro"
           >
-            Hey, I’m Mohamad Alsyouf <span className="wave">↗</span>
+            {personalInfo.name}
           </motion.p>
           <motion.h1 {...entrance} transition={{ duration: 0.8, delay: 0.08 }}>
-            Big ideas.
+            Full stack
             <br />
-            Real systems.
+            software
             <br />
             <span className="hero-accent">
-              Lasting impact<span className="heading-period">.</span>
+              engineer<span className="heading-period">.</span>
             </span>
           </motion.h1>
           <motion.p
@@ -45,9 +44,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.18 }}
             className="hero-description"
           >
-            Senior full-stack engineer. AI-native builder.
-            <br className="desktop-break" /> I connect people, product, and code
-            to turn complex problems into things that work beautifully.
+            I build enterprise systems, customer-facing web applications, and
+            mobile apps with React, TypeScript, Node.js, and AWS.
           </motion.p>
           <motion.div
             {...entrance}
@@ -55,10 +53,10 @@ export default function Hero() {
             className="hero-actions"
           >
             <a className="button button-primary" href="#work">
-              Explore my work <Icon name="down" size={18} />
+              View projects <Icon name="down" size={18} />
             </a>
             <a className="text-link" href={personalInfo.resume} download>
-              Grab my résumé <Icon name="download" size={17} />
+              Download résumé <Icon name="download" size={17} />
             </a>
           </motion.div>
           <motion.div
@@ -67,15 +65,15 @@ export default function Hero() {
             className="hero-location"
           >
             <Icon name="globe" size={14} />
-            <span>Based in Southern California. Building beyond it.</span>
+            <span>{personalInfo.location}</span>
           </motion.div>
         </div>
         <InterestShowcase />
       </div>
       <div className="hero-bottom">
-        <span className="mono">LESS FRICTION. MORE FORWARD.</span>
+        <span className="mono">SELECTED EXPERIENCE & RESULTS</span>
         <a href="#about" className="scroll-cue">
-          A LITTLE SCROLL GOES A LONG WAY
+          ABOUT & EXPERIENCE
           <Icon name="down" size={15} />
         </a>
       </div>

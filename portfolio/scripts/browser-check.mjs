@@ -484,13 +484,13 @@ try {
       y: 10,
     })
     for (const [kind, phrase] of [
-      ['e30', 'from the ground up'],
-      ['wheel', 'passion and profit'],
+      ['e30', '1988 325i convertible'],
+      ['wheel', 'period-correct three-piece wheels'],
       ['pi', 'embedded software'],
-      ['engine', 'individual parts'],
+      ['engine', 'M50 inline-six'],
       ['fishing', 'Marquette High School Fishing Club'],
       ['sword', 'World of Warcraft and Aion 2'],
-      ['phone', 'App Store review'],
+      ['phone', 'faith-based learning app'],
     ]) {
       const point = await evaluate(
         `(async () => {const button=document.querySelector('.interest-${kind}');button.scrollIntoView({block:'center',behavior:'instant'});await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));const r=button.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()`,
@@ -728,20 +728,24 @@ try {
       assert(details === true, 'An accordion expands')
     }
 
-    const currentRole = await evaluate(
-      `(() => {const details=document.querySelector('.experience-details');return {open:details?.open,highlights:details?.querySelectorAll('li').length || 0}})()`,
-    )
+    const experienceRoles =
+      await evaluate(`Array.from(document.querySelectorAll('.experience-row')).map(role => {
+      const highlights = Array.from(role.querySelectorAll('.experience-highlights li'));
+      return {
+        highlights: highlights.length,
+        visible: highlights.length > 0 && highlights.every(item => item.getClientRects().length > 0 && getComputedStyle(item).visibility !== 'hidden'),
+        collapsed: Boolean(role.querySelector('details:not([open]), [aria-expanded="false"]')),
+      };
+    })`)
+    const [currentRole, priorRole] = experienceRoles
     assert(
-      currentRole.open && currentRole.highlights > 0,
+      currentRole?.visible && !currentRole.collapsed,
       'Current role responsibilities are visible by default',
       currentRole,
     )
-    const priorRole = await evaluate(
-      `(() => {const details=document.querySelectorAll('.experience-details')[1];if(!details)return null;details.querySelector('summary').click();return {open:details.open,highlights:details.querySelectorAll('li').length}})()`,
-    )
     assert(
-      priorRole?.open && priorRole.highlights > 0,
-      'Earlier role responsibilities can be expanded',
+      priorRole?.visible && !priorRole.collapsed,
+      'Earlier role responsibilities are visible by default',
       priorRole,
     )
 

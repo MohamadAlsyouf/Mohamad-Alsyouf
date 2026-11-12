@@ -3,7 +3,7 @@
 export const personalInfo = {
   name: 'Mohamad Alsyouf',
   title: 'Senior Full Stack Engineer',
-  tagline: 'I turn complex problems into products people love to use.',
+  tagline: 'Enterprise systems, web applications, and mobile development.',
   email: 'mohamadalsyouf99@gmail.com',
   github: 'https://github.com/MohamadAlsyouf',
   linkedin: 'https://www.linkedin.com/in/mohamad-alsyouf/',
@@ -16,12 +16,14 @@ export const metrics = [
   {
     value: '1M+',
     label: 'monthly users',
-    detail: 'Customer experiences built for national reach.',
+    detail:
+      'Customer-facing web applications used in sales centers nationwide.',
   },
   {
     value: '80%',
     label: 'less cloud egress cost',
-    detail: 'Smarter caching. A materially smaller CloudFront bill.',
+    detail:
+      'Reduced AWS CloudFront egress costs through service worker caching.',
   },
   {
     value: '130+',
@@ -31,21 +33,21 @@ export const metrics = [
   {
     value: '30%',
     label: 'faster project delivery',
-    detail: 'An enterprise workflow designed around real operations.',
+    detail: 'Reduced project delivery times through a shared ERP workflow.',
   },
 ]
 
 export const aboutText =
-  "I'm a senior full stack engineer who connects the dots between product, people, and production. At Focus 360, I own systems that bring customers, sales, project management, and offshore production together. I care as much about the conversation that defines the problem as the code that solves it."
+  "I'm a senior full stack engineer at Focus 360. I develop ERP, scheduling, digital asset management, and customer-facing applications. My work includes requirements gathering, architecture, development, testing, and deployment."
 
 export const projects = [
   {
     id: 'erp',
     number: '01',
     eyebrow: 'ENTERPRISE SYSTEMS / FOCUS 360',
-    title: 'Complex operations.\nOne connected platform.',
+    title: 'Enterprise resource\nplanning platform',
     description:
-      'An ERP that brings project managers, coordinators, production, and three offshore teams into the same workflow. Built around how people actually work.',
+      'An ERP for project managers, coordinators, production staff, and three offshore teams, with shared work orders and digital asset management.',
     impact: '30% faster delivery · 130+ users',
     tech: ['React', 'TypeScript', 'Node.js', 'AWS', 'MySQL'],
     liveUrl: null,
@@ -63,7 +65,7 @@ export const projects = [
     id: 'next',
     number: '02',
     eyebrow: 'CUSTOMER EXPERIENCE / FOCUS 360',
-    title: 'A million users.\nEvery interaction matters.',
+    title: 'Home discovery\napplications',
     description:
       'Interactive home discovery experiences, delivered as installable PWAs on touch kiosks in thousands of sales centers nationwide.',
     impact: '1M+ monthly users · 80% lower egress cost',
@@ -83,9 +85,9 @@ export const projects = [
     id: 'arkan',
     number: '03',
     eyebrow: 'INDEPENDENT PRODUCT / MOBILE',
-    title: 'Purpose,\nmade portable.',
+    title: 'Arkan: faith-based\nlearning app',
     description:
-      'Arkan is a faith-based learning project that brings my product thinking and full stack experience into mobile development.',
+      'A cross-platform faith-based learning app built with React Native, TypeScript, Expo, and Firebase.',
     impact: 'Independent product · Cross-platform development',
     tech: ['React Native', 'TypeScript', 'Expo', 'Firebase'],
     liveUrl: 'https://arkan-app.com',
@@ -93,21 +95,22 @@ export const projects = [
     kind: 'arkan',
     role: 'Independent product development',
     details: [
-      'A faith-based learning project exploring thoughtful mobile experiences.',
+      'An independent mobile app for faith-based learning.',
       'Built with a React Native and TypeScript stack, with Expo and Firebase supporting cross-platform development.',
-      'An independent space to bring product ideas from concept into a tangible experience.',
+      'Responsible for product planning and full stack development.',
     ],
   },
 ]
 
 export const experience = [
   {
-    period: 'SEP 2026 — PRESENT',
+    period: 'Sep 2026 — Present',
     title: 'Senior Full Stack Developer, R&D',
     company: 'Focus 360',
     location: 'Aliso Viejo, California',
     description:
-      'Engineering ownership that spans the product, the platform, and the people building it.',
+      'Lead development of internal systems and coordinate technical priorities across departments.',
+    emphasis: [],
     highlights: [
       'Own end-to-end development across ERP, scheduling, and digital asset management systems.',
       'Serve as Scrum Master: plan Agile sprints, manage JIRA epics, and keep team deliverables moving.',
@@ -115,13 +118,15 @@ export const experience = [
     ],
   },
   {
-    period: 'SEP 2022 — SEP 2026',
+    period: 'Sep 2022 — Sep 2026',
     title: 'Full Stack Developer, R&D',
     company: 'Focus 360',
     location: 'Aliso Viejo, California',
     description:
-      'Built the foundations for customer experiences at scale and enterprise systems with measurable impact.',
+      'Developed customer-facing web applications, reusable interfaces, backend services, and enterprise systems.',
+    emphasis: ['80%', '0.5–2 seconds'],
     highlights: [
+      'Reduced AWS CloudFront data transfer costs by 80% through Workbox service worker caching.',
       'Built reusable React and TypeScript interfaces, reducing duplicated frontend code by 40%.',
       'Optimized MySQL and REST APIs, taking key load times from 6–7 seconds to 0.5–2 seconds.',
       'Shipped serverless Node.js services on AWS and strengthened reliability with Cypress and Postman.',
@@ -133,30 +138,30 @@ export const experience = [
 export const capabilities = [
   {
     number: '01',
-    title: 'Engineer the whole system.',
+    title: 'Full stack development',
     description:
-      'From a considered React interface to the API, database, and cloud infrastructure behind it. I own the path from first requirement to production.',
+      'Develop React interfaces, APIs, databases, and cloud infrastructure, from requirements through production deployment.',
     icon: 'code',
   },
   {
     number: '02',
-    title: 'Bring the room together.',
+    title: 'Cross-functional collaboration',
     description:
-      'Sales, product, project managers, production, and offshore teams. I turn different perspectives into shared priorities and a plan people can execute.',
+      'Work with sales, product, project management, production, and offshore teams to define requirements and technical priorities.',
     icon: 'people',
   },
   {
     number: '03',
-    title: 'Make momentum repeatable.',
+    title: 'Delivery & sprint planning',
     description:
-      'Scrum Master experience, sprint planning, JIRA epics, and purposeful product meetings. Clear decisions, visible ownership, and fewer blockers.',
+      'Serve as Scrum Master, plan sprints, manage JIRA epics, and lead weekly product meetings.',
     icon: 'orbit',
   },
   {
     number: '04',
-    title: 'Build with AI. Own the outcome.',
+    title: 'AI-assisted development',
     description:
-      'Cursor, Claude, and Codex are part of my engineering toolkit. I use agentic workflows to explore, debug, and iterate, with human judgment and code review at the center.',
+      'Use Cursor, Claude, and Codex for codebase exploration, debugging, and implementation, with code review and testing before release.',
     icon: 'spark',
   },
 ]
@@ -164,27 +169,27 @@ export const capabilities = [
 export const workflow = [
   {
     number: '01',
-    title: 'Understand the real problem.',
+    title: 'Define requirements',
     description:
-      'Get the right people in the conversation. Map the workflow, surface constraints, and define what success looks like.',
+      'Review workflows with the people using them, document constraints, and agree on requirements and success criteria.',
   },
   {
     number: '02',
-    title: 'Make a plan worth building.',
+    title: 'Plan implementation',
     description:
-      'Translate the discussion into technical decisions, scoped work, clear ownership, and an achievable sprint.',
+      'Choose the architecture, break the work into tasks, assign ownership, and plan the sprint.',
   },
   {
     number: '03',
-    title: 'Build fast. Think deeply.',
+    title: 'Develop & test',
     description:
-      'Use AI-assisted workflows to shorten iteration cycles. Review the code, test the assumptions, and keep the system understandable.',
+      'Implement the changes, use AI tools where useful, review the code, and test functionality and performance.',
   },
   {
     number: '04',
-    title: 'Ship. Learn. Raise the bar.',
+    title: 'Deploy & improve',
     description:
-      'Deliver to production, listen to the people using it, and turn what we learn into the next meaningful improvement.',
+      'Deploy to production, collect user feedback, and prioritize fixes and follow-up improvements.',
   },
 ]
 

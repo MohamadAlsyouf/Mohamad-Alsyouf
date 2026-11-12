@@ -71,6 +71,7 @@ export default function InterestShowcase() {
       className="interest-showcase"
       ref={scene}
       data-active="false"
+      data-expanded={Boolean(active)}
       initial={reducedMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: reducedMotion ? 0 : 1.1 }}
@@ -85,12 +86,12 @@ export default function InterestShowcase() {
         if (!event.currentTarget.contains(event.relatedTarget)) setActive(null)
       }}
     >
-      <div className="showcase-topline mono">
+      {/* <div className="showcase-topline mono">
         <span>
-          <span className="status-dot" /> BEYOND THE CODE
+          <span className="status-dot" /> PERSONAL INTERESTS
         </span>
-        <span>{String(interests.length).padStart(2, '0')} / EXPLORATIONS</span>
-      </div>
+        <span>{String(interests.length).padStart(2, '0')} / INTERESTS</span>
+      </div> */}
       <div
         className="interest-stage"
         onPointerMove={move}
@@ -171,13 +172,13 @@ export default function InterestShowcase() {
             ↳
           </span>
           <span>
-            {active ? active.name : 'Hover or tap an item. There’s a story.'}
+            {active ? active.name : 'Hover or tap an item for details.'}
           </span>
         </div>
         <a
           href="#about"
           className="showcase-explore"
-          aria-label="Meet the person behind the code"
+          aria-label="About Mohamad"
         >
           <Icon name="down" size={20} />
         </a>
@@ -189,7 +190,7 @@ export default function InterestShowcase() {
           className="sr-only"
         >
           {interest.detail}
-          {interest.funFact ? ` Fun fact: ${interest.funFact}` : ''}
+          {interest.background ? ` ${interest.background}` : ''}
         </span>
       ))}
     </motion.div>

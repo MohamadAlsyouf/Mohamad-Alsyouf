@@ -26,19 +26,15 @@ export default function Contact() {
             <span className="status-dot" />
             OPEN TO THE RIGHT OPPORTUNITY
           </span>
-          <span className="mono">04 / WHAT’S NEXT</span>
+          <span className="mono">04 / CONTACT</span>
         </div>
         <div className="contact-main">
           <div>
             <h2>
-              Let’s build
-              <br />
-              what’s next<span>.</span>
+              Get in touch<span>.</span>
             </h2>
             <p>
-              Have a hard problem, a big idea, or a team
-              <br className="desktop-break" /> that could use a builder? I’d
-              love to hear it.
+              Contact me about engineering roles, projects, or collaboration.
             </p>
           </div>
           <a
@@ -74,9 +70,9 @@ export default function Contact() {
         <a className="footer-brand" href="#hero" aria-label="Back to top">
           <BrandMark />
           <span>
-            Thoughtfully engineered.
+            {personalInfo.title}
             <br />
-            <strong>By Mohamad Alsyouf.</strong>
+            <strong>{personalInfo.name}</strong>
           </span>
         </a>
         <div className="footer-links">

@@ -1399,179 +1399,121 @@ h2 {
   margin-top: 12px;
 }
 .experience {
-  --led-core: #c7ffdc;
-  --led-glow: #58ff9366;
-  --led-halo: #58ff9326;
-  display: grid;
-  grid-template-columns: 0.75fr 1.7fr;
-  gap: 50px;
-  margin-top: 70px;
+  margin-top: 72px;
+  padding-top: 38px;
   border-top: 1px solid var(--line);
-  padding-top: 35px;
 }
-[data-theme='light'] .experience {
-  --led-core: #75efa0;
-  --led-glow: #176b3759;
-  --led-halo: #176b3720;
+.experience-heading {
+  margin-bottom: 36px;
 }
-.experience-label {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
+.experience-heading h3 {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -1.1px;
 }
-.experience-label .mono {
-  font-size: 14px;
-  color: var(--accent);
+.experience-entry {
+  padding-block: 34px;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 220ms ease;
 }
-.experience-label > span:last-child {
-  font-size: 14px;
-  color: var(--muted);
+.experience-entry:first-child {
+  padding-top: 0;
 }
-.experience-list {
-  border-left: 1px solid var(--line);
-  padding-left: 25px;
+.experience-entry:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 .experience-row {
-  display: flex;
-  align-items: flex-start;
-  position: relative;
-  gap: 15px;
-}
-.experience-row + .experience-row {
-  margin-top: 35px;
-}
-.experience-point {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  left: -29px;
-  top: 3px;
-}
-.experience-point.current {
-  width: 9px;
-  height: 9px;
-  left: -30px;
-  top: 2px;
-}
-.experience-row:nth-child(even) .experience-point {
-  animation-delay: -1.4s;
+  display: grid;
+  grid-template-columns: minmax(190px, 0.7fr) minmax(0, 2fr);
+  align-items: start;
+  gap: 48px;
 }
 .experience-period {
-  color: var(--faint);
-  font-size: 14px;
-}
-.experience-details {
-  font-size: 16px;
-  margin-top: 14px;
-  color: var(--muted);
-}
-.experience-details summary {
   display: flex;
   align-items: center;
-  gap: 9px;
-  width: fit-content;
-  cursor: pointer;
-  color: var(--text);
-  list-style: none;
-  padding: 4px 0;
+  gap: 10px;
+  padding-top: 5px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
 }
-.experience-details summary::-webkit-details-marker {
-  display: none;
-}
-.experience-details[open] summary svg {
-  transform: rotate(45deg);
-}
-.experience-details ul {
-  padding-left: 0;
-  margin-top: 10px;
-  max-width: 450px;
-  list-style: none;
-}
-.experience-details li {
-  position: relative;
-  line-height: 1.9;
-  margin-top: 6px;
-  padding-left: 20px;
-}
-.experience-details li::before {
-  content: '';
-  position: absolute;
-  left: 1px;
-  top: calc(0.95em - 3.5px);
-  width: 7px;
-  height: 7px;
-}
-.experience-point,
-.experience-details li::before {
+.experience-dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 35% 30%,
-    var(--led-core),
-    var(--accent) 65%
-  );
-  box-shadow:
-    0 0 5px var(--led-glow),
-    0 0 12px var(--led-halo);
-  animation: experience-led-pulse 3.2s ease-in-out infinite;
-  pointer-events: none;
+  background: var(--faint);
 }
-.experience-details li:nth-child(4n + 2)::before {
-  animation-delay: -0.8s;
+.experience-dot.is-current {
+  background: var(--accent);
 }
-.experience-details li:nth-child(4n + 3)::before {
-  animation-delay: -1.6s;
+.experience-content {
+  min-width: 0;
+  max-width: 760px;
 }
-.experience-details li:nth-child(4n + 4)::before {
-  animation-delay: -2.4s;
+.experience-content h4 {
+  color: var(--text);
+  font-size: clamp(22px, 2.1vw, 26px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.6px;
+  transition: color 220ms ease;
 }
-@keyframes experience-led-pulse {
-  0%,
-  100% {
-    opacity: 0.65;
-    transform: scale(0.85);
-    box-shadow:
-      0 0 3px var(--led-glow),
-      0 0 7px var(--led-halo);
+.experience-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 9px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.experience-company {
+  color: var(--text);
+  font-weight: 500;
+}
+.experience-description {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+.experience-highlights {
+  margin-top: 16px;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.85;
+}
+.experience-highlights li {
+  padding-left: 3px;
+}
+.experience-highlights li + li {
+  margin-top: 9px;
+}
+.experience-highlights li::marker {
+  color: var(--faint);
+  font-size: 0.7em;
+}
+.experience-highlight {
+  color: var(--accent);
+  font-weight: 600;
+}
+@media (hover: hover) {
+  .experience-entry:hover {
+    border-color: color-mix(in srgb, var(--accent) 25%, var(--line));
   }
-  50% {
-    opacity: 1;
-    transform: scale(1.15);
-    box-shadow:
-      0 0 7px var(--led-glow),
-      0 0 18px 2px var(--led-halo);
+  .experience-entry:hover h4 {
+    color: var(--accent);
   }
 }
 .footer-meta button:disabled {
   cursor: default;
   opacity: 0.7;
-}
-.experience-row h3 {
-  margin-top: 9px;
-  font-size: 17px;
-  letter-spacing: -0.4px;
-}
-.experience-row p {
-  font-size: 14px;
-  color: var(--text);
-  margin-top: 6px;
-  line-height: 1.7;
-}
-.experience-row p > span {
-  color: var(--faint);
-}
-.experience-row p.experience-description {
-  color: var(--muted);
-  font-size: 16px;
-  max-width: 440px;
-  margin-top: 10px;
-}
-.current-role {
-  margin-left: auto;
-  color: var(--accent);
-  font-size: 14px;
-  border: 1px solid var(--line);
-  padding: 5px 7px;
-  border-radius: 3px;
 }
 .approach-grid {
   display: grid;
@@ -1600,67 +1542,21 @@ h2 {
     14px 'IBM Plex Mono',
     monospace;
 }
-.terminal-dots {
-  display: flex;
-  gap: 5px;
+.development-tools {
+  display: grid;
+  gap: 24px;
+  margin: 0;
+  padding: 24px;
 }
-.terminal-dots i {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #4b6b55;
-}
-.terminal-dots i:first-child {
-  background: #8a6352;
-}
-.terminal-dots i:nth-child(2) {
-  background: #9a8d53;
-}
-.terminal-dots i:nth-child(3) {
-  background: #568d62;
-}
-.terminal-code {
-  padding: 25px 14px 29px;
-  overflow-x: auto;
-}
-.code-line {
-  display: flex;
-  gap: 16px;
-  min-height: 23px;
-  white-space: pre;
+.development-tools dt {
+  color: #9bb8a4;
   font-size: 14px;
-  line-height: 1.7;
+  margin-bottom: 6px;
 }
-.code-line > span:first-child {
-  color: #92af9b;
-  font:
-    14px/2.3 'IBM Plex Mono',
-    monospace;
-  width: 15px;
-  flex-shrink: 0;
-  text-align: right;
-}
-.code-line code {
-  font-family: 'IBM Plex Mono', monospace;
-}
-.code-line b {
-  color: #c3f1d2;
-  font-weight: 400;
-}
-.code-line em {
-  color: #8ee8a8;
-  font-style: normal;
-}
-.code-line strong {
-  color: #d4edbd;
-  font-weight: 400;
-}
-.code-comment {
-  color: #9bb4a4;
-}
-.terminal-cursor {
-  color: #58ff93;
-  animation: blink 1.2s step-end infinite;
+.development-tools dd {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
 }
 .terminal-bottom {
   height: 34px;
@@ -2116,7 +2012,7 @@ h2 {
 
 @media (min-width: 1600px) {
   .hero-main {
-    padding-top: 70px;
+    padding-top: 0px;
     padding-bottom: 65px;
   }
 }
@@ -2173,10 +2069,6 @@ h2 {
   }
   .workflow-item h3 > button > span:nth-child(2) {
     font-size: 16px;
-  }
-  .code-line {
-    gap: 8px;
-    font-size: 14px;
   }
   .stack-groups {
     gap: 17px;
@@ -2474,42 +2366,32 @@ h2 {
     font-size: 16px;
   }
   .experience {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-top: 37px;
+    margin-top: 44px;
     padding-top: 28px;
   }
-  .experience-label {
-    gap: 8px;
+  .experience-heading {
+    margin-bottom: 28px;
   }
-  .experience-list {
-    margin-left: 3px;
+  .experience-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
-  .experience-row h3 {
-    font-size: 15px;
-  }
-  .current-role {
-    font-size: 14px;
-    padding: 4px 5px;
+  .experience-entry {
+    padding-block: 28px;
   }
   .experience-period {
-    font-size: 14px;
+    padding-top: 0;
   }
-  .experience-row p > span {
-    display: block;
+  .experience-content h4 {
+    font-size: 23px;
+  }
+  .experience-description {
+    margin-top: 14px;
   }
   .approach-grid {
     grid-template-columns: 1fr;
     gap: 33px;
     margin-top: 33px;
-  }
-  .code-line {
-    font-size: 14px;
-    min-height: 25px;
-    gap: 10px;
-  }
-  .terminal-code {
-    padding-inline: 10px;
   }
   .terminal-top {
     font-size: 14px;

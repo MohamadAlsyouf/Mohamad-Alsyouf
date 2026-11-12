@@ -51,7 +51,7 @@ function CaseStudy({ project, onClose }) {
         </div>
         <h3>My role</h3>
         <p>{project.role}</p>
-        <h3>The work behind the outcome</h3>
+        <h3>Implementation & results</h3>
         <ul className="case-details">
           {project.details.map((detail) => (
             <li key={detail}>
@@ -87,7 +87,7 @@ function CaseStudy({ project, onClose }) {
             href="#contact"
             onClick={() => onClose(false)}
           >
-            Let’s talk about the work
+            Contact me
             <Icon />
           </a>
         )}
@@ -159,7 +159,7 @@ export default function ProjectCard({ project, featured = false }) {
           aria-label={`Explore ${project.title.replace(/\n/g, ' ')}`}
           onClick={() => setOpen(true)}
         >
-          <span>Explore the project</span>
+          <span>View project details</span>
           <span className="project-open-icon">
             <Icon />
           </span>

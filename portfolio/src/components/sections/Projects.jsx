@@ -9,14 +9,11 @@ export default function Projects() {
         <SectionLabel number="02">SELECTED WORK</SectionLabel>
         <div className="section-heading-row">
           <h2>
-            Built with purpose.
+            Enterprise systems &
             <br />
-            <span className="muted-heading">Measured in impact.</span>
+            <span className="muted-heading">applications.</span>
           </h2>
-          <p>
-            A few things I’ve helped take
-            <br className="desktop-break" /> from “what if” to the real world.
-          </p>
+          <p>Selected projects, my role, and the results.</p>
         </div>
       </Reveal>
       <div className="projects-grid">
@@ -30,8 +27,8 @@ export default function Projects() {
       </div>
       <div className="work-footnote">
         <p>
-          <span className="tiny-cross">✳</span> Real projects. Real outcomes.
-          Interface visuals are illustrative.
+          <span className="tiny-cross">✳</span> Interface visuals are
+          illustrative.
         </p>
         <a
           className="text-link"

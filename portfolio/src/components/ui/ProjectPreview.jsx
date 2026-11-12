@@ -36,7 +36,7 @@ function Dashboard() {
         </div>
         <div className="mock-heading">
           <div>
-            <small>YOUR WORK, CONNECTED.</small>
+            <small>PROJECT MANAGEMENT</small>
             <h4>Project overview</h4>
           </div>
           <span className="mock-new">+ New project</span>
@@ -44,7 +44,7 @@ function Dashboard() {
         <div className="mock-stats">
           {[
             ['Active projects', '24', '+4 this month'],
-            ['On track', '92%', 'Moving forward'],
+            ['On track', '92%', 'On schedule'],
             ['Team members', '130+', 'Across departments'],
           ].map(([label, value, note]) => (
             <div key={label}>
@@ -56,7 +56,7 @@ function Dashboard() {
         </div>
         <div className="mock-chart">
           <div className="mock-chart-title">
-            <span>Team momentum</span>
+            <span>Project activity</span>
             <span>THIS WEEK ↗</span>
           </div>
           <div className="chart-grid">
@@ -95,7 +95,7 @@ function HomeExperience() {
         <strong>
           NEXT<span>™</span>
         </strong>
-        <span>EXPERIENCE HOME.</span>
+        <span>HOME DISCOVERY</span>
         <Icon name="menu" size={14} />
       </div>
       <div className="architecture">
@@ -112,8 +112,8 @@ function HomeExperience() {
       </div>
       <div className="home-mock-caption">
         <div>
-          <small>YOUR NEXT CHAPTER</small>
-          <h4>Find your place.</h4>
+          <small>AVAILABLE HOMES</small>
+          <h4>Find a home.</h4>
         </div>
         <span className="home-mock-arrow">
           <Icon name="right" size={19} />
@@ -133,8 +133,9 @@ function MobileExperience() {
       <div className="phone-halo halo-one" />
       <div className="phone-halo halo-two" />
       <span className="arkan-art-label">
-        A LITTLE EVERY DAY.
-        <br />A LIFETIME OF MEANING.
+        FAITH-BASED
+        <br />
+        LEARNING APP
       </span>
       <div className="phone">
         <div className="phone-camera" />
@@ -145,18 +146,18 @@ function MobileExperience() {
           <div className="arkan-brand">
             أركان <span>arkan</span>
           </div>
-          <small>MAKE ROOM FOR MEANING</small>
+          <small>FAITH-BASED LEARNING</small>
           <h4>
-            A moment
+            Continue
             <br />
-            to grow.
+            learning.
           </h4>
           <div className="phone-orbit">
             <span>✦</span>
           </div>
           <div className="phone-learning">
-            <span>YOUR LEARNING JOURNEY</span>
-            <strong>One step at a time.</strong>
+            <span>LEARNING PROGRESS</span>
+            <strong>Current lesson</strong>
             <span className="phone-progress">
               <i />
             </span>
@@ -169,7 +170,7 @@ function MobileExperience() {
         </div>
       </div>
       <div className="mobile-float-label">
-        <Icon name="spark" size={15} /> Purpose meets product.
+        <Icon name="code" size={15} /> React Native & TypeScript
       </div>
     </div>
   )

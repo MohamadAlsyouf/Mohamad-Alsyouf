@@ -67,10 +67,7 @@ export default function InterestStory({
       data-interest={interest.kind}
     >
       <div className="interest-story-heading">
-        <div>
-          <p className="interest-story-label mono">{interest.label}</p>
-          <h3 id={`${id}-title`}>{interest.name}</h3>
-        </div>
+        <h3 id={`${id}-title`}>{interest.name}</h3>
         <button
           type="button"
           className="interest-story-close"
@@ -81,11 +78,8 @@ export default function InterestStory({
         </button>
       </div>
       <p className="interest-story-description">{interest.detail}</p>
-      {interest.funFact && (
-        <p className="interest-story-fact">
-          <strong>Fun fact</strong>
-          {interest.funFact}
-        </p>
+      {interest.background && (
+        <p className="interest-story-fact">{interest.background}</p>
       )}
       {interest.link && (
         <a
